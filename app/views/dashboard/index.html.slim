@@ -1,0 +1,48 @@
+div.max-w-7xl.mx-auto.px-4.sm:px-6.lg:px-8.py-6
+  div.md:flex.md:items-center.md:justify-between
+    div.flex-1.min-w-0
+      h2.text-2xl.font-bold.leading-7.text-gray-900.sm:text-3xl.sm:truncate
+        | Dashboard
+      p.mt-1.text-sm.text-gray-500
+        | Welcome to #{@company.name}'s dashboard
+
+  div.mt-8.grid.grid-cols-1.gap-6.sm:grid-cols-2.lg:grid-cols-3
+    div.bg-white.overflow-hidden.shadow.rounded-lg
+      div.px-4.py-5.sm:p-6
+        dl
+          dt.text-sm.font-medium.text-gray-500.truncate Users
+          dd.mt-1.text-3xl.font-semibold.text-gray-900 = @users_count
+    
+    div.bg-white.overflow-hidden.shadow.rounded-lg
+      div.px-4.py-5.sm:p-6
+        dl
+          dt.text-sm.font-medium.text-gray-500.truncate Company
+          dd.mt-1.text-xl.font-semibold.text-gray-900 = @company.name
+    
+    div.bg-white.overflow-hidden.shadow.rounded-lg
+      div.px-4.py-5.sm:p-6
+        dl
+          dt.text-sm.font-medium.text-gray-500.truncate Subdomain
+          dd.mt-1.text-xl.font-semibold.text-gray-900 = @company.subdomain
+  
+  div.mt-8
+    div.bg-white.shadow.overflow-hidden.sm:rounded-lg
+      div.px-4.py-5.sm:px-6
+        h3.text-lg.leading-6.font-medium.text-gray-900
+          | Company Information
+      
+      div.border-t.border-gray-200
+        dl
+          div.bg-gray-50.px-4.py-5.sm:grid.sm:grid-cols-3.sm:gap-4.sm:px-6
+            dt.text-sm.font-medium.text-gray-500 Email
+            dd.mt-1.text-sm.text-gray-900.sm:mt-0.sm:col-span-2 = @company.email || "Not set"
+          
+          div.bg-white.px-4.py-5.sm:grid.sm:grid-cols-3.sm:gap-4.sm:px-6
+            dt.text-sm.font-medium.text-gray-500 Phone
+            dd.mt-1.text-sm.text-gray-900.sm:mt-0.sm:col-span-2 = @company.phone_number || "Not set"
+          
+          div.bg-gray-50.px-4.py-5.sm:grid.sm:grid-cols-3.sm:gap-4.sm:px-6
+            dt.text-sm.font-medium.text-gray-500 Address
+            dd.mt-1.text-sm.text-gray-900.sm:mt-0.sm:col-span-2
+              - address_parts = [@company.street_address, @company.city, @company.state, @company.zip, @company.country].compact
+              = address_parts.join(", ").presence || "Not set" 

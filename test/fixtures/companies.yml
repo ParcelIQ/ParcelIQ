@@ -1,0 +1,39 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  subdomain: MyString
+  domain: MyString
+  time_zone: MyString
+  street_address: MyString
+  city: MyString
+  state: MyString
+  zip: MyString
+  country: MyString
+  phone_number: MyString
+  email: MyString
+  website: MyString
+  tax_id: MyString
+  plan: MyString
+  active: false
+  metadata: 
+  settings: 
+
+two:
+  name: MyString
+  subdomain: MyString
+  domain: MyString
+  time_zone: MyString
+  street_address: MyString
+  city: MyString
+  state: MyString
+  zip: MyString
+  country: MyString
+  phone_number: MyString
+  email: MyString
+  website: MyString
+  tax_id: MyString
+  plan: MyString
+  active: false
+  metadata: 
+  settings: 

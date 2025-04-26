@@ -1,0 +1,26 @@
+doctype html
+html
+  head
+    title = "#{current_tenant&.name || 'ParcelIQ'} - Multitenant SaaS Platform"
+    meta name="viewport" content="width=device-width,initial-scale=1"
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload"
+    = stylesheet_link_tag "application", "data-turbo-track": "reload" 
+    = javascript_importmap_tags
+
+  body.bg-gray-100.min-h-screen
+    header.bg-white.shadow-sm
+      div.max-w-7xl.mx-auto.py-4.px-4.sm:px-6.lg:px-8.flex.items-center.justify-between
+        div.flex.items-center
+          - if current_tenant&.logo.attached?
+            = image_tag current_tenant.logo.variant(resize_to_limit: [40, 40]), class: "h-10 w-10 rounded-full"
+          h1.ml-3.text-xl.font-bold.text-indigo-600 = current_tenant&.name
+        
+        div.hidden.sm:ml-6.sm:flex.sm:space-x-8
+          = link_to "Dashboard", tenant_root_path, class: "border-indigo-500 text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+          = link_to "Users", users_path, class: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+          = link_to "Settings", company_settings_path, class: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+    
+    main
+      = yield 

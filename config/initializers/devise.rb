@@ -313,9 +313,6 @@ Devise.setup do |config|
 
   # ==> Tenant-specific configuration
 
-  # Set to true to ensure that passwords are not reused from previous tenants
-  config.password_insecure_token = true
-
   # Override Devise's finder
   config.warden do |manager|
     manager.default_strategies(scope: :user).unshift :tenant_authentication_strategy

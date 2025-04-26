@@ -1,0 +1,59 @@
+div.max-w-7xl.mx-auto.px-4.sm:px-6.lg:px-8.py-6
+  div.md:flex.md:items-center.md:justify-between
+    div.flex-1.min-w-0
+      h2.text-2xl.font-bold.leading-7.text-gray-900.sm:text-3xl.sm:truncate
+        | Root Admin Dashboard
+      p.mt-1.text-sm.text-gray-500
+        | Manage all companies and users across the platform
+
+  div.mt-8.grid.grid-cols-1.gap-6.sm:grid-cols-2.lg:grid-cols-3
+    div.bg-white.overflow-hidden.shadow.rounded-lg
+      div.px-4.py-5.sm:p-6
+        dl
+          dt.text-sm.font-medium.text-gray-500.truncate Total Companies
+          dd.mt-1.text-3xl.font-semibold.text-gray-900 = @total_companies
+    
+    div.bg-white.overflow-hidden.shadow.rounded-lg
+      div.px-4.py-5.sm:p-6
+        dl
+          dt.text-sm.font-medium.text-gray-500.truncate Total Users
+          dd.mt-1.text-3xl.font-semibold.text-gray-900 = @total_users
+  
+  div.mt-8
+    h3.text-lg.font-medium.leading-6.text-gray-900.mb-4 Companies
+    
+    div.flex.flex-col
+      div.-my-2.overflow-x-auto.sm:-mx-6.lg:-mx-8
+        div.py-2.align-middle.inline-block.min-w-full.sm:px-6.lg:px-8
+          div.shadow.overflow-hidden.border-b.border-gray-200.sm:rounded-lg
+            table.min-w-full.divide-y.divide-gray-200
+              thead.bg-gray-50
+                tr
+                  th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider[scope="col"] Name
+                  th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider[scope="col"] Subdomain
+                  th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider[scope="col"] Users
+                  th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider[scope="col"] Status
+                  th.px-6.py-3.text-right.text-xs.font-medium.text-gray-500.uppercase.tracking-wider[scope="col"] Actions
+              
+              tbody.bg-white.divide-y.divide-gray-200
+                - @companies.each do |company|
+                  tr
+                    td.px-6.py-4.whitespace-nowrap
+                      div.text-sm.font-medium.text-gray-900
+                        = company.name
+                    
+                    td.px-6.py-4.whitespace-nowrap
+                      div.text-sm.text-gray-500
+                        = company.subdomain
+                    
+                    td.px-6.py-4.whitespace-nowrap
+                      div.text-sm.text-gray-500
+                        = User.where(company_id: company.id).count
+                    
+                    td.px-6.py-4.whitespace-nowrap
+                      span.px-2.inline-flex.text-xs.leading-5.font-semibold.rounded-full class=("#{company.active ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}")
+                        = company.active ? "Active" : "Inactive"
+                    
+                    td.px-6.py-4.whitespace-nowrap.text-right.text-sm.font-medium
+                      = link_to "View", "#", class: "text-indigo-600 hover:text-indigo-900 mr-3"
+                      = link_to "Login as", "#", class: "text-indigo-600 hover:text-indigo-900" 

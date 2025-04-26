@@ -14,7 +14,7 @@ Rails.application.routes.draw do
     resources :companies, only: [ :new, :create ], path: "signup"
 
     # Public login page - customize Devise routes to only allow login, not registration
-    devise_for :users, skip: [ :registrations, :passwords ], path: "",
+    devise_for :users, skip: [ :registrations ], path: "",
                        path_names: { sign_in: "login" }
   end
 
@@ -26,13 +26,21 @@ Rails.application.routes.draw do
     # Tenant-specific authentication routes with full functionality
     devise_for :users, skip: [ :registrations ],
                        path: "auth",
-                       path_names: { sign_in: "login", sign_out: "logout" }
+                       path_names: { sign_in: "login", sign_out: "logout" },
+                       as: "tenant"
 
     # Add a custom route for user management (registration) by admins
     resources :users
 
     # Company settings for the current tenant
     resource :company_settings, only: [ :show, :edit, :update ]
+  end
+
+  # Root admin routes (available on all domains)
+  namespace :admin do
+    get "dashboard", to: "dashboard#index", as: :dashboard
+    resources :companies
+    resources :users, only: [ :index, :show, :edit, :update, :destroy ]
   end
 
   # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)

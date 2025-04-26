@@ -6,6 +6,9 @@ require "rails/all"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+# Require devise explicitly
+require "devise"
+
 # Require our custom middleware
 require_relative "../app/middleware/tenant_middleware"
 require_relative "../app/constraints/tenant_constraint"

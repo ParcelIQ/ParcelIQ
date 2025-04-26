@@ -3,8 +3,12 @@ class DashboardController < ApplicationController
   layout "tenant"
 
   def index
-    # Dashboard data for the current tenant
-    @company = current_tenant
-    @users_count = User.count # This will automatically be scoped to the current tenant due to acts_as_tenant
+    if current_user.root_admin?
+      redirect_to admin_dashboard_path
+    else
+      # Company customer dashboard
+      @company = current_tenant
+      @users_count = User.count # This will automatically be scoped to the current tenant due to acts_as_tenant
+    end
   end
 end

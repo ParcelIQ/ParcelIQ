@@ -1,0 +1,10 @@
+div.max-w-7xl.mx-auto.px-4.sm:px-6.lg:px-8.py-6
+  div.md:grid.md:grid-cols-3.md:gap-6
+    div.md:col-span-1
+      div.px-4.sm:px-0
+        h3.text-lg.font-medium.leading-6.text-gray-900 Edit User
+        p.mt-1.text-sm.text-gray-600
+          | Update user account details
+    
+    div.mt-5.md:mt-0.md:col-span-2
+      = render "form", user: @user 

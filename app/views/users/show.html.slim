@@ -1,0 +1,33 @@
+div.max-w-7xl.mx-auto.px-4.sm:px-6.lg:px-8.py-6
+  div.bg-white.shadow.overflow-hidden.sm:rounded-lg
+    div.px-4.py-5.sm:px-6
+      h3.text-lg.leading-6.font-medium.text-gray-900
+        | User Information
+      p.mt-1.max-w-2xl.text-sm.text-gray-500
+        | Personal details and account information
+    
+    div.border-t.border-gray-200
+      dl
+        div.bg-gray-50.px-4.py-5.sm:grid.sm:grid-cols-3.sm:gap-4.sm:px-6
+          dt.text-sm.font-medium.text-gray-500 Full name
+          dd.mt-1.text-sm.text-gray-900.sm:mt-0.sm:col-span-2 = @user.name
+        
+        div.bg-white.px-4.py-5.sm:grid.sm:grid-cols-3.sm:gap-4.sm:px-6
+          dt.text-sm.font-medium.text-gray-500 Email address
+          dd.mt-1.text-sm.text-gray-900.sm:mt-0.sm:col-span-2 = @user.email
+        
+        div.bg-gray-50.px-4.py-5.sm:grid.sm:grid-cols-3.sm:gap-4.sm:px-6
+          dt.text-sm.font-medium.text-gray-500 Company
+          dd.mt-1.text-sm.text-gray-900.sm:mt-0.sm:col-span-2 = current_tenant.name
+        
+        div.bg-white.px-4.py-5.sm:grid.sm:grid-cols-3.sm:gap-4.sm:px-6
+          dt.text-sm.font-medium.text-gray-500 Login statistics
+          dd.mt-1.text-sm.text-gray-900.sm:mt-0.sm:col-span-2
+            div.flex.flex-col.space-y-1
+              div Sign in count: #{@user.sign_in_count}
+              div Last sign in: #{@user.last_sign_in_at ? @user.last_sign_in_at.strftime("%B %d, %Y at %H:%M") : "Never"}
+              div Last sign in IP: #{@user.last_sign_in_ip || "N/A"}
+    
+    div.px-4.py-3.bg-gray-50.text-right.sm:px-6
+      = link_to "Back", users_path, class: "text-indigo-600 hover:text-indigo-900 mr-3"
+      = link_to "Edit", edit_user_path(@user), class: "inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" 

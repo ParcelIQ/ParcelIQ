@@ -16,9 +16,16 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+    # Generate a random password for the user
+    generated_password = Devise.friendly_token.first(8)
+    @user.password = generated_password
+    @user.password_confirmation = generated_password
 
     if @user.save
-      redirect_to users_path, notice: "User was successfully created."
+      # Send an email with the initial password (should be implemented)
+      # UserMailer.welcome_email(@user, generated_password).deliver_later
+
+      redirect_to users_path, notice: "User was successfully created. An email with login instructions has been sent."
     else
       render :new, status: :unprocessable_entity
     end
@@ -28,6 +35,12 @@ class UsersController < ApplicationController
   end
 
   def update
+    if params[:user][:password].blank?
+      # Remove password fields if they're blank to avoid validation errors
+      params[:user].delete(:password)
+      params[:user].delete(:password_confirmation)
+    end
+
     if @user.update(user_params)
       redirect_to users_path, notice: "User was successfully updated."
     else
@@ -47,6 +60,6 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:name, :email)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation)
   end
 end

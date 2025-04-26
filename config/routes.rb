@@ -12,6 +12,10 @@ Rails.application.routes.draw do
 
     # Company signup and account creation
     resources :companies, only: [ :new, :create ], path: "signup"
+
+    # Public login page - customize Devise routes to only allow login, not registration
+    devise_for :users, skip: [ :registrations, :passwords ], path: "",
+                       path_names: { sign_in: "login" }
   end
 
   # Tenant-specific routes
@@ -19,7 +23,12 @@ Rails.application.routes.draw do
     # Define your tenant-specific routes here
     root to: "dashboard#index", as: :tenant_root
 
-    # User management within a tenant
+    # Tenant-specific authentication routes with full functionality
+    devise_for :users, skip: [ :registrations ],
+                       path: "auth",
+                       path_names: { sign_in: "login", sign_out: "logout" }
+
+    # Add a custom route for user management (registration) by admins
     resources :users
 
     # Company settings for the current tenant

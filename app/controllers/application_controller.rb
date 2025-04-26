@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   # Only allow modern browsers supporting webp images, web push, badges, import maps, CSS nesting, and CSS :has.
   allow_browser versions: :modern
 
-  helper_method :current_tenant
+  helper_method :current_tenant, :is_tenant_domain?
 
   protected
 
@@ -11,8 +11,35 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate_user!
-    # Implement your authentication logic here
-    # For example, if using Devise:
-    # redirect_to new_user_session_path unless current_user
+    if user_signed_in?
+      super
+    else
+      redirect_to new_user_session_path, alert: "Please sign in to access this page."
+    end
+  end
+
+  def is_tenant_domain?
+    request.host.include?(".") &&
+      extract_subdomain(request.host).present? &&
+      extract_subdomain(request.host) != "www"
+  end
+
+  private
+
+  def extract_subdomain(host)
+    return nil if host.blank?
+
+    # Handle local development with patterns like 'acme.localhost:3000'
+    if host.include?("localhost")
+      parts = host.split(".")
+      return parts.first if parts.size > 1 && parts.first != "www"
+    end
+
+    # Original implementation for non-localhost domains
+    parts = host.split(".")
+    return nil if parts.size <= 2 # No subdomain in example.com
+
+    # For hosts like 'company.example.com', return 'company'
+    parts.first if parts.size > 2
   end
 end

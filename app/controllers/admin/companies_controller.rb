@@ -1,7 +1,7 @@
 module Admin
   class CompaniesController < Admin::BaseController
     before_action :require_admin
-    before_action :set_company, only: [ :show, :edit, :update, :destroy ]
+    before_action :set_company, only: [ :show, :edit, :update, :destroy, :toggle_active ]
 
     def index
       @companies = Company.all.order(created_at: :desc)
@@ -38,11 +38,17 @@ module Admin
 
     def destroy
       if @company.users.exists?
-        redirect_to admin_companies_path, alert: "Cannot delete company with existing users. Please delete or reassign users first."
+        redirect_to admin_companies_path, alert: "Cannot delete company because it has users."
       else
         @company.destroy
         redirect_to admin_companies_path, notice: "Company was successfully deleted."
       end
+    end
+
+    def toggle_active
+      @company.update(active: !@company.active)
+      status = @company.active ? "activated" : "deactivated"
+      redirect_to admin_companies_path, notice: "Company was successfully #{status}."
     end
 
     private

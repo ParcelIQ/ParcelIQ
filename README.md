@@ -2,8 +2,6 @@
 
 ParcelIQ is a modern, multi-tenant SaaS application for streamlined package and shipment tracking management. Built with Ruby on Rails 8, this application provides a robust platform for managing multiple companies, users, and tracking data with elegantly designed interfaces.
 
-![ParcelIQ Dashboard](app/assets/images/dashboard-preview.png)
-
 ## Features
 
 - **Multi-tenant Architecture**: Complete isolation between different companies using subdomain-based access
@@ -27,10 +25,9 @@ ParcelIQ is a modern, multi-tenant SaaS application for streamlined package and 
 
 ### Prerequisites
 
-- Ruby 3.3.0+
+- Ruby 3.4.2
 - PostgreSQL 14+
-- Node.js 18+ (for asset compilation)
-- Yarn
+- Node.js 18+
 
 ### Setup
 

@@ -39,12 +39,21 @@ Rails.application.routes.draw do
   # Root admin routes (available on all domains)
   namespace :admin do
     get "dashboard", to: "dashboard#index", as: :dashboard
-    resources :companies
+    resources :companies do
+      member do
+        put :toggle_active
+      end
+    end
     resources :users do
       member do
         post :resend_invitation
       end
     end
+  end
+
+  # Add a test route for the TestController
+  namespace :admin do
+    get "test", to: "test#index"
   end
 
   # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)
@@ -53,4 +62,7 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+
+  # Define fallback root for when no other root routes match (for testing)
+  root to: proc { [ 200, {}, [ "Root Path" ] ] }, as: :root
 end

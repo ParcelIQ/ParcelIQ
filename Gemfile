@@ -60,6 +60,18 @@ group :development, :test do
 
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
+  
+  # RSpec testing framework
+  gem "rspec-rails"
+  gem "factory_bot_rails"
+  gem "faker"
+  gem "shoulda-matchers"
+
+  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'byebug', platforms: %i[mri mingw x64_mingw]
+  gem 'database_cleaner-active_record'
+  gem 'letter_opener'
+  gem 'rails-controller-testing'
 end
 
 group :development do

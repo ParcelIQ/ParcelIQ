@@ -35,6 +35,17 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  # Redirect after sign in based on user role
+  def after_sign_in_path_for(resource)
+    if resource.admin?
+      admin_dashboard_path
+    elsif is_tenant_domain?
+      tenant_root_path
+    else
+      public_root_path
+    end
+  end
+
   private
 
   def extract_subdomain(host)

@@ -31,7 +31,7 @@ html
                     path[stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"]
                   | Companies
                 
-                = link_to "#", class: "text-indigo-100 hover:bg-indigo-700 group flex items-center px-2 py-2 text-sm font-medium rounded-md" do
+                = link_to admin_users_path, class: "#{controller_name == 'users' ? 'bg-indigo-900 text-white' : 'text-indigo-100 hover:bg-indigo-700'} group flex items-center px-2 py-2 text-sm font-medium rounded-md" do
                   svg.mr-3.flex-shrink-0.h-6.w-6.text-indigo-300[xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"]
                     path[stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"]
                   | Users

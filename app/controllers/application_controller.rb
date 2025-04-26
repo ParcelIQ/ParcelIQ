@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   # Only allow modern browsers supporting webp images, web push, badges, import maps, CSS nesting, and CSS :has.
   allow_browser versions: :modern
 
-  helper_method :current_tenant, :is_tenant_domain?, :current_user_is_root_admin?
+  helper_method :current_tenant, :is_tenant_domain?, :current_user_is_admin?
 
   protected
 
@@ -24,12 +24,12 @@ class ApplicationController < ActionController::Base
       extract_subdomain(request.host) != "www"
   end
 
-  def current_user_is_root_admin?
-    user_signed_in? && current_user.root_admin?
+  def current_user_is_admin?
+    user_signed_in? && current_user.admin?
   end
 
-  def require_root_admin
-    unless current_user_is_root_admin?
+  def require_admin
+    unless current_user_is_admin?
       flash[:alert] = "You are not authorized to access this area."
       redirect_to root_path
     end

@@ -4,25 +4,25 @@ class User < ApplicationRecord
   devise :database_authenticatable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  # Multitenancy - only for customer users, not for root_admin
+  # Multitenancy - only for customer users, not for admins
   acts_as_tenant :company, optional: true
   belongs_to :company, optional: true
 
   # Validations
   validates :email, presence: true
   validates :email, uniqueness: { scope: :company_id }, if: :customer?
-  validates :email, uniqueness: true, if: :root_admin?
+  validates :email, uniqueness: true, if: :admin?
   validates :name, presence: true
   validates :company, presence: true, if: :customer?
-  validates :role, presence: true, inclusion: { in: [ "root_admin", "customer" ] }
+  validates :role, presence: true, inclusion: { in: [ "admin", "customer" ] }
 
   # Scopes
   scope :customer_users, -> { where(role: "customer") }
-  scope :root_admin_users, -> { where(role: "root_admin") }
+  scope :admin_users, -> { where(role: "admin") }
 
   # Role helpers
-  def root_admin?
-    role == "root_admin"
+  def admin?
+    role == "admin"
   end
 
   def customer?
@@ -30,14 +30,14 @@ class User < ApplicationRecord
   end
 
   # For backward compatibility
-  alias_method :admin?, :customer?
+  alias_method :root_admin?, :admin?
 
   # Make sure authentication works with tenant-scoped email uniqueness
   def self.find_for_authentication(warden_conditions)
     where(email: warden_conditions[:email]).first
   end
 
-  # Skip tenant scoping for root_admin users
+  # Skip tenant scoping for admin users
   def self.scoped_by_tenant?
     ActsAsTenant.current_tenant.present? && where(role: "customer")
   end

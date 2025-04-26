@@ -3,7 +3,7 @@ class DashboardController < ApplicationController
   layout "tenant"
 
   def index
-    if current_user.root_admin?
+    if current_user.admin?
       redirect_to admin_dashboard_path
     else
       # Company customer dashboard

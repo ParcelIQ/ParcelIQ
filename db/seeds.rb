@@ -13,7 +13,7 @@ companies = [
   {
     name: "Acme Corp",
     subdomain: "acme",
-    domain: "acmecorp.example.com",
+    domain: "acmecorp.myparceliq.com",
     time_zone: "Eastern Time (US & Canada)",
     street_address: "123 Main St",
     city: "New York",
@@ -21,8 +21,8 @@ companies = [
     zip: "10001",
     country: "USA",
     phone_number: "212-555-1234",
-    email: "info@acmecorp.example.com",
-    website: "https://acmecorp.example.com",
+    email: "info@acmecorp.myparceliq.com",
+    website: "https://acmecorp.myparceliq.com",
     tax_id: "12-3456789",
     plan: "enterprise",
     active: true,
@@ -32,7 +32,7 @@ companies = [
   {
     name: "Globex Inc",
     subdomain: "globex",
-    domain: "globexinc.example.com",
+    domain: "globexinc.myparceliq.com",
     time_zone: "Pacific Time (US & Canada)",
     street_address: "456 Market St",
     city: "San Francisco",
@@ -40,8 +40,8 @@ companies = [
     zip: "94105",
     country: "USA",
     phone_number: "415-555-5678",
-    email: "info@globexinc.example.com",
-    website: "https://globexinc.example.com",
+    email: "info@globexinc.myparceliq.com",
+    website: "https://globexinc.myparceliq.com",
     tax_id: "98-7654321",
     plan: "pro",
     active: true,
@@ -59,10 +59,10 @@ companies.each do |company_data|
   # Create users for each company
   ActsAsTenant.with_tenant(company) do
     3.times do |i|
-      user = User.find_or_initialize_by(email: "user#{i+1}@#{company.subdomain}.example.com")
+      user = User.find_or_initialize_by(email: "user#{i+1}@#{company.subdomain}.myparceliq.com")
       user.update!(
         name: "User #{i+1}",
-        email: "user#{i+1}@#{company.subdomain}.example.com"
+        email: "user#{i+1}@#{company.subdomain}.myparceliq.com"
       )
       puts "  Created user: #{user.name} (#{user.email})"
     end

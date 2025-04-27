@@ -18,6 +18,9 @@ module Admin
     def create
       @user = User.new(user_params)
 
+      # Skip password validation since we're sending an invitation
+      @user.skip_password_validation = true
+
       # Custom validation for customer users requiring a company
       if @user.customer? && @user.company_id.blank?
         @user.errors.add(:company_id, "is required for customer users")
@@ -50,6 +53,9 @@ module Admin
         return render :edit, status: :unprocessable_entity
       end
 
+      # Skip password validation if re-inviting or not setting password
+      @user.skip_password_validation = true if email_changed || params[:user][:password].blank?
+
       if @user.update(user_params)
         # If the email was changed, re-invite the user
         @user.invite! if email_changed
@@ -70,8 +76,12 @@ module Admin
     end
 
     def resend_invitation
-      @user.invite!(current_user)
-      redirect_to admin_user_path(@user), notice: "Invitation was successfully resent."
+      if @user.invited_to_sign_up?
+        @user.invite!(current_user)
+        redirect_to admin_user_path(@user), notice: "Invitation email was resent successfully."
+      else
+        redirect_to admin_user_path(@user), alert: "User has already accepted the invitation."
+      end
     end
 
     private
@@ -81,12 +91,7 @@ module Admin
     end
 
     def user_params
-      params.require(:user).permit(
-        :email,
-        :name,
-        :role,
-        :company_id
-      )
+      params.require(:user).permit(:name, :email, :role, :company_id, :password, :password_confirmation)
     end
   end
 end

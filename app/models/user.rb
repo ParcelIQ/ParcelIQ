@@ -4,6 +4,9 @@ class User < ApplicationRecord
   devise :invitable, :database_authenticatable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  # For skipping password validation during invitation
+  attr_accessor :skip_password_validation
+
   # Multitenancy - only for customer users, not for admins
   acts_as_tenant :company, optional: true
   belongs_to :company, optional: true
@@ -40,5 +43,11 @@ class User < ApplicationRecord
   # Skip tenant scoping for admin users
   def self.scoped_by_tenant?
     ActsAsTenant.current_tenant.present? && where(role: "customer")
+  end
+
+  # Override Devise method to skip password validation when needed
+  def password_required?
+    return false if skip_password_validation
+    super
   end
 end

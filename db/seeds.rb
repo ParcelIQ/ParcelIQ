@@ -65,7 +65,8 @@ companies.each do |company_data|
         email: "user#{i+1}@#{company.subdomain}.myparceliq.com",
         password: "password123",
         password_confirmation: "password123",
-        invitation_accepted_at: Time.current
+        invitation_accepted_at: Time.current,
+        role: "customer"
       )
       puts "  Created user: #{user.name} (#{user.email})"
     end
@@ -77,6 +78,7 @@ User.find_or_initialize_by(email: "admin@myparceliq.com").update!(
   email: "admin@myparceliq.com",
   password: "password123",
   password_confirmation: "password123",
+  role: "admin",
   invitation_accepted_at: Time.current
 )
 

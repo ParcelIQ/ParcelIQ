@@ -104,7 +104,6 @@ div.max-w-7xl.mx-auto.px-4.sm:px-6.lg:px-8
                   tr
                     th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider[scope="col"] Name
                     th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider[scope="col"] Email
-                    th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider[scope="col"] Role
                     th.px-6.py-3.text-right.text-xs.font-medium.text-gray-500.uppercase.tracking-wider[scope="col"] Actions
                 
                 tbody.bg-white.divide-y.divide-gray-200
@@ -114,11 +113,8 @@ div.max-w-7xl.mx-auto.px-4.sm:px-6.lg:px-8
                         div.text-sm.font-medium.text-gray-900 = user.name
                       td.px-6.py-4.whitespace-nowrap
                         div.text-sm.text-gray-500 = user.email
-                      td.px-6.py-4.whitespace-nowrap
-                        span.px-2.inline-flex.text-xs.leading-5.font-semibold.rounded-full.bg-indigo-100.text-indigo-800
-                          = user.role.capitalize
                       td.px-6.py-4.whitespace-nowrap.text-right.text-sm.font-medium
-                        = link_to "View", "#", class: "text-indigo-600 hover:text-indigo-900"
+                        = link_to "View", admin_user_path(user), class: "text-indigo-600 hover:text-indigo-900"
     - else
       div.px-4.py-5.sm:px-6.text-center
         p.text-gray-500 No users found for this company. 

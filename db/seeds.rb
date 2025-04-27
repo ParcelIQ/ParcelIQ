@@ -62,11 +62,22 @@ companies.each do |company_data|
       user = User.find_or_initialize_by(email: "user#{i+1}@#{company.subdomain}.myparceliq.com")
       user.update!(
         name: "User #{i+1}",
-        email: "user#{i+1}@#{company.subdomain}.myparceliq.com"
+        email: "user#{i+1}@#{company.subdomain}.myparceliq.com",
+        password: "password123",
+        password_confirmation: "password123",
+        invitation_accepted_at: Time.current
       )
       puts "  Created user: #{user.name} (#{user.email})"
     end
   end
 end
+
+User.find_or_initialize_by(email: "admin@myparceliq.com").update!(
+  name: "Admin",
+  email: "admin@myparceliq.com",
+  password: "password123",
+  password_confirmation: "password123",
+  invitation_accepted_at: Time.current
+)
 
 puts "Seed data created successfully!"

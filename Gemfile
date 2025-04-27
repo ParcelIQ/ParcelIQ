@@ -27,7 +27,7 @@ gem "acts_as_tenant"
 
 # Authentication
 gem "devise"
-gem "devise_invitable", "~> 2.0.0"
+gem "devise_invitable", "~> 2.0.10"
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: %i[ windows jruby ]

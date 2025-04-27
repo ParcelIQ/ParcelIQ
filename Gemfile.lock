@@ -445,6 +445,7 @@ DEPENDENCIES
   debug
   devise
   devise_invitable (~> 2.0.0)
+  dotenv
   factory_bot_rails
   faker
   importmap-rails

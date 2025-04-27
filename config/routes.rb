@@ -34,6 +34,11 @@ Rails.application.routes.draw do
 
     # Company settings for the current tenant
     resource :company_settings, only: [ :show, :edit, :update ]
+
+    # Customer-specific routes
+    namespace :customer do
+      get "dashboard", to: "dashboard#index", as: :dashboard
+    end
   end
 
   # Root admin routes (available on all domains)

@@ -1,0 +1,64 @@
+div.max-w-7xl.mx-auto.px-4.sm:px-6.lg:px-8.py-6
+  div.md:flex.md:items-center.md:justify-between
+    div.flex-1.min-w-0
+      h2.text-2xl.font-bold.leading-7.text-gray-900.sm:text-3xl.sm:truncate
+        | Customer Dashboard
+      p.mt-1.text-sm.text-gray-500
+        | Welcome to #{@company.name}'s customer portal
+
+  / User info card
+  div.mt-8.bg-white.shadow.rounded-lg.overflow-hidden
+    div.px-4.py-5.sm:p-6
+      h3.text-lg.leading-6.font-medium.text-gray-900 Your Information
+      div.mt-5.border-t.border-gray-200
+        dl.divide-y.divide-gray-200
+          div.py-4.sm:py-5.sm:grid.sm:grid-cols-3.sm:gap-4
+            dt.text-sm.font-medium.text-gray-500 Name
+            dd.mt-1.text-sm.text-gray-900.sm:mt-0.sm:col-span-2 = @my_info[:name]
+          div.py-4.sm:py-5.sm:grid.sm:grid-cols-3.sm:gap-4
+            dt.text-sm.font-medium.text-gray-500 Email
+            dd.mt-1.text-sm.text-gray-900.sm:mt-0.sm:col-span-2 = @my_info[:email]
+          div.py-4.sm:py-5.sm:grid.sm:grid-cols-3.sm:gap-4
+            dt.text-sm.font-medium.text-gray-500 Company
+            dd.mt-1.text-sm.text-gray-900.sm:mt-0.sm:col-span-2 = @my_info[:company]
+
+  / Stats overview
+  div.mt-8.grid.grid-cols-1.gap-6.sm:grid-cols-2.lg:grid-cols-3
+    div.bg-white.overflow-hidden.shadow.rounded-lg
+      div.px-4.py-5.sm:p-6
+        dl
+          dt.text-sm.font-medium.text-gray-500.truncate Recent Activity
+          dd.mt-1.text-3xl.font-semibold.text-gray-900 0
+          dd.mt-3.text-sm.text-gray-500 No recent activity to display
+    
+    div.bg-white.overflow-hidden.shadow.rounded-lg
+      div.px-4.py-5.sm:p-6
+        dl
+          dt.text-sm.font-medium.text-gray-500.truncate Company
+          dd.mt-1.text-xl.font-semibold.text-gray-900 = @company.name
+    
+    div.bg-white.overflow-hidden.shadow.rounded-lg
+      div.px-4.py-5.sm:p-6
+        dl
+          dt.text-sm.font-medium.text-gray-500.truncate Status
+          dd.mt-1.text-xl.font-semibold.text-green-600 Active
+  
+  / Feature placeholders
+  div.mt-8.grid.grid-cols-1.gap-6.sm:grid-cols-2
+    div.bg-white.overflow-hidden.shadow.rounded-lg
+      div.px-4.py-5.sm:p-6
+        h3.text-lg.leading-6.font-medium.text-gray-900 Quick Actions
+        div.mt-5
+          ul.divide-y.divide-gray-200
+            li.py-4
+              a.text-indigo-600.hover:text-indigo-900.font-medium href="#" View reports
+            li.py-4
+              a.text-indigo-600.hover:text-indigo-900.font-medium href="#" Update profile
+            li.py-4
+              a.text-indigo-600.hover:text-indigo-900.font-medium href="#" Contact support
+    
+    div.bg-white.overflow-hidden.shadow.rounded-lg
+      div.px-4.py-5.sm:p-6
+        h3.text-lg.leading-6.font-medium.text-gray-900 Recent Notifications
+        div.mt-5
+          p.text-sm.text-gray-500 No new notifications 

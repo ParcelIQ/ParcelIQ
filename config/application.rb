@@ -29,6 +29,14 @@ module ParcelIQ
     # Add tenant middleware to handle subdomain-based multitenancy
     config.middleware.use TenantMiddleware
 
+    # Configure hosts to allow all subdomains of localhost in development
+    if Rails.env.development?
+      config.hosts << /.*\.localhost/
+    end
+
+    # Allow redirects to subdomains of the main domain
+    config.action_controller.raise_on_open_redirects = false
+
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files

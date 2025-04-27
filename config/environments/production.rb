@@ -62,7 +62,7 @@ Rails.application.configure do
 
   # Specify outgoing SMTP server. Remember to add smtp/* credentials via rails credentials:edit.
   config.action_mailer.smtp_settings = {
-    user_name:  ENV.fetch("SMTP_USER_NAME"),
+    user_name:  ENV.fetch("SMTP_USERNAME"),
     password: ENV.fetch("SMTP_PASSWORD"),
     address: ENV.fetch("SMTP_ADDRESS"),
     port: ENV.fetch("SMTP_PORT"),

@@ -38,6 +38,7 @@ Rails.application.routes.draw do
     # Customer-specific routes
     namespace :customer do
       get "dashboard", to: "dashboard#index", as: :dashboard
+      get "reports", to: "reports#index", as: :reports
     end
   end
 

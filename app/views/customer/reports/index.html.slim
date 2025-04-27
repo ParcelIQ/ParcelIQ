@@ -1,0 +1,249 @@
+div.max-w-7xl.mx-auto.px-4.sm:px-6.lg:px-8.py-8 data-controller="reports"
+  / Page header with drop shadow and subtle gradient
+  div.rounded-xl.overflow-hidden.bg-gradient-to-r.from-indigo-50.to-blue-50.shadow-md.mb-8
+    div.px-6.py-6.sm:px-8
+      h1.text-3xl.font-extrabold.text-gray-900.tracking-tight
+        | Shipping Reports
+      p.mt-2.max-w-4xl.text-lg.text-gray-600
+        | View detailed shipping metrics and reports for 
+        span.font-semibold.text-indigo-700 = @company.name
+
+  / Control panel with filters
+  div.bg-white.rounded-xl.shadow-md.p-6.mb-8
+    div.flex.flex-col.sm:flex-row.items-center.justify-between.mb-4
+      h2.text-lg.font-bold.text-gray-900 Report Controls
+      div.mt-3.sm:mt-0.inline-flex.items-center.px-4.py-2.border.border-indigo-100.rounded-lg.bg-indigo-50
+        span.text-sm.font-medium.text-indigo-800 
+          span.font-bold.ml-1.mr-2 = @company.name
+        span.inline-block.h-1.w-1.mx-2.rounded-full.bg-indigo-300
+        span.text-sm.font-medium.text-green-700
+          | Invoice: 
+          span.font-bold.ml-1 = @report_data[:invoice_amount_formatted]
+    
+    div.grid.grid-cols-1.gap-4.sm:grid-cols-12.items-end.mt-2
+      div.sm:col-span-2
+        label.block.text-sm.font-medium.text-gray-700.mb-1 Month
+        div.relative.rounded-md
+          select.appearance-none.block.w-full.pl-3.pr-10.py-2.text-base.border-gray-300.bg-white.rounded-lg.shadow-sm.focus:outline-none.focus:ring-indigo-500.focus:border-indigo-500.transition.duration-150.hover:border-gray-400.sm:text-sm data-reports-target="month" data-action="change->reports#filter"
+            - @available_months.each do |month_name, month_value|
+              option value=month_value = month_name
+          div.pointer-events-none.absolute.inset-y-0.right-0.flex.items-center.px-2.text-gray-500
+            svg.h-5.w-5[xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"]
+              path[fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"]
+      
+      div.sm:col-span-2
+        label.block.text-sm.font-medium.text-gray-700.mb-1 Year
+        div.relative.rounded-md
+          select.appearance-none.block.w-full.pl-3.pr-10.py-2.text-base.border-gray-300.bg-white.rounded-lg.shadow-sm.focus:outline-none.focus:ring-indigo-500.focus:border-indigo-500.transition.duration-150.hover:border-gray-400.sm:text-sm data-reports-target="year" data-action="change->reports#filter"
+            - @available_years.each do |year|
+              option = year
+          div.pointer-events-none.absolute.inset-y-0.right-0.flex.items-center.px-2.text-gray-500
+            svg.h-5.w-5[xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"]
+              path[fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"]
+      
+      div.sm:col-span-2
+        label.block.text-sm.font-medium.text-gray-700.mb-1 Carrier
+        div.relative.rounded-md
+          select.appearance-none.block.w-full.pl-3.pr-10.py-2.text-base.border-gray-300.bg-white.rounded-lg.shadow-sm.focus:outline-none.focus:ring-indigo-500.focus:border-indigo-500.transition.duration-150.hover:border-gray-400.sm:text-sm data-reports-target="carrier" data-action="change->reports#filter"
+            - @available_carriers.each do |carrier|
+              option = carrier
+          div.pointer-events-none.absolute.inset-y-0.right-0.flex.items-center.px-2.text-gray-500
+            svg.h-5.w-5[xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"]
+              path[fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"]
+      
+      div.sm:col-span-6
+        button.w-full.inline-flex.items-center.justify-center.px-4.py-2.border.border-transparent.rounded-lg.shadow-sm.text-base.font-medium.text-white.bg-indigo-600.hover:bg-indigo-700.focus:outline-none.focus:ring-2.focus:ring-offset-2.focus:ring-indigo-500.transition.ease-in-out.duration-150 data-action="click->reports#downloadInvoice"
+          svg.h-5.w-5.mr-2[xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"]
+            path[stroke-linecap="round" stroke-linejoin="round" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10"]
+          | Carrier Invoice Detail Download
+
+  / Main reports grid
+  div.grid.grid-cols-1.gap-8.lg:grid-cols-2 data-reports-target="reportContent"
+    / Current Shipment Details
+    div.bg-white.overflow-hidden.rounded-xl.shadow-md.transition-shadow.duration-300.hover:shadow-lg
+      div.px-6.py-6
+        div.border-b.border-gray-100.pb-4.mb-6
+          div.flex.justify-between.items-baseline
+            h3.text-xl.font-bold.text-gray-900 Current Shipment Details
+            div.flex.flex-col.items-end
+              p.flex.items-baseline
+                span.text-2xl.font-bold.text-green-600 = @report_data[:shipment_stats][:total_amount_formatted]
+              p.text-sm.font-medium.text-blue-600
+                = @report_data[:shipment_stats][:shipment_count]
+                span.ml-1 Shipments
+        
+        ul.space-y-4
+          li.flex.items-center.p-2.rounded-lg.transition.duration-150.hover:bg-gray-50
+            div.flex-shrink-0.h-10.w-10.flex.items-center.justify-center.rounded-md.bg-indigo-100.text-indigo-600
+              svg.h-6.w-6[xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"]
+                path[stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"]
+            div.ml-4.flex-1
+              p.text-sm.font-medium.text-gray-900 Base Transportation Spend
+              p.text-lg.font-semibold.text-green-600 = @report_data[:shipment_stats][:base_transportation_formatted]
+          
+          li.flex.items-center.p-2.rounded-lg.transition.duration-150.hover:bg-gray-50
+            div.flex-shrink-0.h-10.w-10.flex.items-center.justify-center.rounded-md.bg-blue-100.text-blue-600
+              svg.h-6.w-6[xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"]
+                path[stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"]
+            div.ml-4.flex-1
+              p.text-sm.font-medium.text-gray-900 Surcharge Spend
+              p.text-lg.font-semibold.text-green-600 = @report_data[:shipment_stats][:surcharge_formatted]
+          
+          li.flex.items-center.p-2.rounded-lg.transition.duration-150.hover:bg-gray-50
+            div.flex-shrink-0.h-10.w-10.flex.items-center.justify-center.rounded-md.bg-yellow-100.text-yellow-600
+              svg.h-6.w-6[xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"]
+                path[stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"]
+            div.ml-4.flex-1
+              p.text-sm.font-medium.text-gray-900 Miscellaneous Spend
+              p.text-lg.font-semibold.text-green-600 = @report_data[:shipment_stats][:miscellaneous_formatted]
+          
+          li.flex.items-center.p-2.rounded-lg.transition.duration-150.hover:bg-gray-50
+            div.flex-shrink-0.h-10.w-10.flex.items-center.justify-center.rounded-md.bg-purple-100.text-purple-600
+              svg.h-6.w-6[xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"]
+                path[stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"]
+            div.ml-4.flex-1
+              p.text-sm.font-medium.text-gray-900 Total Shipments
+              p.text-lg.font-semibold = @report_data[:shipment_stats][:shipment_count]
+          
+          li.flex.items-center.p-2.rounded-lg.transition.duration-150.hover:bg-gray-50
+            div.flex-shrink-0.h-10.w-10.flex.items-center.justify-center.rounded-md.bg-green-100.text-green-600
+              svg.h-6.w-6[xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"]
+                path[stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 8h6m-5 0a3 3 0 110 6H9l3 3m-3-6h6m6 1a9 9 0 11-18 0 9 9 0 0118 0z"]
+            div.ml-4.flex-1
+              p.text-sm.font-medium.text-gray-900 Average Cost per Shipment
+              p.text-lg.font-semibold.text-green-600 = @report_data[:shipment_stats][:average_cost_formatted]
+
+    / Comparison Savings Breakdown
+    div.bg-white.overflow-hidden.rounded-xl.shadow-md.transition-shadow.duration-300.hover:shadow-lg
+      div.px-6.py-6
+        div.border-b.border-gray-100.pb-4.mb-6
+          div.flex.justify-between.items-baseline
+            h3.text-xl.font-bold.text-gray-900 Comparison Savings Breakdown
+            p.text-2xl.font-bold.text-green-600 = @report_data[:savings][:total_formatted]
+        
+        ul.space-y-4
+          li.flex.items-center.p-2.rounded-lg.transition.duration-150.hover:bg-gray-50
+            div.flex-shrink-0.h-10.w-10.flex.items-center.justify-center.rounded-md.bg-green-100.text-green-600
+              svg.h-6.w-6[xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"]
+                path[stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 8h6m-5 0a3 3 0 110 6H9l3 3m-3-6h6m6 1a9 9 0 11-18 0 9 9 0 0118 0z"]
+            div.ml-4.flex-1
+              p.text-sm.font-medium.text-gray-900 Transportation Charge Savings
+              p.text-lg.font-semibold.text-green-600 = @report_data[:savings][:transportation_charge_formatted]
+          
+          li.flex.items-center.p-2.rounded-lg.transition.duration-150.hover:bg-gray-50
+            div.flex-shrink-0.h-10.w-10.flex.items-center.justify-center.rounded-md.bg-blue-100.text-blue-600
+              svg.h-6.w-6[xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"]
+                path[stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"]
+            div.ml-4.flex-1
+              p.text-sm.font-medium.text-gray-900 Surcharge Savings
+              p.text-lg.font-semibold.text-green-600 = @report_data[:savings][:surcharge_formatted]
+          
+          li.flex.items-center.p-2.rounded-lg.transition.duration-150.hover:bg-gray-50
+            div.flex-shrink-0.h-10.w-10.flex.items-center.justify-center.rounded-md.bg-indigo-100.text-indigo-600
+              svg.h-6.w-6[xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"]
+                path[stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"]
+            div.ml-4.flex-1
+              p.text-sm.font-medium.text-gray-900 Dimensional Savings
+              p.text-lg.font-semibold.text-green-600 = @report_data[:savings][:dimensional_formatted]
+          
+          li.flex.items-center.p-2.rounded-lg.transition.duration-150.hover:bg-gray-50
+            div.flex-shrink-0.h-10.w-10.flex.items-center.justify-center.rounded-md.bg-red-100.text-red-600
+              svg.h-6.w-6[xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"]
+                path[stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"]
+            div.ml-4.flex-1
+              p.text-sm.font-medium.text-gray-900 Late Shipment Refunds
+              p.text-lg.font-semibold.text-green-600 = @report_data[:savings][:late_shipment_refunds_formatted]
+          
+          li.flex.items-center.p-2.rounded-lg.transition.duration-150.hover:bg-gray-50
+            div.flex-shrink-0.h-10.w-10.flex.items-center.justify-center.rounded-md.bg-purple-100.text-purple-600
+              svg.h-6.w-6[xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"]
+                path[stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"]
+            div.ml-4.flex-1
+              p.text-sm.font-medium.text-gray-900 Average Savings per Shipment
+              p.text-lg.font-semibold.text-green-600 = @report_data[:savings][:average_per_shipment_formatted]
+
+  / Bottom section with links and comparison boxes
+  div.mt-8.grid.grid-cols-1.gap-6.lg:grid-cols-5
+    / Red-outlined action buttons
+    div.lg:col-span-2.space-y-4
+      / Section header
+      h3.text-lg.font-bold.text-gray-800.px-1.mb-3 Quick Actions
+      
+      / Cards container with subtle grid effect
+      div.bg-white.rounded-xl.shadow-sm.p-4.grid.grid-cols-1.gap-3
+        / Distribution Mapping
+        a.group.flex.items-center.p-3.border-l-4.border-green-800.bg-white.rounded-lg.text-gray-800.font-medium.transform.transition.duration-200.ease-in-out.hover:bg-green-50.hover:shadow-md.hover:translate-x-1 data-action="click->reports#openDistributionMapping" href="#"
+          div.flex-shrink-0.mr-4.h-12.w-12.flex.items-center.justify-center.rounded-full.bg-green-100.text-green-800.group-hover:bg-green-200.transition.duration-200
+            svg.h-6.w-6[xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"]
+              path[stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"]
+              path[stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"]
+          div.flex-1
+            span.text-base.font-medium.group-hover:text-green-800.transition.duration-200 Distribution Mapping
+            p.text-sm.text-gray-500.mt-1.group-hover:text-gray-700 View shipping zone distribution
+        
+        / Package Profile Detail
+        a.group.flex.items-center.p-3.border-l-4.border-green-800.bg-white.rounded-lg.text-gray-800.font-medium.transform.transition.duration-200.ease-in-out.hover:bg-green-50.hover:shadow-md.hover:translate-x-1 data-action="click->reports#openPackageProfile" href="#"
+          div.flex-shrink-0.mr-4.h-12.w-12.flex.items-center.justify-center.rounded-full.bg-green-100.text-green-800.group-hover:bg-green-200.transition.duration-200
+            svg.h-6.w-6[xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"]
+              path[stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"]
+          div.flex-1
+            span.text-base.font-medium.group-hover:text-green-800.transition.duration-200 Package Profile Detail  
+            p.text-sm.text-gray-500.mt-1.group-hover:text-gray-700 Analyze package dimensions and weight
+        
+        / Zone Analysis
+        a.group.flex.items-center.p-3.border-l-4.border-green-800.bg-white.rounded-lg.text-gray-800.font-medium.transform.transition.duration-200.ease-in-out.hover:bg-green-50.hover:shadow-md.hover:translate-x-1 data-action="click->reports#openZoneAnalysis" href="#"
+          div.flex-shrink-0.mr-4.h-12.w-12.flex.items-center.justify-center.rounded-full.bg-green-100.text-green-800.group-hover:bg-green-200.transition.duration-200
+            svg.h-6.w-6[xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"]
+              path[stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"]
+          div.flex-1
+            span.text-base.font-medium.group-hover:text-green-800.transition.duration-200 Zone Analysis
+            p.text-sm.text-gray-500.mt-1.group-hover:text-gray-700 Evaluate shipping zone performance
+        
+        / Quick Tracking # Search
+        a.group.flex.items-center.p-3.border-l-4.border-green-800.bg-white.rounded-lg.text-gray-800.font-medium.transform.transition.duration-200.ease-in-out.hover:bg-green-50.hover:shadow-md.hover:translate-x-1 data-action="click->reports#openTrackingSearch" href="#"
+          div.flex-shrink-0.mr-4.h-12.w-12.flex.items-center.justify-center.rounded-full.bg-green-100.text-green-800.group-hover:bg-green-200.transition.duration-200
+            svg.h-6.w-6[xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"]
+              path[stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16l2.879-2.879m0 0a3 3 0 104.243-4.242 3 3 0 00-4.243 4.242zM21 12a9 9 0 11-18 0 9 9 0 0118 0z"]
+          div.flex-1
+            span.text-base.font-medium.group-hover:text-green-800.transition.duration-200 Quick Tracking # Search
+            p.text-sm.text-gray-500.mt-1.group-hover:text-gray-700 Find and track specific shipments
+    
+    / Agreement comparison section
+    div.lg:col-span-3
+      / Section header
+      h3.text-lg.font-bold.text-gray-800.px-1.mb-4 Invoice Comparison
+      
+      div.grid.grid-cols-1.md:grid-cols-2.gap-6
+        / Previous Agreement Invoice Amount
+        div.bg-white.overflow-hidden.rounded-xl.shadow-md.transition-all.duration-300.hover:shadow-lg.transform.hover:-translate-y-1
+          div.px-6.py-6.flex.flex-col.items-center.justify-center.text-center
+            div.flex.items-center.justify-center.w-16.h-16.bg-gray-100.rounded-full.mb-4
+              svg.h-8.w-8.text-gray-600[xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"]
+                path[stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"]
+            h3.text-base.font-medium.text-gray-900 Previous Agreement Invoice Amount
+            p.mt-2.text-3xl.font-bold.text-red-600 = @report_data[:previous_agreement_amount_formatted]
+        
+        / New Agreement Invoice Amount
+        div.bg-white.overflow-hidden.rounded-xl.shadow-md.transition-all.duration-300.hover:shadow-lg.transform.hover:-translate-y-1
+          div.px-6.py-6.flex.flex-col.items-center.justify-center.text-center
+            div.flex.items-center.justify-center.w-16.h-16.bg-green-100.rounded-full.mb-4
+              svg.h-8.w-8.text-green-600[xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"]
+                path[stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"]
+            h3.text-base.font-medium.text-gray-900 New Agreement Invoice Amount
+            p.mt-2.text-3xl.font-bold.text-green-600 = @report_data[:new_agreement_amount_formatted]
+            
+      / Savings indicator
+      div.mt-6.bg-green-50.rounded-xl.border.border-green-200.px-6.py-4
+        div.flex.items-center.justify-between
+          div.flex.items-center
+            div.flex-shrink-0.h-12.w-12.flex.items-center.justify-center.rounded-full.bg-green-100.text-green-600
+              svg.h-6.w-6[xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"]
+                path[stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"]
+            div.ml-4
+              p.text-sm.font-medium.text-gray-900 Total Savings
+              p.text-xl.font-bold.text-green-700
+                | $#{sprintf('%.2f', @savings_amount)}
+          div.text-right
+            p.text-sm.font-medium.text-gray-700 Savings Rate
+            p.text-lg.font-bold.text-green-700
+              | #{sprintf('%.1f', @savings_percentage)}% 

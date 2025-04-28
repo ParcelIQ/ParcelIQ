@@ -82,7 +82,7 @@ export default class extends Controller {
         e.stopPropagation()
 
         if (!this.hasFileInfoTarget || this.fileInfoTarget.classList.contains('hidden')) {
-            this.uploadZoneTarget.classList.add('border-indigo-300', 'bg-indigo-50')
+            this.uploadZoneTarget.classList.add('border-blue-300', 'bg-blue-50')
         }
     }
 
@@ -96,7 +96,7 @@ export default class extends Controller {
         e.stopPropagation()
 
         if (!this.hasFileInfoTarget || this.fileInfoTarget.classList.contains('hidden')) {
-            this.uploadZoneTarget.classList.remove('border-indigo-300', 'bg-indigo-50')
+            this.uploadZoneTarget.classList.remove('border-blue-300', 'bg-blue-50')
         }
     }
 
@@ -104,7 +104,7 @@ export default class extends Controller {
         e.preventDefault()
         e.stopPropagation()
 
-        this.uploadZoneTarget.classList.remove('border-indigo-300', 'bg-indigo-50')
+        this.uploadZoneTarget.classList.remove('border-blue-300', 'bg-blue-50')
 
         const dt = e.dataTransfer
         const files = dt.files

@@ -29,7 +29,7 @@
                 div.absolute.inset-y-0.left-0.pl-3.flex.items-center.pointer-events-none
                   svg.h-5.w-5.text-gray-400[xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"]
                     path[fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z" clip-rule="evenodd"]
-                = f.text_field :name, required: true, class: "appearance-none block w-full pl-10 px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition duration-200 ease-in-out hover:border-gray-400", placeholder: "e.g. April 2025 FedEx Invoice"
+                = f.text_field :name, required: true, class: "appearance-none block w-full pl-10 px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition duration-200 ease-in-out hover:border-gray-400", placeholder: "e.g. April 2025 FedEx Invoice"
             
             div.col-span-6.sm:col-span-3
               = f.label :carrier, class: "block text-sm font-medium text-gray-700"
@@ -38,7 +38,7 @@
                   svg.h-5.w-5.text-gray-400[xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"]
                     path[d="M8 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM15 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"]
                     path[d="M3 4a1 1 0 00-1 1v10a1 1 0 001 1h1.05a2.5 2.5 0 014.9 0H10a1 1 0 001-1V5a1 1 0 00-1-1H3zM14 7a1 1 0 00-1 1v6.05A2.5 2.5 0 0115.95 16H17a1 1 0 001-1v-5a1 1 0 00-.293-.707l-2-2A1 1 0 0015 7h-1z"]
-                = f.select :carrier, ShippingInvoice::CARRIERS, { prompt: "Select a carrier" }, { required: true, class: "appearance-none block w-full pl-10 px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition duration-200 ease-in-out hover:border-gray-400" }
+                = f.select :carrier, ShippingInvoice::CARRIERS, { prompt: "Select a carrier" }, { required: true, class: "appearance-none block w-full pl-10 px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition duration-200 ease-in-out hover:border-gray-400" }
             
             div.col-span-6.sm:col-span-3
               = f.label :invoice_uploaded_date, "Upload Date", class: "block text-sm font-medium text-gray-700"
@@ -46,7 +46,7 @@
                 div.absolute.inset-y-0.left-0.pl-3.flex.items-center.pointer-events-none
                   svg.h-5.w-5.text-gray-400[xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"]
                     path[fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"]
-                = f.date_field :invoice_uploaded_date, required: true, class: "appearance-none block w-full pl-10 px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition duration-200 ease-in-out hover:border-gray-400"
+                = f.date_field :invoice_uploaded_date, required: true, class: "appearance-none block w-full pl-10 px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition duration-200 ease-in-out hover:border-gray-400"
 
   div.bg-white.shadow-md.rounded-lg.overflow-hidden.mt-8 data-controller="file-upload"
     div.px-4.py-5.sm:p-6.border-b.border-gray-200
@@ -72,7 +72,7 @@
               svg.mx-auto.h-12.w-12.text-gray-400[xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"]
                 path[stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 17a5 5 0 01-.916-9.916 5.002 5.002 0 019.832 0A5.002 5.002 0 0116 17m-7-5l3-3m0 0l3 3m-3-3v12"]
               div.flex.text-sm.text-gray-600.justify-center
-                label.relative.cursor-pointer.bg-white.rounded-md.font-medium.text-indigo-600.hover:text-indigo-500.focus-within:outline-none.focus-within:ring-2.focus-within:ring-offset-2.focus-within:ring-indigo-500 for="shipping_invoice_csv_file"
+                label.relative.cursor-pointer.bg-white.rounded-md.font-medium.text-blue-600.hover:text-blue-500.focus-within:outline-none.focus-within:ring-2.focus-within:ring-offset-2.focus-within:ring-blue-500 for="shipping_invoice_csv_file"
                   span Click to upload
                   = f.file_field :csv_file, 
                                 id: "shipping_invoice_csv_file",
@@ -92,11 +92,11 @@
                 p.text-sm.font-medium.text-gray-900 File selected:
                 p.text-sm.text-gray-500 data-file-upload-target="filename" = existing_filename
               div.mt-3
-                button type="button" class="inline-flex items-center px-3 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" data-action="click->file-upload#clearFile"
+                button type="button" class="inline-flex items-center px-3 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" data-action="click->file-upload#clearFile"
                   svg.-ml-0.5.mr-1.h-4.w-4.text-gray-500[xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"]
                     path[fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"]
                   | Change file
 
   div.flex.justify-end.py-4.px-4.text-right.sm:px-6.rounded-b-lg
-    = link_to "Cancel", customer_shipping_invoices_path, class: "bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150 ease-in-out"
-    = f.submit class: "ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150 ease-in-out" 
+    = link_to "Cancel", customer_shipping_invoices_path, class: "bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150 ease-in-out"
+    = f.submit class: "ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150 ease-in-out" 

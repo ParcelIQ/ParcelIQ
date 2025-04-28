@@ -16,10 +16,10 @@ div.max-w-md.mx-auto.bg-white.p-8.rounded-lg.shadow-md
         = f.label :remember_me, class: "text-sm text-gray-700"
     
     div.flex.items-center.justify-between
-      = f.submit "Log in", class: "bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+      = f.submit "Log in", class: "bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
       
       - if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations'
-        = link_to "Forgot password?", new_password_path(resource_name), class: "inline-block align-baseline font-bold text-sm text-indigo-600 hover:text-indigo-800"
+        = link_to "Forgot password?", new_password_path(resource_name), class: "inline-block align-baseline font-bold text-sm text-blue-600 hover:text-blue-800"
 
 div.text-center.mt-6
   p.text-gray-600.text-sm

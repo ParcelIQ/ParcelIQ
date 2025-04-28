@@ -3,7 +3,7 @@ div.max-w-7xl.mx-auto.px-4.sm:px-6.lg:px-8.pb-12
   nav.flex.mb-6 aria-label="Breadcrumb"
     ol.inline-flex.items-center.space-x-1.md:space-x-3
       li.inline-flex.items-center
-        = link_to admin_users_path, class: "inline-flex items-center text-sm font-medium text-gray-500 hover:text-indigo-600 transition duration-150 ease-in-out" do
+        = link_to admin_users_path, class: "inline-flex items-center text-sm font-medium text-gray-500 hover:text-blue-600 transition duration-150 ease-in-out" do
           svg.w-4.h-4.mr-2[xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"]
             path[d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"]
           | Users
@@ -22,13 +22,13 @@ div.max-w-7xl.mx-auto.px-4.sm:px-6.lg:px-8.pb-12
     
     div.mt-4.flex.md:mt-0.md:ml-4
       - if !@user.invitation_accepted_at
-        = button_to resend_invitation_admin_user_path(@user), method: :post, class: "inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150 ease-in-out" do
+        = button_to resend_invitation_admin_user_path(@user), method: :post, class: "inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150 ease-in-out" do
           svg.-ml-1.mr-2.h-5.w-5.text-gray-500[xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"]
             path[d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"]
             path[d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"]
           | Resend Invitation
           
-      = link_to edit_admin_user_path(@user), class: "ml-3 inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150 ease-in-out" do
+      = link_to edit_admin_user_path(@user), class: "ml-3 inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150 ease-in-out" do
         svg.-ml-1.mr-2.h-5.w-5.text-gray-500[xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"]
           path[d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"]
         | Edit User
@@ -57,13 +57,13 @@ div.max-w-7xl.mx-auto.px-4.sm:px-6.lg:px-8.pb-12
         div.bg-gray-50.px-4.py-5.sm:grid.sm:grid-cols-3.sm:gap-4.sm:px-6
           dt.text-sm.font-medium.text-gray-500 Role
           dd.mt-1.sm:mt-0.sm:col-span-2
-            span.px-2.py-1.inline-flex.text-xs.leading-5.font-semibold.rounded-full.bg-indigo-100.text-indigo-800 = @user.role.capitalize
+            span.px-2.py-1.inline-flex.text-xs.leading-5.font-semibold.rounded-full.bg-blue-100.text-blue-800 = @user.role.capitalize
         
         div.bg-white.px-4.py-5.sm:grid.sm:grid-cols-3.sm:gap-4.sm:px-6
           dt.text-sm.font-medium.text-gray-500 Company
           dd.mt-1.text-sm.text-gray-900.sm:mt-0.sm:col-span-2
             - if @user.company
-              = link_to @user.company.name, admin_company_path(@user.company), class: "text-indigo-600 hover:text-indigo-900"
+              = link_to @user.company.name, admin_company_path(@user.company), class: "text-blue-600 hover:text-blue-900"
             - else
               | N/A
         

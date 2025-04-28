@@ -2,7 +2,7 @@ div.max-w-7xl.mx-auto.px-4.sm:px-6.lg:px-8.py-6
   div.md:flex.md:items-center.md:justify-between
     div.flex-1.min-w-0
       div.flex.items-center
-        = link_to admin_shipping_invoices_path, class: "mr-2 text-indigo-600 hover:text-indigo-900" do
+        = link_to admin_shipping_invoices_path, class: "mr-2 text-blue-600 hover:text-blue-900" do
           svg.h-5.w-5[xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"]
             path[fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"]
         h2.text-2xl.font-bold.leading-7.text-gray-900.sm:text-3xl.sm:truncate
@@ -10,7 +10,7 @@ div.max-w-7xl.mx-auto.px-4.sm:px-6.lg:px-8.py-6
       p.mt-1.text-sm.text-gray-500
         | Created #{time_ago_in_words(@shipping_invoice.created_at)} ago
     div.mt-4.flex.md:mt-0.md:ml-4
-      = link_to edit_admin_shipping_invoice_path(@shipping_invoice), class: "inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" do
+      = link_to edit_admin_shipping_invoice_path(@shipping_invoice), class: "inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" do
         svg.-ml-1.mr-2.h-5.w-5[xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"]
           path[d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"]
         | Edit Invoice
@@ -28,7 +28,7 @@ div.max-w-7xl.mx-auto.px-4.sm:px-6.lg:px-8.py-6
           div.py-4.sm:py-5.sm:grid.sm:grid-cols-3.sm:gap-4.sm:px-6
             dt.text-sm.font-medium.text-gray-500 Company
             dd.mt-1.text-sm.text-gray-900.sm:mt-0.sm:col-span-2 
-              = link_to @shipping_invoice.company.name, admin_company_path(@shipping_invoice.company), class: "text-indigo-600 hover:text-indigo-900"
+              = link_to @shipping_invoice.company.name, admin_company_path(@shipping_invoice.company), class: "text-blue-600 hover:text-blue-900"
           
           div.py-4.sm:py-5.sm:grid.sm:grid-cols-3.sm:gap-4.sm:px-6
             dt.text-sm.font-medium.text-gray-500 Carrier
@@ -54,7 +54,7 @@ div.max-w-7xl.mx-auto.px-4.sm:px-6.lg:px-8.py-6
               path[stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"]
             p.text-sm.text-gray-500.mb-4 = @shipping_invoice.csv_file.filename
             
-            = link_to rails_blob_path(@shipping_invoice.csv_file, disposition: "attachment"), class: "inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" do
+            = link_to rails_blob_path(@shipping_invoice.csv_file, disposition: "attachment"), class: "inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" do
               svg.-ml-1.mr-2.h-5.w-5[xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"]
                 path[fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd"]
               | Download CSV

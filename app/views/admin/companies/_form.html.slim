@@ -26,19 +26,19 @@
             div.col-span-6.sm:col-span-3
               = f.label :name, class: "block text-sm font-medium text-gray-700"
               div.mt-1.relative
-                = f.text_field :name, class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition duration-200 ease-in-out hover:border-gray-400"
+                = f.text_field :name, class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition duration-200 ease-in-out hover:border-gray-400"
             
             div.col-span-6.sm:col-span-3
               = f.label :subdomain, class: "block text-sm font-medium text-gray-700"
               div.mt-1.flex.rounded-md.shadow-sm
-                = f.text_field :subdomain, class: "appearance-none flex-1 block w-full px-3 py-2 border border-gray-300 rounded-none rounded-l-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition duration-200 ease-in-out hover:border-gray-400"
+                = f.text_field :subdomain, class: "appearance-none flex-1 block w-full px-3 py-2 border border-gray-300 rounded-none rounded-l-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition duration-200 ease-in-out hover:border-gray-400"
                 span.inline-flex.items-center.px-3.rounded-r-md.border.border-l-0.border-gray-300.bg-gray-50.text-gray-500.text-sm
                   | .myparceliq.com
             
             div.col-span-6.sm:col-span-4
               = f.label :domain, class: "block text-sm font-medium text-gray-700"
               div.mt-1.relative
-                = f.text_field :domain, class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition duration-200 ease-in-out hover:border-gray-400", placeholder: "custom-domain.com (optional)"
+                = f.text_field :domain, class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition duration-200 ease-in-out hover:border-gray-400", placeholder: "custom-domain.com (optional)"
             
             div.col-span-6.sm:col-span-3
               = f.label :email, class: "block text-sm font-medium text-gray-700"
@@ -47,7 +47,7 @@
                   svg.h-5.w-5.text-gray-400[xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"]
                     path[d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"]
                     path[d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"]
-                = f.email_field :email, class: "appearance-none block w-full pl-10 px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition duration-200 ease-in-out hover:border-gray-400"
+                = f.email_field :email, class: "appearance-none block w-full pl-10 px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition duration-200 ease-in-out hover:border-gray-400"
             
             div.col-span-6.sm:col-span-3
               = f.label :phone_number, class: "block text-sm font-medium text-gray-700"
@@ -55,14 +55,14 @@
                 div.absolute.inset-y-0.left-0.pl-3.flex.items-center.pointer-events-none
                   svg.h-5.w-5.text-gray-400[xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"]
                     path[d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"]
-                = f.text_field :phone_number, class: "appearance-none block w-full pl-10 px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition duration-200 ease-in-out hover:border-gray-400"
+                = f.text_field :phone_number, class: "appearance-none block w-full pl-10 px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition duration-200 ease-in-out hover:border-gray-400"
             
             div.col-span-6
               = f.label :website, class: "block text-sm font-medium text-gray-700"
               div.mt-1.flex.rounded-md.shadow-sm
                 span.inline-flex.items-center.px-3.rounded-l-md.border.border-r-0.border-gray-300.bg-gray-50.text-gray-500.text-sm
                   | https://
-                = f.text_field :website, class: "appearance-none flex-1 block w-full px-3 py-2 border border-gray-300 rounded-none rounded-r-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition duration-200 ease-in-out hover:border-gray-400", placeholder: "www.example.com"
+                = f.text_field :website, class: "appearance-none flex-1 block w-full px-3 py-2 border border-gray-300 rounded-none rounded-r-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition duration-200 ease-in-out hover:border-gray-400", placeholder: "www.example.com"
 
   div.bg-white.shadow.rounded-lg.overflow-hidden.mt-8
     div.px-4.py-5.sm:p-6.border-b.border-gray-200
@@ -80,32 +80,32 @@
                 div.absolute.inset-y-0.left-0.pl-3.flex.items-center.pointer-events-none
                   svg.h-5.w-5.text-gray-400[xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"]
                     path[fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"]
-                = f.text_field :street_address, class: "appearance-none block w-full pl-10 px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition duration-200 ease-in-out hover:border-gray-400"
+                = f.text_field :street_address, class: "appearance-none block w-full pl-10 px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition duration-200 ease-in-out hover:border-gray-400"
             
             div.col-span-6.sm:col-span-6.lg:col-span-2
               = f.label :city, class: "block text-sm font-medium text-gray-700"
               div.mt-1.relative
-                = f.text_field :city, class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition duration-200 ease-in-out hover:border-gray-400"
+                = f.text_field :city, class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition duration-200 ease-in-out hover:border-gray-400"
             
             div.col-span-6.sm:col-span-3.lg:col-span-2
               = f.label :state, class: "block text-sm font-medium text-gray-700"
               div.mt-1.relative
-                = f.text_field :state, class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition duration-200 ease-in-out hover:border-gray-400"
+                = f.text_field :state, class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition duration-200 ease-in-out hover:border-gray-400"
             
             div.col-span-6.sm:col-span-3.lg:col-span-2
               = f.label :zip, class: "block text-sm font-medium text-gray-700"
               div.mt-1.relative
-                = f.text_field :zip, class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition duration-200 ease-in-out hover:border-gray-400"
+                = f.text_field :zip, class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition duration-200 ease-in-out hover:border-gray-400"
             
             div.col-span-6.sm:col-span-3
               = f.label :country, class: "block text-sm font-medium text-gray-700"
               div.mt-1.relative
-                = f.text_field :country, class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition duration-200 ease-in-out hover:border-gray-400"
+                = f.text_field :country, class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition duration-200 ease-in-out hover:border-gray-400"
             
             div.col-span-6.sm:col-span-3
               = f.label :tax_id, class: "block text-sm font-medium text-gray-700"
               div.mt-1.relative
-                = f.text_field :tax_id, class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition duration-200 ease-in-out hover:border-gray-400"
+                = f.text_field :tax_id, class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition duration-200 ease-in-out hover:border-gray-400"
 
   div.bg-white.shadow.rounded-lg.overflow-hidden.mt-8
     div.px-4.py-5.sm:p-6.border-b.border-gray-200
@@ -119,20 +119,20 @@
           div.grid.grid-cols-6.gap-6
             div.col-span-6.sm:col-span-3
               = f.label :plan, class: "block text-sm font-medium text-gray-700"
-              = f.select :plan, options_for_select([["Free", "free"], ["Pro", "pro"]], @company.plan), { include_blank: "Select a plan" }, { class: "appearance-none mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition duration-200 ease-in-out hover:border-gray-400" }
+              = f.select :plan, options_for_select([["Free", "free"], ["Pro", "pro"]], @company.plan), { include_blank: "Select a plan" }, { class: "appearance-none mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition duration-200 ease-in-out hover:border-gray-400" }
             
             div.col-span-6.sm:col-span-3
               = f.label :time_zone, class: "block text-sm font-medium text-gray-700"
-              = f.time_zone_select :time_zone, ActiveSupport::TimeZone.all.sort, { default: "UTC" }, { class: "appearance-none mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition duration-200 ease-in-out hover:border-gray-400" }
+              = f.time_zone_select :time_zone, ActiveSupport::TimeZone.all.sort, { default: "UTC" }, { class: "appearance-none mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition duration-200 ease-in-out hover:border-gray-400" }
             
             div.col-span-6.mt-2
               div.flex.items-start
                 div.flex.items-center.h-5
-                  = f.check_box :active, class: "focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded transition duration-200 ease-in-out"
+                  = f.check_box :active, class: "focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded transition duration-200 ease-in-out"
                 div.ml-3.text-sm
                   = f.label :active, "Active", class: "font-medium text-gray-700"
                   p.text-gray-500 Enable or disable this company account. Inactive companies cannot access the system.
 
   div.flex.justify-end.py-4.px-4.text-right.sm:px-6.rounded-b-lg
-    = link_to "Cancel", @company.new_record? ? admin_companies_path : admin_company_path(@company), class: "bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150 ease-in-out"
-    = f.submit @company.new_record? ? "Create Company" : "Update Company", class: "ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150 ease-in-out" 
+    = link_to "Cancel", @company.new_record? ? admin_companies_path : admin_company_path(@company), class: "bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150 ease-in-out"
+    = f.submit @company.new_record? ? "Create Company" : "Update Company", class: "ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150 ease-in-out" 

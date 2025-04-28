@@ -2,7 +2,7 @@ div.max-w-7xl.mx-auto.px-4.sm:px-6.lg:px-8.py-12
   div.text-center
     h1.text-4xl.font-extrabold.tracking-tight.text-gray-900.sm:text-5xl.md:text-6xl
       span.block ParcelIQ
-      span.block.text-indigo-600 SaaS Platform
+      span.block.text-blue-600 SaaS Platform
     
     p.mt-3.max-w-md.mx-auto.text-base.text-gray-500.sm:text-lg.md:mt-5.md:text-xl.md:max-w-3xl
       | The ultimate solution for your shipping needs
@@ -12,16 +12,16 @@ div.max-w-7xl.mx-auto.px-4.sm:px-6.lg:px-8.py-12
         - if user_signed_in?
           .flex.gap-2  
             - if current_user.admin?
-              = link_to "Dashboard", admin_dashboard_path, class: "w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10"
+              = link_to "Dashboard", admin_dashboard_path, class: "w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 md:py-4 md:text-lg md:px-10"
             - elsif current_user.customer?
               - if current_user.company.present?
                 - subdomain = current_user.company.subdomain
                 - host = Rails.env.development? ? 'localhost:3000' : request.domain
-                = link_to "Dashboard", generate_customer_dashboard_url(subdomain: subdomain, host: host), class: "w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10", data: { turbo: false }
+                = link_to "Dashboard", generate_customer_dashboard_url(subdomain: subdomain, host: host), class: "w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 md:py-4 md:text-lg md:px-10", data: { turbo: false }
               - else
-                = link_to "Dashboard", tenant_root_path, class: "w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10"
+                = link_to "Dashboard", tenant_root_path, class: "w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 md:py-4 md:text-lg md:px-10"
             - else
-              = link_to "Dashboard", tenant_root_path, class: "w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10"
+              = link_to "Dashboard", tenant_root_path, class: "w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 md:py-4 md:text-lg md:px-10"
             = button_to "Logout", destroy_user_session_path, method: :delete, class: "w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-red-600 hover:bg-red-700 md:py-4 md:text-lg md:px-10 hover:cursor-pointer" 
         - else
-          = link_to "Login", new_user_session_path, class: "w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10" 
+          = link_to "Login", new_user_session_path, class: "w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 md:py-4 md:text-lg md:px-10" 

@@ -15,18 +15,18 @@ html
         div.flex.items-center
           - if current_tenant&.logo.attached?
             = image_tag current_tenant.logo.variant(resize_to_limit: [40, 40]), class: "h-10 w-10 rounded-full"
-          h1.ml-3.text-xl.font-bold.text-indigo-600 = current_tenant&.name
+          h1.ml-3.text-xl.font-bold.text-blue-600 = current_tenant&.name
         
         div.hidden.sm:ml-6.sm:flex.sm:space-x-8
           - if current_user&.admin?
             = link_to "Admin Dashboard", admin_dashboard_path, class: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
           - elsif current_user&.customer?
-            = link_to "Dashboard", customer_dashboard_path, class: "#{controller_path == 'customer/dashboard' ? 'border-indigo-500 text-gray-900' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+            = link_to "Dashboard", customer_dashboard_path, class: "#{controller_path == 'customer/dashboard' ? 'border-blue-500 text-gray-900' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
           - else
-            = link_to "Dashboard", tenant_root_path, class: "#{controller_name == 'dashboard' ? 'border-indigo-500 text-gray-900' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+            = link_to "Dashboard", tenant_root_path, class: "#{controller_name == 'dashboard' ? 'border-blue-500 text-gray-900' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
           
-          = link_to "Users", users_path, class: "#{controller_name == 'users' ? 'border-indigo-500 text-gray-900' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
-          = link_to "Settings", '#', class: "#{controller_name == 'company_settings' ? 'border-indigo-500 text-gray-900' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+          = link_to "Users", users_path, class: "#{controller_name == 'users' ? 'border-blue-500 text-gray-900' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+          = link_to "Settings", '#', class: "#{controller_name == 'company_settings' ? 'border-blue-500 text-gray-900' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
           - if user_signed_in?
             = button_to "Logout", destroy_user_session_path, method: :delete, class: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
     

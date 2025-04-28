@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_04_26_175601) do
+ActiveRecord::Schema[8.0].define(version: 2025_04_28_051530) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -67,6 +67,18 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_26_175601) do
     t.index ["subdomain"], name: "index_companies_on_subdomain", unique: true
   end
 
+  create_table "shipping_invoices", force: :cascade do |t|
+    t.string "name"
+    t.bigint "company_id", null: false
+    t.string "carrier"
+    t.date "invoice_uploaded_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["carrier"], name: "index_shipping_invoices_on_carrier"
+    t.index ["company_id"], name: "index_shipping_invoices_on_company_id"
+    t.index ["invoice_uploaded_date"], name: "index_shipping_invoices_on_invoice_uploaded_date"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email"
     t.string "name"
@@ -101,5 +113,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_26_175601) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "shipping_invoices", "companies"
   add_foreign_key "users", "companies"
 end

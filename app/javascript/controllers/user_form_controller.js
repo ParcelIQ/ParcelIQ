@@ -8,29 +8,37 @@ export default class extends Controller {
     }
 
     toggleCompanyField() {
-        const roleSelect = this.element.querySelector('select[name="user[role]"]')
-        const isCustomer = roleSelect && roleSelect.value === "customer"
+        const roleSelect = this.element.querySelector('select[name*="[role]"]')
 
-        if (this.hasCompanyFieldTarget) {
-            if (isCustomer) {
-                this.companyFieldTarget.classList.remove("hidden")
-                this.companySelectTarget.setAttribute("required", "")
-            } else {
-                this.companyFieldTarget.classList.add("hidden")
-                this.companySelectTarget.removeAttribute("required")
-            }
+        if (!roleSelect) return
+
+        const selectedRole = roleSelect.value
+
+        if (selectedRole === "customer") {
+            this.companyFieldTarget.style.display = "block"
+            this.companySelectTarget.required = true
+        } else {
+            this.companyFieldTarget.style.display = "none"
+            this.companySelectTarget.required = false
+            this.companyErrorTarget.style.display = "none"
         }
     }
 
     validateForm(event) {
-        const roleSelect = this.element.querySelector('select[name="user[role]"]')
-        const isCustomer = roleSelect && roleSelect.value === "customer"
+        const roleSelect = this.element.querySelector('select[name*="[role]"]')
 
-        if (isCustomer && this.hasCompanySelectTarget && !this.companySelectTarget.value) {
+        if (!roleSelect) return
+
+        const selectedRole = roleSelect.value
+
+        if (selectedRole === "customer" && !this.companySelectTarget.value) {
             event.preventDefault()
             this.companyErrorTarget.style.display = "block"
             this.companySelectTarget.classList.add("border-red-500")
             this.companySelectTarget.focus()
+        } else {
+            this.companyErrorTarget.style.display = "none"
+            this.companySelectTarget.classList.remove("border-red-500")
         }
     }
 } 

@@ -39,6 +39,7 @@ Rails.application.routes.draw do
     namespace :customer do
       get "dashboard", to: "dashboard#index", as: :dashboard
       get "reports", to: "reports#index", as: :reports
+      resources :shipping_invoices
     end
   end
 
@@ -55,6 +56,7 @@ Rails.application.routes.draw do
         post :resend_invitation
       end
     end
+    resources :shipping_invoices
   end
 
   # Add a test route for the TestController

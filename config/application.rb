@@ -21,7 +21,12 @@ module ParcelIQ
     # Please, add to the `ignore` list any other `lib` subdirectories that do
     # not contain `.rb` files, or that should not be reloaded or eager loaded.
     # Common ones are `templates`, `generators`, or `middleware`, for example.
-    config.autoload_lib(ignore: %w[assets tasks templates])
+    config.autoload_lib(ignore: %w[assets tasks templates generators])
+
+    # Exclude generator templates from Zeitwerk autoloading
+    config.to_prepare do
+      Rails.autoloaders.main.ignore(Rails.root.join("lib/generators/*/templates"))
+    end
 
     # Use autoload paths for our middleware
     config.autoload_paths += %W[#{config.root}/app/middleware #{config.root}/app/constraints]

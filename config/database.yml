@@ -80,12 +80,15 @@ test:
 production:
   primary: &primary_production
     <<: *default
-    url: <%= ENV["DATABASE_URL"] %>
-    database: parcel_iq_production
-    username: parcel_iq
-    password: <%= ENV["PARCEL_IQ_DATABASE_PASSWORD"] %>
-    host: <%= ENV["DATABASE_HOST"] %>
-    port: <%= ENV["DATABASE_PORT"] %>
+    <% if ENV["DATABASE_URL"].present? %>
+      url: <%= ENV["DATABASE_URL"] %>
+    <% else %>
+      database: parcel_iq_production
+      username: parcel_iq
+      password: <%= ENV["PARCEL_IQ_DATABASE_PASSWORD"] %>
+      host: <%= ENV["DATABASE_HOST"] %>
+      port: <%= ENV["DATABASE_PORT"] %>
+    <% end %>
   cache:
     <<: *primary_production
     database: parcel_iq_production_cache

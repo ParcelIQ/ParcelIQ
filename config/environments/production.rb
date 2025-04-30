@@ -61,12 +61,18 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: "example.com" }
 
   # Specify outgoing SMTP server. Remember to add smtp/* credentials via rails credentials:edit.
-  config.action_mailer.smtp_settings = {
-    user_name:  ENV.fetch("SMTP_USERNAME"),
-    password: ENV.fetch("SMTP_PASSWORD"),
-    address: ENV.fetch("SMTP_ADDRESS"),
-    port: ENV.fetch("SMTP_PORT"),
-    authentication: :plain
+  # config.action_mailer.smtp_settings = {
+  #   user_name:  ENV.fetch("SMTP_USERNAME"),
+  #   password: ENV.fetch("SMTP_PASSWORD"),
+  #   address: ENV.fetch("SMTP_ADDRESS"),
+  #   port: ENV.fetch("SMTP_PORT"),
+  #   authentication: :plain
+  # }
+
+  config.action_mailer.delivery_method = :postmark
+
+  config.action_mailer.postmark_settings = {
+    api_token: Rails.application.credentials.postmark_api_token
   }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to

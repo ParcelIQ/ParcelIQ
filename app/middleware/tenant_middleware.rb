@@ -20,7 +20,8 @@ class TenantMiddleware
         ActsAsTenant.current_tenant = company
       else
         # Handle invalid tenant (redirect to marketing site or error page)
-        return [ 302, { "Location" => "http://#{ENV['DEFAULT_HOST'] || 'localhost:3000'}" }, [] ]
+        base_domain = Rails.env.development? ? "localhost:3000" : request.domain
+        return [ 302, { "Location" => "http://#{base_domain}" }, [] ]
       end
     end
 

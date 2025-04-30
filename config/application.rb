@@ -39,6 +39,9 @@ module ParcelIQ
       config.hosts << /.*\.localhost/
     end
 
+    # Set DEFAULT_HOST environment variable to handle flexible domains
+    ENV["DEFAULT_HOST"] ||= Rails.env.production? ? "myparceliq.com" : "localhost:3000"
+
     # Allow redirects to subdomains of the main domain
     config.action_controller.raise_on_open_redirects = false
 

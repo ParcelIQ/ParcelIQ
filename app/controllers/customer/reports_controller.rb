@@ -3,6 +3,7 @@ module Customer
     before_action :authenticate_user!
     before_action :require_customer
     before_action :set_tenant_for_customer
+    before_action :set_company
     layout "tenant"
 
     def index
@@ -75,6 +76,16 @@ module Customer
       if ActsAsTenant.current_tenant.nil? && current_user&.company.present?
         ActsAsTenant.current_tenant = current_user.company
       end
+    end
+
+    def set_company
+      @current_company = current_user.company
+    end
+
+    helper_method :current_company
+
+    def current_company
+      @current_company
     end
   end
 end

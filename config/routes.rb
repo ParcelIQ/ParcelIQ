@@ -56,7 +56,11 @@ Rails.application.routes.draw do
         post :resend_invitation
       end
     end
-    resources :shipping_invoices
+    resources :shipping_invoices do
+      member do
+        post :reprocess
+      end
+    end
   end
 
   # Add a test route for the TestController

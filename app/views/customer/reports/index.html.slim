@@ -60,7 +60,7 @@ div.max-w-7xl.mx-auto.px-4.sm:px-6.lg:px-8.py-8 data-controller="reports"
   / Main reports grid
   div.grid.grid-cols-1.gap-8.lg:grid-cols-2 data-reports-target="reportContent"
     / Current Shipment Details
-    div.bg-white.overflow-hidden.rounded-xl.shadow-md.transition-shadow.duration-300.hover:shadow-lg
+    div.bg-white.overflow-hidden.rounded-xl.shadow-md.transition-shadow.duration-300.hover:shadow-lg.cursor-pointer data-action="click->reports#openShipmentDetailsModal"
       div.px-6.py-6
         div.border-b.border-gray-100.pb-4.mb-6
           div.flex.justify-between.items-baseline
@@ -114,7 +114,7 @@ div.max-w-7xl.mx-auto.px-4.sm:px-6.lg:px-8.py-8 data-controller="reports"
               p.text-lg.font-semibold.text-green-600 = @report_data[:shipment_stats][:average_cost_formatted]
 
     / Comparison Savings Breakdown
-    div.bg-white.overflow-hidden.rounded-xl.shadow-md.transition-shadow.duration-300.hover:shadow-lg
+    div.bg-white.overflow-hidden.rounded-xl.shadow-md.transition-shadow.duration-300.hover:shadow-lg.cursor-pointer data-action="click->reports#openSavingsBreakdownModal"
       div.px-6.py-6
         div.border-b.border-gray-100.pb-4.mb-6
           div.flex.justify-between.items-baseline
@@ -125,7 +125,7 @@ div.max-w-7xl.mx-auto.px-4.sm:px-6.lg:px-8.py-8 data-controller="reports"
           li.flex.items-center.p-2.rounded-lg.transition.duration-150.hover:bg-gray-50
             div.flex-shrink-0.h-10.w-10.flex.items-center.justify-center.rounded-md.bg-green-100.text-green-600
               svg.h-6.w-6[xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"]
-                path[stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 8h6m-5 0a3 3 0 110 6H9l3 3m-3-6h6m6 1a9 9 0 11-18 0 9 9 0 0118 0z"]
+                path[stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"]
             div.ml-4.flex-1
               p.text-sm.font-medium.text-gray-900 Transportation Charge Savings
               p.text-lg.font-semibold.text-green-600 = @report_data[:savings][:transportation_charge_formatted]
@@ -246,4 +246,10 @@ div.max-w-7xl.mx-auto.px-4.sm:px-6.lg:px-8.py-8 data-controller="reports"
           div.text-right
             p.text-sm.font-medium.text-gray-700 Savings Rate
             p.text-lg.font-bold.text-green-700
-              | #{sprintf('%.1f', @savings_percentage)}% 
+              | #{sprintf('%.1f', @savings_percentage)}%
+
+  / Render the shipment details modal partial
+  = render 'customer/reports/shipment_details_modal'
+  
+  / Render the savings breakdown modal partial
+  = render 'customer/reports/savings_breakdown_modal' 

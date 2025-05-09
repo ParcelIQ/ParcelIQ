@@ -1,0 +1,67 @@
+/ Distribution Mapping
+div.bg-white.overflow-hidden.rounded-xl.shadow-md.p-6.mb-6
+  h2.text-xl.font-bold.text-gray-900.mb-4 #{current_tenant.name} Distribution Map
+  
+  div.overflow-x-auto
+    div.grid.grid-cols-1.lg:grid-cols-4.gap-6.items-start
+      / US Map
+      div.lg:col-span-2
+        img.w-full.h-auto src="https://labeledmaps.com/wp-content/uploads/2023/04/usa-labeled-map-colored-12.jpg" alt="US Distribution Map"
+        div.text-xs.text-gray-500.text-right.mt-1 © 2017 WaterproofPaper.com
+      
+      / Distribution Statistics
+      div.lg:col-span-2.grid.grid-cols-1.gap-4
+        / Filters
+        div.flex.justify-end.space-x-4.mb-4
+          div.px-4.py-2.border.border-gray-300.rounded-md.text-sm.font-medium.text-gray-700 Month
+          div.px-4.py-2.border.border-gray-300.rounded-md.text-sm.font-medium.text-gray-700 Year
+          div.px-4.py-2.border.border-gray-300.rounded-md.text-sm.font-medium.text-gray-700 Carrier
+        
+        / Stats table
+        table.min-w-full.divide-y.divide-gray-200
+          thead.bg-blue-600
+            tr
+              th.px-6.py-3.text-left.text-xs.font-medium.text-white.uppercase.tracking-wider US Air Shipments
+              th.px-6.py-3.text-left.text-xs.font-medium.text-white.uppercase.tracking-wider US Ground Shipments
+              th.px-6.py-3.text-left.text-xs.font-medium.text-white.uppercase.tracking-wider International Export
+              th.px-6.py-3.text-left.text-xs.font-medium.text-white.uppercase.tracking-wider International Import
+          tbody.bg-white.divide-y.divide-gray-200
+            tr.bg-gray-100
+              td.px-6.py-4.whitespace-nowrap.text-sm.font-medium.text-gray-900 CA – 80
+              td.px-6.py-4.whitespace-nowrap.text-sm.font-medium.text-gray-900 TX – 500
+              td.px-6.py-4.whitespace-nowrap.text-sm.font-medium.text-gray-900 MX – 29
+              td.px-6.py-4.whitespace-nowrap.text-sm.font-medium.text-gray-900 CN – 31
+            tr
+              td.px-6.py-4.whitespace-nowrap.text-sm.font-medium.text-gray-900 NC – 25
+              td.px-6.py-4.whitespace-nowrap.text-sm.font-medium.text-gray-900 CO – 56
+              td.px-6.py-4.whitespace-nowrap.text-sm.font-medium.text-gray-900 TW - 12
+              td.px-6.py-4.whitespace-nowrap.text-sm.font-medium.text-gray-900 FR - 21
+            tr.bg-gray-100
+              td.px-6.py-4.whitespace-nowrap.text-sm.font-medium.text-gray-500 —
+              td.px-6.py-4.whitespace-nowrap.text-sm.font-medium.text-gray-500 —
+              td.px-6.py-4.whitespace-nowrap.text-sm.font-medium.text-gray-500 —
+              td.px-6.py-4.whitespace-nowrap.text-sm.font-medium.text-gray-500 —
+            tr
+              td.px-6.py-4.whitespace-nowrap.text-sm.font-medium.text-gray-500 —
+              td.px-6.py-4.whitespace-nowrap.text-sm.font-medium.text-gray-500 —
+              td.px-6.py-4.whitespace-nowrap.text-sm.font-medium.text-gray-500 —
+              td.px-6.py-4.whitespace-nowrap.text-sm.font-medium.text-gray-500 —
+            tr.bg-gray-100
+              td.px-6.py-4.whitespace-nowrap.text-sm.font-medium.text-gray-500 —
+              td.px-6.py-4.whitespace-nowrap.text-sm.font-medium.text-gray-500 —
+              td.px-6.py-4.whitespace-nowrap.text-sm.font-medium.text-gray-500 —
+              td.px-6.py-4.whitespace-nowrap.text-sm.font-medium.text-gray-500 —
+            tr
+              td.px-6.py-4.whitespace-nowrap.text-sm.font-medium.text-gray-500 —
+              td.px-6.py-4.whitespace-nowrap.text-sm.font-medium.text-gray-500 —
+              td.px-6.py-4.whitespace-nowrap.text-sm.font-medium.text-gray-500 —
+              td.px-6.py-4.whitespace-nowrap.text-sm.font-medium.text-gray-500 —
+            tr.bg-blue-600.text-white
+              td.px-6.py-4.whitespace-nowrap.text-sm.font-bold Total - 105
+              td.px-6.py-4.whitespace-nowrap.text-sm.font-bold Total - 556
+              td.px-6.py-4.whitespace-nowrap.text-sm.font-bold Total - 41
+              td.px-6.py-4.whitespace-nowrap.text-sm.font-bold Total - 52
+    
+    / Bottom Label
+    div.flex.justify-end.mt-6
+      div.px-4.py-2.border.border-red-600.text-red-600.rounded-md.text-sm.font-medium Distribution Mapping 

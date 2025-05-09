@@ -68,3 +68,12 @@ div.max-w-7xl.mx-auto.px-4.sm:px-6.lg:px-8.py-6
         - else
           div.text-center.py-4
             p.text-gray-500.text-sm No file attached
+
+  // Render the appropriate invoice entries partial based on carrier
+  div.mt-8.bg-white.shadow.overflow-hidden.sm:rounded-lg
+    div.px-4.py-5.sm:px-6
+      - case @shipping_invoice.carrier
+      - when "UPS"
+        = render "ups_invoice_entries"
+      - when "FedEx"
+        = render "fedex_invoice_entries"

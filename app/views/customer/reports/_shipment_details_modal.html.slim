@@ -1,0 +1,49 @@
+/ Shipment Details Modal
+div.fixed.inset-0.z-50.overflow-y-auto.hidden data-reports-target="shipmentDetailsModal"
+  / Modal backdrop
+  div.fixed.inset-0.bg-gray-500.bg-opacity-75.transition-opacity data-action="click->reports#closeShipmentDetailsModal"
+  
+  / Modal content
+  div.relative.flex.flex-col.items-center.justify-center.min-h-screen.pointer-events-none
+    div.relative.bg-white.rounded-xl.shadow-xl.pointer-events-auto.w-full.max-w-5xl.mx-auto.overflow-hidden data-action="click->reports#stopPropagation"
+      / Modal header
+      div.px-6.py-4.bg-blue-50.border-b.border-blue-100.flex.items-center.justify-between
+        h3.text-xl.font-bold.text-gray-900 Current Shipment Details
+        button.text-gray-500.hover:text-gray-700.focus:outline-none data-action="click->reports#closeShipmentDetailsModal" type="button"
+          svg.h-6.w-6[xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"]
+            path[stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"]
+      
+      / Tabs navigation
+      div.border-b.border-gray-200
+        div.flex.items-center.px-6
+          button.border-b-2.border-blue-500.text-blue-600.py-3.px-4.text-sm.font-medium data-reports-target="shipmentDetailsTab" data-tab="baseTransportation" data-action="click->reports#switchShipmentDetailsTab" Base Transportation
+          button.border-b-2.border-transparent.text-gray-500.hover:text-gray-700.hover:border-gray-300.py-3.px-4.text-sm.font-medium data-reports-target="shipmentDetailsTab" data-tab="surcharge" data-action="click->reports#switchShipmentDetailsTab" Surcharge
+          button.border-b-2.border-transparent.text-gray-500.hover:text-gray-700.hover:border-gray-300.py-3.px-4.text-sm.font-medium data-reports-target="shipmentDetailsTab" data-tab="miscellaneous" data-action="click->reports#switchShipmentDetailsTab" Miscellaneous
+          button.border-b-2.border-transparent.text-gray-500.hover:text-gray-700.hover:border-gray-300.py-3.px-4.text-sm.font-medium data-reports-target="shipmentDetailsTab" data-tab="totalShipments" data-action="click->reports#switchShipmentDetailsTab" Total Shipments
+          button.border-b-2.border-transparent.text-gray-500.hover:text-gray-700.hover:border-gray-300.py-3.px-4.text-sm.font-medium data-reports-target="shipmentDetailsTab" data-tab="averageCost" data-action="click->reports#switchShipmentDetailsTab" Average Cost
+      
+      / Tabs content
+      div.px-6.py-6
+        / Base Transportation tab content
+        div.block data-reports-target="shipmentDetailsTabContent" data-tab-content="baseTransportation"
+          = render 'customer/reports/base_transportation_spend'
+        
+        / Surcharge tab content
+        div.hidden data-reports-target="shipmentDetailsTabContent" data-tab-content="surcharge"
+          = render 'customer/reports/surcharge_spend'
+        
+        / Miscellaneous tab content
+        div.hidden data-reports-target="shipmentDetailsTabContent" data-tab-content="miscellaneous"
+          = render 'customer/reports/miscellaneous_spend'
+        
+        / Total Shipments tab content
+        div.hidden data-reports-target="shipmentDetailsTabContent" data-tab-content="totalShipments"
+          = render 'customer/reports/total_shipments'
+        
+        / Average Cost tab content
+        div.hidden data-reports-target="shipmentDetailsTabContent" data-tab-content="averageCost"
+          = render 'customer/reports/average_cost_per_shipment'
+      
+      / Modal footer
+      div.border-t.border-gray-200.px-6.py-4.bg-gray-50.flex.justify-end
+        button.inline-flex.justify-center.py-2.px-4.border.border-transparent.shadow-sm.text-sm.font-medium.rounded-md.text-white.bg-blue-600.hover:bg-blue-700.focus:outline-none.focus:ring-2.focus:ring-offset-2.focus:ring-blue-500 data-action="click->reports#closeShipmentDetailsModal" type="button" Close 

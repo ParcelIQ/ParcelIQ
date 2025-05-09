@@ -37,3 +37,7 @@
 !/app/assets/builds/.keep
 
 .env.local
+
+.byebug_history
+UPS_trimmed.csv
+FedEx_trimmed.csv

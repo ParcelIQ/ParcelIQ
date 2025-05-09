@@ -2,6 +2,7 @@ class Company < ApplicationRecord
   has_one_attached :logo
   has_many :users, dependent: :restrict_with_error
   has_many :shipping_invoices, dependent: :destroy
+  has_many :prior_spends, dependent: :destroy
 
   validates :name, presence: true
   validates :subdomain, presence: true, uniqueness: true,

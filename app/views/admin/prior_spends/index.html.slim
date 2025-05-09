@@ -1,0 +1,42 @@
+h1.text-2xl.font-bold.mb-4 Prior Spend Management
+
+.mb-4.flex.justify-between.items-center
+  p Manage prior spend data for customers to calculate savings comparisons
+
+  = link_to "Add New Prior Spend", new_admin_prior_spend_path, class: "bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+
+.bg-white.shadow.overflow-hidden.sm:rounded-md
+  .px-4.py-5.border-b.border-gray-200.sm:px-6
+    h3.text-lg.leading-6.font-medium.text-gray-900 Prior Spend Entries
+
+  .overflow-x-auto
+    table.min-w-full.divide-y.divide-gray-200
+      thead.bg-gray-50
+        tr
+          th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Company
+          th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Carrier
+          th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Spend Type
+          th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Service Type
+          th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Shipment Count
+          th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Spend Amount
+          th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Actions
+      tbody.bg-white.divide-y.divide-gray-200
+        - @prior_spends.each do |prior_spend|
+          tr
+            td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = prior_spend.company.name
+            td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = prior_spend.carrier
+            td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = prior_spend.spend_type.titleize
+            td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = prior_spend.service_type
+            td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = number_with_delimiter(prior_spend.shipment_count)
+            td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = number_to_currency(prior_spend.spend_amount)
+            td.px-6.py-4.whitespace-nowrap.text-sm.font-medium
+              = link_to "Edit", edit_admin_prior_spend_path(prior_spend), class: "text-indigo-600 hover:text-indigo-900 mr-2"
+              = link_to "Delete", admin_prior_spend_path(prior_spend), method: :delete, data: { confirm: "Are you sure?" }, class: "text-red-600 hover:text-red-900"
+
+  - if @prior_spends.empty?
+    .px-4.py-5.sm:px-6.text-center.text-gray-500
+      p No prior spend data found.
+
+  - if @prior_spends.respond_to?(:total_pages)
+    .px-4.py-3.flex.items-center.justify-between.border-t.border-gray-200.sm:px-6
+      = paginate @prior_spends

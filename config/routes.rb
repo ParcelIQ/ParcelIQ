@@ -61,6 +61,7 @@ Rails.application.routes.draw do
         post :reprocess
       end
     end
+    resources :prior_spends
   end
 
   # Add a test route for the TestController

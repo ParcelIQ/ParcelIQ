@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_09_152832) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_09_181749) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -195,6 +195,19 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_09_152832) do
     t.index ["invoice_date"], name: "index_fedex_invoice_entries_on_invoice_date"
     t.index ["invoice_number"], name: "index_fedex_invoice_entries_on_invoice_number"
     t.index ["shipping_invoice_id"], name: "index_fedex_invoice_entries_on_shipping_invoice_id"
+  end
+
+  create_table "prior_spends", force: :cascade do |t|
+    t.bigint "company_id", null: false
+    t.string "carrier", null: false
+    t.string "spend_type", null: false
+    t.string "service_type", null: false
+    t.integer "shipment_count", default: 0
+    t.decimal "spend_amount", precision: 10, scale: 2, default: "0.0"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id", "carrier", "spend_type", "service_type"], name: "index_prior_spends_on_company_carrier_spend_service"
+    t.index ["company_id"], name: "index_prior_spends_on_company_id"
   end
 
   create_table "shipping_invoices", force: :cascade do |t|
@@ -440,6 +453,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_09_152832) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "fedex_invoice_entries", "shipping_invoices"
+  add_foreign_key "prior_spends", "companies"
   add_foreign_key "shipping_invoices", "companies"
   add_foreign_key "solid_queue_blocked_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_claimed_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade

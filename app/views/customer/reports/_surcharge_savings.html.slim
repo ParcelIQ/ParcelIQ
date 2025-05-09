@@ -1,6 +1,12 @@
+- prior_surcharge_spend = ::PriorSpend::Fetcher.new(current_company).surcharge_spend
+- current_surcharge_data = ::Reports::SurchargeSpend.new(current_company, start_date: params[:start_date], end_date: params[:end_date]).execute
+- total_prior = prior_surcharge_spend.sum { |_, data| data[:spend] }
+- total_current = current_surcharge_data[:total_spend]
+- total_savings = total_prior - total_current
+
 / Surcharge Savings Table
 div.bg-white.overflow-hidden.rounded-xl.shadow-md.p-6.mb-6
-  h2.text-xl.font-bold.text-gray-900.mb-4 Surcharge Savings - $$$
+  h2.text-xl.font-bold.text-gray-900.mb-4 Surcharge Savings - #{number_to_currency(total_savings)}
   
   div.overflow-x-auto
     table.min-w-full.divide-y.divide-gray-200
@@ -12,39 +18,25 @@ div.bg-white.overflow-hidden.rounded-xl.shadow-md.p-6.mb-6
           th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Current Surcharge Spend
           th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Surcharge Savings
       tbody.bg-white.divide-y.divide-gray-200
-        tr
-          td.px-6.py-4.whitespace-nowrap.text-sm.font-medium.text-gray-900 Address Correction
-          td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 900
-          td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 $5,000
-          td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 $3,000
-          td.px-6.py-4.whitespace-nowrap.text-sm.font-medium.text-green-600 $2,000
-        tr
-          td.px-6.py-4.whitespace-nowrap.text-sm.font-medium.text-gray-900 Residential Express
-          td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 850
-          td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 $4,000
-          td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 $2,000
-          td.px-6.py-4.whitespace-nowrap.text-sm.font-medium.text-green-600 $5,000
-        tr
-          td.px-6.py-4.whitespace-nowrap.text-sm.font-medium.text-gray-900 Ground DAS
-          td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 500
-          td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 $3,000
-          td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 $1,500
-          td.px-6.py-4.whitespace-nowrap.text-sm.font-medium.text-green-600 $1,500
-        tr
-          td.px-6.py-4.whitespace-nowrap.text-sm.font-medium.text-gray-900 Fuel Surcharge
-          td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 300
-          td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 $3,000
-          td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 $1,000
-          td.px-6.py-4.whitespace-nowrap.text-sm.font-medium.text-green-600 $2,000
-        tr
-          td.px-6.py-4.whitespace-nowrap.text-sm.font-medium.text-gray-900 Direct Signature
-          td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 100
-          td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 $2,000
-          td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 $1,000
-          td.px-6.py-4.whitespace-nowrap.text-sm.font-medium.text-green-600 $1,000
+        - # Collect all surcharge types
+        - all_surcharge_types = (prior_surcharge_spend.keys + current_surcharge_data[:items].map { |item| item[:surcharge_type] }).uniq
+        - all_surcharge_types.each do |surcharge_type|
+          - prior_data = prior_surcharge_spend[surcharge_type] || { shipments: 0, spend: 0 }
+          - current_data = current_surcharge_data[:items].find { |item| item[:surcharge_type] == surcharge_type }
+          - current_spend = current_data ? current_data[:spend] : 0
+          - current_shipments = current_data ? current_data[:shipments] : 0
+          - savings = prior_data[:spend] - current_spend
+          
+          tr
+            td.px-6.py-4.whitespace-nowrap.text-sm.font-medium.text-gray-900 = surcharge_type
+            td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = number_with_delimiter(prior_data[:shipments])
+            td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = number_to_currency(prior_data[:spend])
+            td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = number_to_currency(current_spend)
+            td.px-6.py-4.whitespace-nowrap.text-sm.font-medium class="#{savings >= 0 ? 'text-green-600' : 'text-red-600'}" = number_to_currency(savings)
+
         tr.bg-blue-50
           td.px-6.py-4.whitespace-nowrap.text-sm.font-bold.text-gray-900 Total
-          td.px-6.py-4.whitespace-nowrap.text-sm.font-bold.text-gray-900 2,650
-          td.px-6.py-4.whitespace-nowrap.text-sm.font-bold.text-gray-900 $17,000
-          td.px-6.py-4.whitespace-nowrap.text-sm.font-bold.text-gray-900 $8,500
-          td.px-6.py-4.whitespace-nowrap.text-sm.font-bold.text-green-600 $8,500 
+          td.px-6.py-4.whitespace-nowrap.text-sm.font-bold.text-gray-900 = number_with_delimiter(prior_surcharge_spend.sum { |_, data| data[:shipments] })
+          td.px-6.py-4.whitespace-nowrap.text-sm.font-bold.text-gray-900 = number_to_currency(total_prior)
+          td.px-6.py-4.whitespace-nowrap.text-sm.font-bold.text-gray-900 = number_to_currency(total_current)
+          td.px-6.py-4.whitespace-nowrap.text-sm.font-bold class="#{total_savings >= 0 ? 'text-green-600' : 'text-red-600'}" = number_to_currency(total_savings) 

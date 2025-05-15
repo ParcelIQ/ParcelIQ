@@ -43,6 +43,11 @@ class Admin::FedexInternationalPriorityImportDiscountProjectionsController < Adm
     @projection = FedexInternationalPriorityImportDiscountProjection.new(projection_params)
     @projection.company = current_company
 
+    # Always ensure at least one box zone discount record exists
+    if @projection.fedex_box_zone_discount_internationals.empty?
+      @projection.fedex_box_zone_discount_internationals.build(low_weight: 0, max_weight: 1)
+    end
+
     respond_to do |format|
       if @projection.save
         format.html { redirect_to edit_admin_fedex_international_priority_import_discount_projection_path(@projection), notice: "FedEx International Priority Import discount projection was successfully created." }
@@ -55,8 +60,21 @@ class Admin::FedexInternationalPriorityImportDiscountProjectionsController < Adm
   end
 
   def update
+    # Always ensure at least one box zone discount record exists after update
+    projection_p = projection_params
+
+    # If params would result in no box zone records, add a default one
+    if projection_p[:fedex_box_zone_discount_internationals_attributes] &&
+       projection_p[:fedex_box_zone_discount_internationals_attributes].values.all? { |attrs| attrs[:_destroy] == "1" }
+      new_id = Time.now.to_i.to_s
+      projection_p[:fedex_box_zone_discount_internationals_attributes][new_id] = {
+        low_weight: 0,
+        max_weight: 1
+      }
+    end
+
     respond_to do |format|
-      if @projection.update(projection_params)
+      if @projection.update(projection_p)
         format.html { redirect_to edit_admin_fedex_international_priority_import_discount_projection_path(@projection), notice: "FedEx International Priority Import discount projection was successfully updated." }
         format.json { render :show, status: :ok, location: @projection }
       else

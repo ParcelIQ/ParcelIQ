@@ -1,0 +1,41 @@
+= form_with(model: [:admin, @projection], local: true, class: "needs-validation", data: { turbo: false }) do |form|
+  - if @projection.errors.any?
+    .alert.alert-danger
+      h4 = pluralize(@projection.errors.count, "error") + " prohibited this projection from being saved:"
+      ul
+        - @projection.errors.full_messages.each do |message|
+          li = message
+
+  .row.mb-4
+    .col-md-12
+      .card
+        .card-header.bg-primary.text-white
+          h5.mb-0 Basic Information
+        .card-body
+          .mb-3
+            = form.label :name, class: "form-label"
+            = form.text_field :name, class: "form-control"
+
+          = form.fields_for :fedex_discount_basic do |basic_form|
+            .row
+              .col-md-4
+                .mb-3
+                  = basic_form.label :dim_divisor, "Dim Divisor", class: "form-label"
+                  = basic_form.number_field :dim_divisor, step: 0.01, class: "form-control"
+              .col-md-4
+                .mb-3
+                  = basic_form.label :envelope_earned_discount, "Envelope Earned Discount (%)", class: "form-label"
+                  = basic_form.number_field :envelope_earned_discount, step: 0.01, min: 0, max: 100, class: "form-control"
+              .col-md-4
+                .mb-3
+                  = basic_form.label :pakbox_earned_discount, "Pak/Box Earned Discount (%)", class: "form-label"
+                  = basic_form.number_field :pakbox_earned_discount, step: 0.01, min: 0, max: 100, class: "form-control"
+
+  = render 'envelope_zone_form', form: form
+  = render 'pakbox_zone_form', form: form
+  = render 'envelope_minimum_form', form: form
+  = render 'pakbox_minimum_form', form: form
+  
+  .d-flex.justify-content-between.mb-4
+    = link_to 'Cancel', admin_fedex_discount_projections_path, class: 'btn btn-secondary'
+    = form.submit 'Save Projection', class: 'btn btn-primary' 

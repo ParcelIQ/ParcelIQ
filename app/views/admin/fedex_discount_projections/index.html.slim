@@ -1,0 +1,37 @@
+.container.mt-4
+  .d-flex.justify-content-between.align-items-center.mb-4
+    h1 FedEx Discount Projections
+    = link_to 'New Projection', new_admin_fedex_discount_projection_path, class: 'btn btn-primary'
+
+  - if notice.present?
+    .alert.alert-success.alert-dismissible.fade.show role="alert"
+      = notice
+      button.btn-close type="button" data-bs-dismiss="alert" aria-label="Close"
+
+  .card
+    .card-header.bg-primary.text-white
+      h5.mb-0 All Projections
+    .card-body
+      - if @projections.any?
+        .table-responsive
+          table.table.table-striped
+            thead
+              tr
+                th Name
+                th Dim Divisor
+                th Envelope Discount
+                th Pak/Box Discount
+                th Actions
+            tbody
+              - @projections.each do |projection|
+                tr
+                  td = projection.name
+                  td = projection.fedex_discount_basic&.dim_divisor || "Not set"
+                  td = "#{projection.fedex_discount_basic&.envelope_earned_discount || '0'}%"
+                  td = "#{projection.fedex_discount_basic&.pakbox_earned_discount || '0'}%"
+                  td.text-nowrap
+                    = link_to 'View', admin_fedex_discount_projection_path(projection), class: 'btn btn-sm btn-info'
+                    = link_to 'Edit', edit_admin_fedex_discount_projection_path(projection), class: 'btn btn-sm btn-primary ms-1'
+                    = button_to 'Delete', admin_fedex_discount_projection_path(projection), method: :delete, class: 'btn btn-sm btn-danger ms-1', style: 'display: inline', data: { turbo_confirm: 'Are you sure?' }
+      - else
+        .alert.alert-info No FedEx discount projections found 

@@ -1,0 +1,216 @@
+.container.mt-4
+  .d-flex.justify-content-between.align-items-center.mb-3
+    h1 = @projection.name
+    div
+      = link_to 'Edit', edit_admin_fedex_discount_projection_path(@projection), class: 'btn btn-primary'
+      = link_to 'Back', admin_fedex_discount_projections_path, class: 'btn btn-secondary'
+
+  - if notice.present?
+    .alert.alert-success.alert-dismissible.fade.show role="alert"
+      = notice
+      button.btn-close type="button" data-bs-dismiss="alert" aria-label="Close"
+
+  .row.mb-4
+    .col-md-12
+      .card
+        .card-header.bg-primary.text-white
+          h5.mb-0 Basic Settings
+        .card-body
+          .row
+            .col-md-4
+              p
+                strong Dim Divisor:
+                |  #{@projection.fedex_discount_basic&.dim_divisor || "Not set"}
+            .col-md-4
+              p
+                strong Envelope Earned Discount:
+                |  #{@projection.fedex_discount_basic&.envelope_earned_discount || "0"}%
+            .col-md-4
+              p
+                strong Pak/Box Earned Discount:
+                |  #{@projection.fedex_discount_basic&.pakbox_earned_discount || "0"}%
+
+  .row.mb-4
+    .col-md-12
+      .card
+        .card-header.bg-primary.text-white
+          h5.mb-0 Envelope Zone Discounts
+        .card-body
+          .table-responsive
+            table.table.table-bordered
+              thead
+                tr
+                  th Zone 2
+                  th Zone 3
+                  th Zone 4
+                  th Zone 5
+                  th Zone 6
+                  th Zone 7
+                  th Zone 8
+                  th Zone 9-10
+                  th Zone 13-16
+              tbody
+                tr
+                  td #{@projection.fedex_envelope_zone_discount&.zone_2_discount || "0"}%
+                  td #{@projection.fedex_envelope_zone_discount&.zone_3_discount || "0"}%
+                  td #{@projection.fedex_envelope_zone_discount&.zone_4_discount || "0"}%
+                  td #{@projection.fedex_envelope_zone_discount&.zone_5_discount || "0"}%
+                  td #{@projection.fedex_envelope_zone_discount&.zone_6_discount || "0"}%
+                  td #{@projection.fedex_envelope_zone_discount&.zone_7_discount || "0"}%
+                  td #{@projection.fedex_envelope_zone_discount&.zone_8_discount || "0"}%
+                  td #{@projection.fedex_envelope_zone_discount&.zone_9_10_discount || "0"}%
+                  td #{@projection.fedex_envelope_zone_discount&.zone_13_16_discount || "0"}%
+
+  .row.mb-4
+    .col-md-12
+      .card
+        .card-header.bg-primary.text-white
+          h5.mb-0 Pak/Box Zone Discounts
+        .card-body
+          .table-responsive
+            table.table.table-bordered
+              thead
+                tr
+                  th Low Weight
+                  th Max Weight
+                  th Zone 2
+                  th Zone 3
+                  th Zone 4
+                  th Zone 5
+                  th Zone 6
+                  th Zone 7
+                  th Zone 8
+                  th Zone 9-10
+                  th Zone 13-16
+              tbody
+                - @projection.fedex_pak_box_zone_discounts.each do |discount|
+                  tr
+                    td #{discount.low_weight || "0"}
+                    td #{discount.max_weight || "0"}
+                    td #{discount.zone_2_discount || "0"}%
+                    td #{discount.zone_3_discount || "0"}%
+                    td #{discount.zone_4_discount || "0"}%
+                    td #{discount.zone_5_discount || "0"}%
+                    td #{discount.zone_6_discount || "0"}%
+                    td #{discount.zone_7_discount || "0"}%
+                    td #{discount.zone_8_discount || "0"}%
+                    td #{discount.zone_9_10_discount || "0"}%
+                    td #{discount.zone_13_16_discount || "0"}%
+
+  .row.mb-4
+    .col-md-12
+      .card
+        .card-header.bg-primary.text-white
+          h5.mb-0
+            | Envelope Minimum Charges ($#{@projection.fedex_envelope_minimum_charge&.envelope_min_charge})
+        .card-body
+          h6.mb-3 Percentage Reduction
+          .table-responsive.mb-4
+            table.table.table-bordered
+              thead
+                tr
+                  th Zone 2
+                  th Zone 3
+                  th Zone 4
+                  th Zone 5
+                  th Zone 6
+                  th Zone 7
+                  th Zone 8
+                  th Zone 9-10
+                  th Zone 13-16
+              tbody
+                tr
+                  td #{@projection.fedex_envelope_minimum_charge&.zone_2_percentage_reduction || "0"}%
+                  td #{@projection.fedex_envelope_minimum_charge&.zone_3_percentage_reduction || "0"}%
+                  td #{@projection.fedex_envelope_minimum_charge&.zone_4_percentage_reduction || "0"}%
+                  td #{@projection.fedex_envelope_minimum_charge&.zone_5_percentage_reduction || "0"}%
+                  td #{@projection.fedex_envelope_minimum_charge&.zone_6_percentage_reduction || "0"}%
+                  td #{@projection.fedex_envelope_minimum_charge&.zone_7_percentage_reduction || "0"}%
+                  td #{@projection.fedex_envelope_minimum_charge&.zone_8_percentage_reduction || "0"}%
+                  td #{@projection.fedex_envelope_minimum_charge&.zone_9_10_percentage_reduction || "0"}%
+                  td #{@projection.fedex_envelope_minimum_charge&.zone_13_16_percentage_reduction || "0"}%
+
+          h6.mb-3 Dollar Reduction
+          .table-responsive
+            table.table.table-bordered
+              thead
+                tr
+                  th Zone 2
+                  th Zone 3
+                  th Zone 4
+                  th Zone 5
+                  th Zone 6
+                  th Zone 7
+                  th Zone 8
+                  th Zone 9-10
+                  th Zone 13-16
+              tbody
+                tr
+                  td $#{@projection.fedex_envelope_minimum_charge&.zone_2_dollar_reduction || "0"}
+                  td $#{@projection.fedex_envelope_minimum_charge&.zone_3_dollar_reduction || "0"}
+                  td $#{@projection.fedex_envelope_minimum_charge&.zone_4_dollar_reduction || "0"}
+                  td $#{@projection.fedex_envelope_minimum_charge&.zone_5_dollar_reduction || "0"}
+                  td $#{@projection.fedex_envelope_minimum_charge&.zone_6_dollar_reduction || "0"}
+                  td $#{@projection.fedex_envelope_minimum_charge&.zone_7_dollar_reduction || "0"}
+                  td $#{@projection.fedex_envelope_minimum_charge&.zone_8_dollar_reduction || "0"}
+                  td $#{@projection.fedex_envelope_minimum_charge&.zone_9_10_dollar_reduction || "0"}
+                  td $#{@projection.fedex_envelope_minimum_charge&.zone_13_16_dollar_reduction || "0"}
+
+  .row.mb-4
+    .col-md-12
+      .card
+        .card-header.bg-primary.text-white
+          h5.mb-0
+            | Pak/Box Minimum Charges ($#{@projection.fedex_pak_box_minimum_charge&.pakbox_min_charge})
+        .card-body
+          h6.mb-3 Percentage Reduction
+          .table-responsive.mb-4
+            table.table.table-bordered
+              thead
+                tr
+                  th Zone 2
+                  th Zone 3
+                  th Zone 4
+                  th Zone 5
+                  th Zone 6
+                  th Zone 7
+                  th Zone 8
+                  th Zone 9-10
+                  th Zone 13-16
+              tbody
+                tr
+                  td #{@projection.fedex_pak_box_minimum_charge&.zone_2_percentage_reduction || "0"}%
+                  td #{@projection.fedex_pak_box_minimum_charge&.zone_3_percentage_reduction || "0"}%
+                  td #{@projection.fedex_pak_box_minimum_charge&.zone_4_percentage_reduction || "0"}%
+                  td #{@projection.fedex_pak_box_minimum_charge&.zone_5_percentage_reduction || "0"}%
+                  td #{@projection.fedex_pak_box_minimum_charge&.zone_6_percentage_reduction || "0"}%
+                  td #{@projection.fedex_pak_box_minimum_charge&.zone_7_percentage_reduction || "0"}%
+                  td #{@projection.fedex_pak_box_minimum_charge&.zone_8_percentage_reduction || "0"}%
+                  td #{@projection.fedex_pak_box_minimum_charge&.zone_9_10_percentage_reduction || "0"}%
+                  td #{@projection.fedex_pak_box_minimum_charge&.zone_13_16_percentage_reduction || "0"}%
+
+          h6.mb-3 Dollar Reduction
+          .table-responsive
+            table.table.table-bordered
+              thead
+                tr
+                  th Zone 2
+                  th Zone 3
+                  th Zone 4
+                  th Zone 5
+                  th Zone 6
+                  th Zone 7
+                  th Zone 8
+                  th Zone 9-10
+                  th Zone 13-16
+              tbody
+                tr
+                  td $#{@projection.fedex_pak_box_minimum_charge&.zone_2_dollar_reduction || "0"}
+                  td $#{@projection.fedex_pak_box_minimum_charge&.zone_3_dollar_reduction || "0"}
+                  td $#{@projection.fedex_pak_box_minimum_charge&.zone_4_dollar_reduction || "0"}
+                  td $#{@projection.fedex_pak_box_minimum_charge&.zone_5_dollar_reduction || "0"}
+                  td $#{@projection.fedex_pak_box_minimum_charge&.zone_6_dollar_reduction || "0"}
+                  td $#{@projection.fedex_pak_box_minimum_charge&.zone_7_dollar_reduction || "0"}
+                  td $#{@projection.fedex_pak_box_minimum_charge&.zone_8_dollar_reduction || "0"}
+                  td $#{@projection.fedex_pak_box_minimum_charge&.zone_9_10_dollar_reduction || "0"}
+                  td $#{@projection.fedex_pak_box_minimum_charge&.zone_13_16_dollar_reduction || "0"} 

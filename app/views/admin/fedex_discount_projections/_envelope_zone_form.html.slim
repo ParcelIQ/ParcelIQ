@@ -1,0 +1,31 @@
+.row.mb-4
+  .col-md-12
+    .card
+      .card-header.bg-primary.text-white
+        h5.mb-0 Envelope Zone Discounts
+      .card-body
+        = form.fields_for :fedex_envelope_zone_discount do |envelope_form|
+          .table-responsive
+            table.table.table-bordered
+              thead
+                tr
+                  th Zone 2
+                  th Zone 3
+                  th Zone 4
+                  th Zone 5
+                  th Zone 6
+                  th Zone 7
+                  th Zone 8
+                  th Zone 9-10
+                  th Zone 13-16
+              tbody
+                tr
+                  td = envelope_form.number_field :zone_2_discount, step: 0.01, min: 0, max: 100, class: "form-control"
+                  td = envelope_form.number_field :zone_3_discount, step: 0.01, min: 0, max: 100, class: "form-control"
+                  td = envelope_form.number_field :zone_4_discount, step: 0.01, min: 0, max: 100, class: "form-control"
+                  td = envelope_form.number_field :zone_5_discount, step: 0.01, min: 0, max: 100, class: "form-control"
+                  td = envelope_form.number_field :zone_6_discount, step: 0.01, min: 0, max: 100, class: "form-control"
+                  td = envelope_form.number_field :zone_7_discount, step: 0.01, min: 0, max: 100, class: "form-control"
+                  td = envelope_form.number_field :zone_8_discount, step: 0.01, min: 0, max: 100, class: "form-control"
+                  td = envelope_form.number_field :zone_9_10_discount, step: 0.01, min: 0, max: 100, class: "form-control"
+                  td = envelope_form.number_field :zone_13_16_discount, step: 0.01, min: 0, max: 100, class: "form-control" 

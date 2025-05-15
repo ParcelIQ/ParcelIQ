@@ -62,6 +62,11 @@ Rails.application.routes.draw do
       end
     end
     resources :prior_spends
+    resources :fedex_discount_projections do
+      member do
+        post :duplicate
+      end
+    end
   end
 
   # Add a test route for the TestController

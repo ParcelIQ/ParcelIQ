@@ -1,0 +1,7 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+- Whenever CRUD ui is being generated, unless specified otherwise, follow the ui styles and guidelines that are there for companies resource
+- Use slim instead of erb

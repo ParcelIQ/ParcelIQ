@@ -86,6 +86,64 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_09_181749) do
     t.index ["subdomain"], name: "index_companies_on_subdomain", unique: true
   end
 
+  create_table "fedex_discount_basics", force: :cascade do |t|
+    t.bigint "fedex_discount_projection_id", null: false
+    t.decimal "dim_divisor", precision: 10, scale: 2
+    t.decimal "envelope_earned_discount", precision: 5, scale: 2
+    t.decimal "pakbox_earned_discount", precision: 5, scale: 2
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["fedex_discount_projection_id"], name: "index_fedex_discount_basics_on_fedex_discount_projection_id"
+  end
+
+  create_table "fedex_discount_projections", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "fedex_envelope_minimum_charges", force: :cascade do |t|
+    t.bigint "fedex_discount_projection_id", null: false
+    t.decimal "envelope_min_charge", precision: 10, scale: 2, default: "34.71"
+    t.decimal "zone_2_percentage_reduction", precision: 5, scale: 2
+    t.decimal "zone_3_percentage_reduction", precision: 5, scale: 2
+    t.decimal "zone_4_percentage_reduction", precision: 5, scale: 2
+    t.decimal "zone_5_percentage_reduction", precision: 5, scale: 2
+    t.decimal "zone_6_percentage_reduction", precision: 5, scale: 2
+    t.decimal "zone_7_percentage_reduction", precision: 5, scale: 2
+    t.decimal "zone_8_percentage_reduction", precision: 5, scale: 2
+    t.decimal "zone_9_10_percentage_reduction", precision: 5, scale: 2
+    t.decimal "zone_13_16_percentage_reduction", precision: 5, scale: 2
+    t.decimal "zone_2_dollar_reduction", precision: 10, scale: 2
+    t.decimal "zone_3_dollar_reduction", precision: 10, scale: 2
+    t.decimal "zone_4_dollar_reduction", precision: 10, scale: 2
+    t.decimal "zone_5_dollar_reduction", precision: 10, scale: 2
+    t.decimal "zone_6_dollar_reduction", precision: 10, scale: 2
+    t.decimal "zone_7_dollar_reduction", precision: 10, scale: 2
+    t.decimal "zone_8_dollar_reduction", precision: 10, scale: 2
+    t.decimal "zone_9_10_dollar_reduction", precision: 10, scale: 2
+    t.decimal "zone_13_16_dollar_reduction", precision: 10, scale: 2
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["fedex_discount_projection_id"], name: "idx_fedex_env_min_charges_on_proj_id"
+  end
+
+  create_table "fedex_envelope_zone_discounts", force: :cascade do |t|
+    t.bigint "fedex_discount_projection_id", null: false
+    t.decimal "zone_2_discount", precision: 5, scale: 2
+    t.decimal "zone_3_discount", precision: 5, scale: 2
+    t.decimal "zone_4_discount", precision: 5, scale: 2
+    t.decimal "zone_5_discount", precision: 5, scale: 2
+    t.decimal "zone_6_discount", precision: 5, scale: 2
+    t.decimal "zone_7_discount", precision: 5, scale: 2
+    t.decimal "zone_8_discount", precision: 5, scale: 2
+    t.decimal "zone_9_10_discount", precision: 5, scale: 2
+    t.decimal "zone_13_16_discount", precision: 5, scale: 2
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["fedex_discount_projection_id"], name: "idx_fedex_env_zone_disc_on_proj_id"
+  end
+
   create_table "fedex_invoice_entries", force: :cascade do |t|
     t.bigint "shipping_invoice_id", null: false
     t.string "consolidated_account"
@@ -195,6 +253,50 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_09_181749) do
     t.index ["invoice_date"], name: "index_fedex_invoice_entries_on_invoice_date"
     t.index ["invoice_number"], name: "index_fedex_invoice_entries_on_invoice_number"
     t.index ["shipping_invoice_id"], name: "index_fedex_invoice_entries_on_shipping_invoice_id"
+  end
+
+  create_table "fedex_pak_box_minimum_charges", force: :cascade do |t|
+    t.bigint "fedex_discount_projection_id", null: false
+    t.decimal "pakbox_min_charge", precision: 10, scale: 2, default: "42.31"
+    t.decimal "zone_2_percentage_reduction", precision: 5, scale: 2
+    t.decimal "zone_3_percentage_reduction", precision: 5, scale: 2
+    t.decimal "zone_4_percentage_reduction", precision: 5, scale: 2
+    t.decimal "zone_5_percentage_reduction", precision: 5, scale: 2
+    t.decimal "zone_6_percentage_reduction", precision: 5, scale: 2
+    t.decimal "zone_7_percentage_reduction", precision: 5, scale: 2
+    t.decimal "zone_8_percentage_reduction", precision: 5, scale: 2
+    t.decimal "zone_9_10_percentage_reduction", precision: 5, scale: 2
+    t.decimal "zone_13_16_percentage_reduction", precision: 5, scale: 2
+    t.decimal "zone_2_dollar_reduction", precision: 10, scale: 2
+    t.decimal "zone_3_dollar_reduction", precision: 10, scale: 2
+    t.decimal "zone_4_dollar_reduction", precision: 10, scale: 2
+    t.decimal "zone_5_dollar_reduction", precision: 10, scale: 2
+    t.decimal "zone_6_dollar_reduction", precision: 10, scale: 2
+    t.decimal "zone_7_dollar_reduction", precision: 10, scale: 2
+    t.decimal "zone_8_dollar_reduction", precision: 10, scale: 2
+    t.decimal "zone_9_10_dollar_reduction", precision: 10, scale: 2
+    t.decimal "zone_13_16_dollar_reduction", precision: 10, scale: 2
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["fedex_discount_projection_id"], name: "idx_fedex_pak_box_min_charges_on_proj_id"
+  end
+
+  create_table "fedex_pak_box_zone_discounts", force: :cascade do |t|
+    t.bigint "fedex_discount_projection_id", null: false
+    t.decimal "low_weight", precision: 10, scale: 2
+    t.decimal "max_weight", precision: 10, scale: 2
+    t.decimal "zone_2_discount", precision: 5, scale: 2
+    t.decimal "zone_3_discount", precision: 5, scale: 2
+    t.decimal "zone_4_discount", precision: 5, scale: 2
+    t.decimal "zone_5_discount", precision: 5, scale: 2
+    t.decimal "zone_6_discount", precision: 5, scale: 2
+    t.decimal "zone_7_discount", precision: 5, scale: 2
+    t.decimal "zone_8_discount", precision: 5, scale: 2
+    t.decimal "zone_9_10_discount", precision: 5, scale: 2
+    t.decimal "zone_13_16_discount", precision: 5, scale: 2
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["fedex_discount_projection_id"], name: "idx_fedex_pak_box_zone_disc_on_proj_id"
   end
 
   create_table "prior_spends", force: :cascade do |t|
@@ -452,7 +554,12 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_09_181749) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "fedex_discount_basics", "fedex_discount_projections"
+  add_foreign_key "fedex_envelope_minimum_charges", "fedex_discount_projections"
+  add_foreign_key "fedex_envelope_zone_discounts", "fedex_discount_projections"
   add_foreign_key "fedex_invoice_entries", "shipping_invoices"
+  add_foreign_key "fedex_pak_box_minimum_charges", "fedex_discount_projections"
+  add_foreign_key "fedex_pak_box_zone_discounts", "fedex_discount_projections"
   add_foreign_key "prior_spends", "companies"
   add_foreign_key "shipping_invoices", "companies"
   add_foreign_key "solid_queue_blocked_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade

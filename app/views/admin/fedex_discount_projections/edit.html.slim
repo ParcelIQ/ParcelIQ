@@ -1,0 +1,10 @@
+.container.mt-4
+  .d-flex.justify-content-between.align-items-center.mb-4
+    h1 
+      | Edit FedEx Discount Projection: 
+      = @projection.name
+    div
+      = link_to 'View', admin_fedex_discount_projection_path(@projection), class: 'btn btn-primary'
+      = link_to 'Back', admin_fedex_discount_projections_path, class: 'btn btn-secondary'
+
+  = render 'form' 

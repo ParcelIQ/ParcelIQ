@@ -1,0 +1,95 @@
+.row.mb-4
+  .col-md-12
+    .card
+      .card-header.bg-primary.text-white.d-flex.justify-content-between.align-items-center
+        h5.mb-0 Pak/Box Zone Discounts
+        button.btn.btn-light.btn-sm#add-weight-range type="button"
+          i.bi.bi-plus-circle
+          |  Add Weight Range
+      .card-body
+        .table-responsive
+          table.table.table-bordered#pakbox-discounts-table
+            thead
+              tr
+                th Low Weight
+                th Max Weight
+                th Zone 2
+                th Zone 3
+                th Zone 4
+                th Zone 5
+                th Zone 6
+                th Zone 7
+                th Zone 8
+                th Zone 9-10
+                th Zone 13-16
+                th Actions
+            tbody
+              = form.fields_for :fedex_pak_box_zone_discounts do |pakbox_form|
+                tr.weight-range-row
+                  td
+                    = pakbox_form.number_field :low_weight, step: 0.01, min: 0, class: "form-control"
+                  td
+                    = pakbox_form.number_field :max_weight, step: 0.01, min: 0, class: "form-control"
+                  td
+                    = pakbox_form.number_field :zone_2_discount, step: 0.01, min: 0, max: 100, class: "form-control"
+                  td
+                    = pakbox_form.number_field :zone_3_discount, step: 0.01, min: 0, max: 100, class: "form-control"
+                  td
+                    = pakbox_form.number_field :zone_4_discount, step: 0.01, min: 0, max: 100, class: "form-control"
+                  td
+                    = pakbox_form.number_field :zone_5_discount, step: 0.01, min: 0, max: 100, class: "form-control"
+                  td
+                    = pakbox_form.number_field :zone_6_discount, step: 0.01, min: 0, max: 100, class: "form-control"
+                  td
+                    = pakbox_form.number_field :zone_7_discount, step: 0.01, min: 0, max: 100, class: "form-control"
+                  td
+                    = pakbox_form.number_field :zone_8_discount, step: 0.01, min: 0, max: 100, class: "form-control"
+                  td
+                    = pakbox_form.number_field :zone_9_10_discount, step: 0.01, min: 0, max: 100, class: "form-control"
+                  td
+                    = pakbox_form.number_field :zone_13_16_discount, step: 0.01, min: 0, max: 100, class: "form-control"
+                  td
+                    - if pakbox_form.object.persisted?
+                      = pakbox_form.check_box :_destroy, class: "delete-weight-range"
+                      = pakbox_form.label :_destroy, "Remove", class: "text-danger"
+                    - else
+                      button.btn.btn-danger.btn-sm.remove-weight-range type="button" Remove
+
+javascript:
+  document.addEventListener('DOMContentLoaded', function() {
+    // Add new weight range
+    document.getElementById('add-weight-range').addEventListener('click', function() {
+      var lastRow = document.querySelector('#pakbox-discounts-table tbody tr:last-child');
+      if (lastRow) {
+        var newRow = lastRow.cloneNode(true);
+        
+        // Clear input values
+        var inputs = newRow.querySelectorAll('input[type="number"]');
+        inputs.forEach(function(input) {
+          input.value = '';
+        });
+        
+        // Update input names and IDs to have the correct index
+        var time = new Date().getTime();
+        var regexp = new RegExp('fedex_discount_projection\\[fedex_pak_box_zone_discounts_attributes\\]\\[\\d+\\]', 'g');
+        newRow.innerHTML = newRow.innerHTML.replace(regexp, 'fedex_discount_projection[fedex_pak_box_zone_discounts_attributes][' + time + ']');
+        
+        // Add remove button event listener
+        var removeBtn = newRow.querySelector('.remove-weight-range');
+        if (removeBtn) {
+          removeBtn.addEventListener('click', function() {
+            newRow.remove();
+          });
+        }
+        
+        document.querySelector('#pakbox-discounts-table tbody').appendChild(newRow);
+      }
+    });
+    
+    // Remove weight range (for dynamically added rows)
+    document.querySelectorAll('.remove-weight-range').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        this.closest('tr').remove();
+      });
+    });
+  }); 

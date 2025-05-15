@@ -1,0 +1,72 @@
+div.max-w-7xl.mx-auto.px-4.sm:px-6.lg:px-8
+  div.pb-5.border-b.border-gray-200.sm:flex.sm:items-center.sm:justify-between
+    div.flex-1.min-w-0
+      h2.text-2xl.font-extrabold.text-gray-900.sm:text-3xl.sm:truncate
+        | Prior Spend Management
+      p.mt-1.text-sm.text-gray-500
+        | Manage prior spend data for customers to calculate savings comparisons
+    
+    div.mt-4.flex.sm:mt-0.sm:ml-4
+      = link_to new_admin_prior_spend_path, class: "inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150 ease-in-out" do
+        svg.-ml-1.mr-2.h-5.w-5[xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"]
+          path[fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"]
+        | Add Prior Spend
+
+  / Prior Spend table
+  div.mt-8
+    div.sm:flex.sm:items-center
+      div.sm:flex-auto
+        p.mt-2.text-sm.text-gray-700
+          = pluralize(@prior_spends.count, 'prior spend entry') + ' found'
+      
+    div.mt-4.flex.flex-col
+      div.-my-2.overflow-x-auto.sm:-mx-6.lg:-mx-8
+        div.py-2.align-middle.inline-block.min-w-full.sm:px-6.lg:px-8
+          div.shadow.overflow-hidden.border-b.border-gray-200.sm:rounded-lg
+            table.min-w-full.divide-y.divide-gray-200
+              thead.bg-gray-50
+                tr
+                  th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider scope="col" Company
+                  th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider scope="col" Carrier
+                  th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider scope="col" Spend Type
+                  th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider scope="col" Service Type
+                  th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider scope="col" Shipment Count
+                  th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider scope="col" Spend Amount
+                  th.px-6.py-3.text-right.text-xs.font-medium.text-gray-500.uppercase.tracking-wider scope="col" Actions
+              
+              tbody.bg-white.divide-y.divide-gray-200
+                - if @prior_spends.any?
+                  - @prior_spends.each do |prior_spend|
+                    tr.hover:bg-gray-50.transition.duration-150
+                      td.px-6.py-4.whitespace-nowrap
+                        div.text-sm.text-gray-900
+                          = link_to prior_spend.company.name, admin_company_path(prior_spend.company), class: "text-blue-600 hover:text-blue-900"
+                      td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = prior_spend.carrier
+                      td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = prior_spend.spend_type.titleize
+                      td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = prior_spend.service_type
+                      td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = number_with_delimiter(prior_spend.shipment_count)
+                      td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = number_to_currency(prior_spend.spend_amount)
+                      td.px-6.py-4.whitespace-nowrap.text-right.text-sm.font-medium
+                        div.flex.justify-end.space-x-3
+                          = link_to edit_admin_prior_spend_path(prior_spend), class: "text-blue-600 hover:text-blue-900 inline-flex items-center" do
+                            svg.h-4.w-4.mr-1[xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"]
+                              path[stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a1 1 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"]
+                            span Edit
+                          
+                          = button_to admin_prior_spend_path(prior_spend), method: :delete, form: { data: { turbo_confirm: "Are you sure you want to delete this prior spend entry? This action cannot be undone." } }, class: "text-red-600 hover:text-red-900 bg-transparent border-none p-0 cursor-pointer inline-flex items-center" do
+                            svg.h-4.w-4.mr-1[xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"]
+                              path[stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"]
+                            span Delete
+                            
+                - else
+                  tr
+                    td.px-6.py-10.text-center.text-sm.text-gray-500.font-medium colspan="7"
+                      div.flex.flex-col.items-center.justify-center
+                        svg.h-12.w-12.text-gray-400.mb-4[xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"]
+                          path[stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"]
+                        p.text-gray-500 No prior spend entries found
+                        = link_to "Add your first entry", new_admin_prior_spend_path, class: "mt-2 text-blue-600 hover:text-blue-900 font-medium"
+
+  - if @prior_spends.respond_to?(:total_pages)
+    div.mt-6
+      = paginate @prior_spends

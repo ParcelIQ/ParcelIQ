@@ -36,10 +36,15 @@ html
                     path[stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"]
                   | Users
                 
-                = link_to admin_shipping_invoices_path, class: "text-blue-100 hover:bg-blue-700 group flex items-center px-2 py-2 text-sm font-medium rounded-md" do
+                = link_to admin_shipping_invoices_path, class: "#{controller_name == 'shipping_invoices' ? 'bg-blue-900 text-white' : 'text-blue-100 hover:bg-blue-700'} group flex items-center px-2 py-2 text-sm font-medium rounded-md" do
                   svg.mr-3.flex-shrink-0.h-6.w-6.text-blue-300[xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"]
                     path[stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"]
                   | Shipping Invoices
+                
+                = link_to admin_prior_spends_path, class: "#{controller_name == 'prior_spends' ? 'bg-blue-900 text-white' : 'text-blue-100 hover:bg-blue-700'} group flex items-center px-2 py-2 text-sm font-medium rounded-md" do
+                  svg.mr-3.flex-shrink-0.h-6.w-6.text-blue-300[xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"]
+                    path[stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"]
+                  | Prior Spend
                 
                 = link_to "#", class: "text-blue-100 hover:bg-blue-700 group flex items-center px-2 py-2 text-sm font-medium rounded-md" do
                   svg.mr-3.flex-shrink-0.h-6.w-6.text-blue-300[xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"]

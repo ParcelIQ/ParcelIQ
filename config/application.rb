@@ -52,5 +52,9 @@ module ParcelIQ
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    # Explicitly add app/services to the autoload paths
+    config.autoload_paths += %W[#{config.root}/app/services]
+    config.eager_load_paths += %W[#{config.root}/app/services]
   end
 end

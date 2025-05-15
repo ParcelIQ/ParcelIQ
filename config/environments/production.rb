@@ -88,7 +88,8 @@ Rails.application.configure do
   # Enable DNS rebinding protection and other `Host` header attacks.
   config.hosts = [
     "myparceliq.com",     # Allow requests from main domain
-    /.*\.myparceliq\.com/ # Allow requests from subdomains
+    /.*\.myparceliq\.com/, # Allow requests from subdomains
+    /.*\.herokuapp\.com/ # Allow all Heroku domains
   ]
 
   # Skip DNS rebinding protection for the default health check endpoint.

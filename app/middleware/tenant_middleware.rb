@@ -20,7 +20,15 @@ class TenantMiddleware
         ActsAsTenant.current_tenant = company
       else
         # Handle invalid tenant (redirect to marketing site or error page)
-        base_domain = Rails.env.development? ? "localhost:3000" : request.domain
+        base_domain = if Rails.env.development?
+                        "localhost:3000"
+        elsif host.include?("herokuapp.com")
+                        host # On Heroku, just use the full host
+        else
+                        # Extract domain from host (e.g., "example.com" from "subdomain.example.com")
+                        parts = host.split(".")
+                        parts.size > 1 ? parts.last(2).join(".") : host
+        end
         return [ 302, { "Location" => "http://#{base_domain}" }, [] ]
       end
     end
@@ -34,6 +42,9 @@ class TenantMiddleware
 
   def extract_subdomain(host)
     return nil if host.blank?
+
+    # Skip subdomain extraction for Heroku domains
+    return nil if host.include?("herokuapp.com")
 
     parts = host.split(".")
     return nil if parts.size <= 2 # No subdomain in localhost or example.com

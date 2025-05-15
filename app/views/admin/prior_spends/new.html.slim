@@ -1,69 +1,32 @@
-h1.text-2xl.font-bold.mb-4 Add Prior Spend
+div.max-w-7xl.mx-auto.px-4.sm:px-6.lg:px-8.pb-12 data-controller="prior-spend"
+  / Breadcrumbs
+  nav.flex.mb-6 aria-label="Breadcrumb"
+    ol.inline-flex.items-center.space-x-1.md:space-x-3
+      li.inline-flex.items-center
+        = link_to admin_prior_spends_path, class: "inline-flex items-center text-sm font-medium text-gray-500 hover:text-blue-600 transition duration-150 ease-in-out" do
+          svg.w-4.h-4.mr-2[xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"]
+            path[d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"]
+          | Prior Spend
+      li
+        div.flex.items-center
+          svg.w-6.h-6.text-gray-400[xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20"]
+            path[fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"]
+          span.ml-1.text-sm.font-medium.text-gray-500.md:ml-2 New Entry
 
-.mb-4
-  = link_to "← Back to Prior Spends", admin_prior_spends_path, class: "text-blue-600 hover:text-blue-800"
+  div.pb-5.border-b.border-gray-200.mb-6
+    div.flex-1.min-w-0
+      h2.text-2xl.font-extrabold.text-gray-900.sm:text-3xl.sm:truncate
+        | New Prior Spend Entry
+      p.mt-1.text-sm.text-gray-500
+        | Create a new prior spend entry for calculating savings comparisons.
 
-.bg-white.shadow.overflow-hidden.sm:rounded-md
-  .px-4.py-5.border-b.border-gray-200.sm:px-6
-    h3.text-lg.leading-6.font-medium.text-gray-900 Prior Spend Details
+  div.rounded-lg.overflow-hidden
+    = render "form"
 
-  .px-4.py-5.sm:p-6
-    = form_with(model: [:admin, @prior_spend], local: true, class: "space-y-6") do |f|
-      - if @prior_spend.errors.any?
-        .bg-red-100.border.border-red-400.text-red-700.px-4.py-3.rounded.relative.mb-4
-          h2.text-lg.font-bold = "#{pluralize(@prior_spend.errors.count, "error")} prohibited this prior spend from being saved:"
-          ul.list-disc.list-inside
-            - @prior_spend.errors.full_messages.each do |message|
-              li = message
-
-      .grid.grid-cols-1.gap-y-6.gap-x-4.sm:grid-cols-6
-        .sm:col-span-3
-          = f.label :company_id, class: "block text-sm font-medium text-gray-700"
-          .mt-1
-            = f.collection_select :company_id, @companies, :id, :name, 
-                                { selected: @company_id, prompt: "Select company" }, 
-                                { class: "mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md" }
-
-        .sm:col-span-3
-          = f.label :carrier, class: "block text-sm font-medium text-gray-700"
-          .mt-1
-            = f.select :carrier, PriorSpend::CARRIERS,
-                      { prompt: "Select carrier" },
-                      { class: "mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md",
-                        data: { controller: "prior-spend", action: "change->prior-spend#updateServiceTypes" } }
-
-        .sm:col-span-3
-          = f.label :spend_type, class: "block text-sm font-medium text-gray-700"
-          .mt-1
-            = f.select :spend_type, PriorSpend::SPEND_TYPES.map { |type| [type.titleize, type] },
-                      { prompt: "Select spend type" },
-                      { class: "mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md",
-                        data: { action: "change->prior-spend#updateServiceTypes" } }
-
-        .sm:col-span-3
-          = f.label :service_type, class: "block text-sm font-medium text-gray-700"
-          .mt-1
-            = f.select :service_type, [],
-                      { prompt: "Select service type" },
-                      { class: "mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md",
-                        data: { target: "prior-spend.serviceTypeSelect" } }
-
-        .sm:col-span-3
-          = f.label :shipment_count, class: "block text-sm font-medium text-gray-700"
-          .mt-1
-            = f.number_field :shipment_count, min: 0, class: "shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
-
-        .sm:col-span-3
-          = f.label :spend_amount, class: "block text-sm font-medium text-gray-700"
-          .mt-1.relative.rounded-md.shadow-sm
-            .absolute.inset-y-0.left-0.pl-3.flex.items-center.pointer-events-none
-              span.text-gray-500.sm:text-sm $
-            = f.number_field :spend_amount, min: 0, step: 0.01, class: "pl-7 shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
-
-      .pt-5
-        .flex.justify-end
-          = link_to "Cancel", admin_prior_spends_path, class: "bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 mr-2"
-          = f.submit "Save", class: "inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+/ JavaScript for the form
+- fedex_service_types = PriorSpend::FEDEX_SERVICE_TYPES.to_json
+- ups_service_types = PriorSpend::UPS_SERVICE_TYPES.to_json
+- surcharge_types = PriorSpend::SURCHARGE_TYPES.to_json
 
 javascript:
   document.addEventListener('DOMContentLoaded', function() {
@@ -71,9 +34,9 @@ javascript:
     const spendTypeSelect = document.querySelector('[data-action="change->prior-spend#updateServiceTypes"]');
     const serviceTypeSelect = document.querySelector('[data-target="prior-spend.serviceTypeSelect"]');
     
-    const fedexServiceTypes = #{PriorSpend::FEDEX_SERVICE_TYPES.to_json.html_safe};
-    const upsServiceTypes = #{PriorSpend::UPS_SERVICE_TYPES.to_json.html_safe};
-    const surchargeTypes = #{PriorSpend::SURCHARGE_TYPES.to_json.html_safe};
+    const fedexServiceTypes = #{fedex_service_types};
+    const upsServiceTypes = #{ups_service_types};
+    const surchargeTypes = #{surcharge_types};
     
     function updateServiceTypes() {
       const carrier = carrierSelect.value;

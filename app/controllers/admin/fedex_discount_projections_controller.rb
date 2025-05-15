@@ -1,4 +1,4 @@
-class Admin::FedexDiscountProjectionsController < ApplicationController
+class Admin::FedexDiscountProjectionsController < Admin::BaseController
   before_action :set_projection, only: [ :show, :edit, :update, :destroy, :duplicate ]
 
   def index

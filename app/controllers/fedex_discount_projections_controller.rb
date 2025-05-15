@@ -1,4 +1,5 @@
 class FedexDiscountProjectionsController < ApplicationController
+  before_action :require_admin
   before_action :set_projection, only: [ :show, :edit, :update, :destroy, :duplicate ]
 
   def index

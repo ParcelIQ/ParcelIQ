@@ -1,63 +1,68 @@
-.row.mb-4
-  .col-md-12
-    .card
-      .card-header.bg-primary.text-white
-        h5.mb-0 Envelope Minimum Charges
-      .card-body
+div.bg-white.shadow.rounded-lg.overflow-hidden
+  div.px-4.py-5.sm:p-6.border-b.border-gray-200
+    div.md:grid.md:grid-cols-3.md:gap-6
+      div.md:col-span-1
+        h3.text-lg.font-medium.leading-6.text-gray-900 Envelope Minimum Charges
+        p.mt-1.text-sm.text-gray-500
+          | Configure minimum charge reductions for envelopes.
+      
+      div.mt-5.md:mt-0.md:col-span-2
         = form.fields_for :fedex_envelope_minimum_charge do |min_form|
-          .mb-3.row
-            label.col-sm-3.col-form-label Envelope Minimum Charge ($)
-            .col-sm-3
-              = min_form.number_field :envelope_min_charge, step: 0.01, min: 0, class: "form-control"
+          div.mb-6
+            div.grid.grid-cols-6.gap-6
+              div.col-span-6.sm:col-span-3
+                = min_form.label :envelope_min_charge, "Envelope Minimum Charge ($)", class: "block text-sm font-medium text-gray-700"
+                div.mt-1.relative
+                  = min_form.number_field :envelope_min_charge, step: 0.01, min: 0, class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition duration-200 ease-in-out hover:border-gray-400"
 
-          h6.mb-3 Percentage Reduction
-          .table-responsive.mb-4
-            table.table.table-bordered
-              thead
+          h4.text-sm.font-medium.leading-6.text-gray-900.mb-3 Percentage Reduction
+          div.overflow-x-auto.mb-5
+            table.min-w-full.divide-y.divide-gray-200
+              thead.bg-gray-50
                 tr
-                  th Zone 2
-                  th Zone 3
-                  th Zone 4
-                  th Zone 5
-                  th Zone 6
-                  th Zone 7
-                  th Zone 8
-                  th Zone 9-10
-                  th Zone 13-16
-              tbody
+                  th.px-3.py-2.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 2
+                  th.px-3.py-2.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 3
+                  th.px-3.py-2.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 4
+                  th.px-3.py-2.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 5
+                  th.px-3.py-2.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 6
+                  th.px-3.py-2.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 7
+                  th.px-3.py-2.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 8
+                  th.px-3.py-2.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 9-10
+                  th.px-3.py-2.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 13-16
+              tbody.bg-white.divide-y.divide-gray-200
                 tr
-                  td = min_form.number_field :zone_2_percentage_reduction, step: 0.01, min: 0, max: 100, class: "form-control"
-                  td = min_form.number_field :zone_3_percentage_reduction, step: 0.01, min: 0, max: 100, class: "form-control"
-                  td = min_form.number_field :zone_4_percentage_reduction, step: 0.01, min: 0, max: 100, class: "form-control"
-                  td = min_form.number_field :zone_5_percentage_reduction, step: 0.01, min: 0, max: 100, class: "form-control"
-                  td = min_form.number_field :zone_6_percentage_reduction, step: 0.01, min: 0, max: 100, class: "form-control"
-                  td = min_form.number_field :zone_7_percentage_reduction, step: 0.01, min: 0, max: 100, class: "form-control"
-                  td = min_form.number_field :zone_8_percentage_reduction, step: 0.01, min: 0, max: 100, class: "form-control"
-                  td = min_form.number_field :zone_9_10_percentage_reduction, step: 0.01, min: 0, max: 100, class: "form-control"
-                  td = min_form.number_field :zone_13_16_percentage_reduction, step: 0.01, min: 0, max: 100, class: "form-control"
+                  td.px-2.py-1 = min_form.number_field :zone_2_percentage_reduction, step: 0.01, min: 0, max: 100, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  td.px-2.py-1 = min_form.number_field :zone_3_percentage_reduction, step: 0.01, min: 0, max: 100, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  td.px-2.py-1 = min_form.number_field :zone_4_percentage_reduction, step: 0.01, min: 0, max: 100, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  td.px-2.py-1 = min_form.number_field :zone_5_percentage_reduction, step: 0.01, min: 0, max: 100, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  td.px-2.py-1 = min_form.number_field :zone_6_percentage_reduction, step: 0.01, min: 0, max: 100, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  td.px-2.py-1 = min_form.number_field :zone_7_percentage_reduction, step: 0.01, min: 0, max: 100, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  td.px-2.py-1 = min_form.number_field :zone_8_percentage_reduction, step: 0.01, min: 0, max: 100, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  td.px-2.py-1 = min_form.number_field :zone_9_10_percentage_reduction, step: 0.01, min: 0, max: 100, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  td.px-2.py-1 = min_form.number_field :zone_13_16_percentage_reduction, step: 0.01, min: 0, max: 100, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
 
-          h6.mb-3 Dollar Reduction
-          .table-responsive
-            table.table.table-bordered
-              thead
+          h4.text-sm.font-medium.leading-6.text-gray-900.mb-3 Dollar Reduction
+          div.overflow-x-auto
+            table.min-w-full.divide-y.divide-gray-200
+              thead.bg-gray-50
                 tr
-                  th Zone 2
-                  th Zone 3
-                  th Zone 4
-                  th Zone 5
-                  th Zone 6
-                  th Zone 7
-                  th Zone 8
-                  th Zone 9-10
-                  th Zone 13-16
-              tbody
+                  th.px-3.py-2.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 2
+                  th.px-3.py-2.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 3
+                  th.px-3.py-2.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 4
+                  th.px-3.py-2.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 5
+                  th.px-3.py-2.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 6
+                  th.px-3.py-2.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 7
+                  th.px-3.py-2.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 8
+                  th.px-3.py-2.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 9-10
+                  th.px-3.py-2.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 13-16
+              tbody.bg-white.divide-y.divide-gray-200
                 tr
-                  td = min_form.number_field :zone_2_dollar_reduction, step: 0.01, min: 0, class: "form-control"
-                  td = min_form.number_field :zone_3_dollar_reduction, step: 0.01, min: 0, class: "form-control"
-                  td = min_form.number_field :zone_4_dollar_reduction, step: 0.01, min: 0, class: "form-control"
-                  td = min_form.number_field :zone_5_dollar_reduction, step: 0.01, min: 0, class: "form-control"
-                  td = min_form.number_field :zone_6_dollar_reduction, step: 0.01, min: 0, class: "form-control"
-                  td = min_form.number_field :zone_7_dollar_reduction, step: 0.01, min: 0, class: "form-control"
-                  td = min_form.number_field :zone_8_dollar_reduction, step: 0.01, min: 0, class: "form-control"
-                  td = min_form.number_field :zone_9_10_dollar_reduction, step: 0.01, min: 0, class: "form-control"
-                  td = min_form.number_field :zone_13_16_dollar_reduction, step: 0.01, min: 0, class: "form-control" 
+                  td.px-2.py-1 = min_form.number_field :zone_2_dollar_reduction, step: 0.01, min: 0, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  td.px-2.py-1 = min_form.number_field :zone_3_dollar_reduction, step: 0.01, min: 0, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  td.px-2.py-1 = min_form.number_field :zone_4_dollar_reduction, step: 0.01, min: 0, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  td.px-2.py-1 = min_form.number_field :zone_5_dollar_reduction, step: 0.01, min: 0, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  td.px-2.py-1 = min_form.number_field :zone_6_dollar_reduction, step: 0.01, min: 0, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  td.px-2.py-1 = min_form.number_field :zone_7_dollar_reduction, step: 0.01, min: 0, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  td.px-2.py-1 = min_form.number_field :zone_8_dollar_reduction, step: 0.01, min: 0, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  td.px-2.py-1 = min_form.number_field :zone_9_10_dollar_reduction, step: 0.01, min: 0, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  td.px-2.py-1 = min_form.number_field :zone_13_16_dollar_reduction, step: 0.01, min: 0, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" 

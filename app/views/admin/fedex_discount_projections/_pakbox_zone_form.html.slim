@@ -1,59 +1,70 @@
-.row.mb-4
-  .col-md-12
-    .card
-      .card-header.bg-primary.text-white.d-flex.justify-content-between.align-items-center
-        h5.mb-0 Pak/Box Zone Discounts
-        button.btn.btn-light.btn-sm#add-weight-range type="button"
-          i.bi.bi-plus-circle
-          |  Add Weight Range
-      .card-body
-        .table-responsive
-          table.table.table-bordered#pakbox-discounts-table
-            thead
+div.bg-white.shadow.rounded-lg.overflow-hidden
+  div.px-4.py-5.sm:p-6.border-b.border-gray-200
+    div.md:grid.md:grid-cols-3.md:gap-6
+      div.md:col-span-1
+        h3.text-lg.font-medium.leading-6.text-gray-900 Pak/Box Zone Discounts
+        p.mt-1.text-sm.text-gray-500
+          | Set weight-based discount percentages for each zone.
+      
+      div.mt-5.md:mt-0.md:col-span-2
+        div.flex.justify-between.items-center.mb-4
+          p.text-sm.text-gray-500 Configure discounts by weight ranges
+          button.inline-flex.items-center.px-3.py-1.border.border-transparent.rounded-md.shadow-sm.text-sm.font-medium.text-white.bg-blue-600.hover:bg-blue-700.focus:outline-none.focus:ring-2.focus:ring-offset-2.focus:ring-blue-500#add-weight-range type="button"
+            svg.-ml-0.5.mr-1.h-4.w-4[xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"]
+              path[fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"]
+            | Add Weight Range
+        
+        div.overflow-x-auto
+          table.min-w-full.divide-y.divide-gray-200#pakbox-discounts-table
+            thead.bg-gray-50
               tr
-                th Low Weight
-                th Max Weight
-                th Zone 2
-                th Zone 3
-                th Zone 4
-                th Zone 5
-                th Zone 6
-                th Zone 7
-                th Zone 8
-                th Zone 9-10
-                th Zone 13-16
-                th Actions
-            tbody
+                th.px-3.py-2.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Low Weight
+                th.px-3.py-2.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Max Weight
+                th.px-3.py-2.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 2
+                th.px-3.py-2.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 3
+                th.px-3.py-2.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 4
+                th.px-3.py-2.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 5
+                th.px-3.py-2.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 6
+                th.px-3.py-2.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 7
+                th.px-3.py-2.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 8
+                th.px-3.py-2.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 9-10
+                th.px-3.py-2.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 13-16
+                th.px-3.py-2.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider 
+            tbody.bg-white.divide-y.divide-gray-200
               = form.fields_for :fedex_pak_box_zone_discounts do |pakbox_form|
                 tr.weight-range-row
-                  td
-                    = pakbox_form.number_field :low_weight, step: 0.01, min: 0, class: "form-control"
-                  td
-                    = pakbox_form.number_field :max_weight, step: 0.01, min: 0, class: "form-control"
-                  td
-                    = pakbox_form.number_field :zone_2_discount, step: 0.01, min: 0, max: 100, class: "form-control"
-                  td
-                    = pakbox_form.number_field :zone_3_discount, step: 0.01, min: 0, max: 100, class: "form-control"
-                  td
-                    = pakbox_form.number_field :zone_4_discount, step: 0.01, min: 0, max: 100, class: "form-control"
-                  td
-                    = pakbox_form.number_field :zone_5_discount, step: 0.01, min: 0, max: 100, class: "form-control"
-                  td
-                    = pakbox_form.number_field :zone_6_discount, step: 0.01, min: 0, max: 100, class: "form-control"
-                  td
-                    = pakbox_form.number_field :zone_7_discount, step: 0.01, min: 0, max: 100, class: "form-control"
-                  td
-                    = pakbox_form.number_field :zone_8_discount, step: 0.01, min: 0, max: 100, class: "form-control"
-                  td
-                    = pakbox_form.number_field :zone_9_10_discount, step: 0.01, min: 0, max: 100, class: "form-control"
-                  td
-                    = pakbox_form.number_field :zone_13_16_discount, step: 0.01, min: 0, max: 100, class: "form-control"
-                  td
+                  td.px-2.py-1
+                    = pakbox_form.number_field :low_weight, step: 0.01, min: 0, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  td.px-2.py-1
+                    = pakbox_form.number_field :max_weight, step: 0.01, min: 0, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  td.px-2.py-1
+                    = pakbox_form.number_field :zone_2_discount, step: 0.01, min: 0, max: 100, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  td.px-2.py-1
+                    = pakbox_form.number_field :zone_3_discount, step: 0.01, min: 0, max: 100, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  td.px-2.py-1
+                    = pakbox_form.number_field :zone_4_discount, step: 0.01, min: 0, max: 100, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  td.px-2.py-1
+                    = pakbox_form.number_field :zone_5_discount, step: 0.01, min: 0, max: 100, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  td.px-2.py-1
+                    = pakbox_form.number_field :zone_6_discount, step: 0.01, min: 0, max: 100, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  td.px-2.py-1
+                    = pakbox_form.number_field :zone_7_discount, step: 0.01, min: 0, max: 100, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  td.px-2.py-1
+                    = pakbox_form.number_field :zone_8_discount, step: 0.01, min: 0, max: 100, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  td.px-2.py-1
+                    = pakbox_form.number_field :zone_9_10_discount, step: 0.01, min: 0, max: 100, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  td.px-2.py-1
+                    = pakbox_form.number_field :zone_13_16_discount, step: 0.01, min: 0, max: 100, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  td.px-2.py-1
                     - if pakbox_form.object.persisted?
-                      = pakbox_form.check_box :_destroy, class: "delete-weight-range"
-                      = pakbox_form.label :_destroy, "Remove", class: "text-danger"
+                      div.flex.items-center
+                        = pakbox_form.check_box :_destroy, class: "delete-weight-range focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded transition duration-150 ease-in-out"
+                        = pakbox_form.label :_destroy, "Remove", class: "ml-2 text-sm text-red-600 font-medium"
                     - else
-                      button.btn.btn-danger.btn-sm.remove-weight-range type="button" Remove
+                      button.inline-flex.items-center.px-2.py-1.border.border-transparent.text-xs.font-medium.rounded.text-red-700.bg-red-100.hover:bg-red-200.focus:outline-none.focus:ring-2.focus:ring-offset-2.focus:ring-red-500.remove-weight-range type="button"
+                        svg.-ml-0.5.mr-1.h-4.w-4[xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"]
+                          path[fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"]
+                        | Remove
 
 javascript:
   document.addEventListener('DOMContentLoaded', function() {

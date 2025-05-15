@@ -27,6 +27,7 @@ div.max-w-7xl.mx-auto.px-4.sm:px-6.lg:px-8
               thead.bg-gray-50
                 tr
                   th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider.whitespace-nowrap scope="col" Name
+                  th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider.whitespace-nowrap scope="col" Shipping Invoice
                   th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider.whitespace-nowrap scope="col" Dim Divisor
                   th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider.whitespace-nowrap scope="col" Envelope Discount
                   th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider.whitespace-nowrap scope="col" Pak/Box Discount
@@ -43,6 +44,9 @@ div.max-w-7xl.mx-auto.px-4.sm:px-6.lg:px-8
                           div.ml-4
                             div.text-sm.font-medium.text-gray-900
                               = link_to projection.name, admin_fedex_discount_projection_path(projection), class: "text-blue-600 hover:text-blue-900"
+                      
+                      td.px-6.py-4.whitespace-nowrap
+                        div.text-sm.text-gray-500 = projection.shipping_invoice&.name || "Not set"
                       
                       td.px-6.py-4.whitespace-nowrap
                         div.text-sm.text-gray-500 = projection.fedex_discount_basic&.dim_divisor || "Not set"

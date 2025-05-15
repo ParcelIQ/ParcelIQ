@@ -1,8 +1,15 @@
 class Admin::FedexDiscountProjectionsController < Admin::BaseController
   before_action :set_projection, only: [ :show, :edit, :update, :destroy, :duplicate ]
+  before_action :set_shipping_invoices, only: [ :new, :edit, :create, :update ]
 
   def index
-    @projections = FedexDiscountProjection.all
+    # If viewing from a shipping invoice, filter projections
+    if params[:shipping_invoice_id].present?
+      @shipping_invoice = ShippingInvoice.find_by(id: params[:shipping_invoice_id])
+      @projections = @shipping_invoice&.fedex_discount_projections&.where(company: current_company) || FedexDiscountProjection.none
+    else
+      @projections = FedexDiscountProjection.where(company: current_company)
+    end
   end
 
   def show
@@ -10,6 +17,8 @@ class Admin::FedexDiscountProjectionsController < Admin::BaseController
 
   def new
     @projection = FedexDiscountProjection.new
+    @projection.company = current_company
+    @projection.shipping_invoice_id = params[:shipping_invoice_id] if params[:shipping_invoice_id].present?
 
     # Set a default name based on the shipping invoice if it's provided
     if params[:shipping_invoice_id].present?
@@ -30,10 +39,11 @@ class Admin::FedexDiscountProjectionsController < Admin::BaseController
 
   def create
     @projection = FedexDiscountProjection.new(projection_params)
+    @projection.company = current_company
 
     respond_to do |format|
       if @projection.save
-        format.html { redirect_to admin_fedex_discount_projections_path, notice: "FedEx discount projection was successfully created." }
+        format.html { redirect_to edit_admin_fedex_discount_projection_path(@projection), notice: "FedEx discount projection was successfully created." }
         format.json { render :show, status: :created, location: @projection }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -45,7 +55,7 @@ class Admin::FedexDiscountProjectionsController < Admin::BaseController
   def update
     respond_to do |format|
       if @projection.update(projection_params)
-        format.html { redirect_to admin_fedex_discount_projections_path, notice: "FedEx discount projection was successfully updated." }
+        format.html { redirect_to edit_admin_fedex_discount_projection_path(@projection), notice: "FedEx discount projection was successfully updated." }
         format.json { render :show, status: :ok, location: @projection }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -74,12 +84,17 @@ class Admin::FedexDiscountProjectionsController < Admin::BaseController
   private
 
   def set_projection
-    @projection = FedexDiscountProjection.find(params[:id])
+    @projection = current_company.fedex_discount_projections.find(params[:id])
+  end
+
+  def set_shipping_invoices
+    @shipping_invoices = current_company.shipping_invoices.where(carrier: "FedEx").order(invoice_uploaded_date: :desc)
   end
 
   def projection_params
     params.require(:fedex_discount_projection).permit(
       :name,
+      :shipping_invoice_id,
       fedex_discount_basic_attributes: [
         :id, :dim_divisor, :envelope_earned_discount, :pakbox_earned_discount
       ],
@@ -94,6 +109,9 @@ class Admin::FedexDiscountProjectionsController < Admin::BaseController
       ],
       fedex_envelope_minimum_charge_attributes: [
         :id, :envelope_min_charge,
+        :zone_2_min_charge, :zone_3_min_charge, :zone_4_min_charge,
+        :zone_5_min_charge, :zone_6_min_charge, :zone_7_min_charge,
+        :zone_8_min_charge, :zone_9_10_min_charge, :zone_13_16_min_charge,
         :zone_2_percentage_reduction, :zone_3_percentage_reduction, :zone_4_percentage_reduction,
         :zone_5_percentage_reduction, :zone_6_percentage_reduction, :zone_7_percentage_reduction,
         :zone_8_percentage_reduction, :zone_9_10_percentage_reduction, :zone_13_16_percentage_reduction,

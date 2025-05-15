@@ -1,216 +1,283 @@
-.container.mt-4
-  .d-flex.justify-content-between.align-items-center.mb-3
-    h1 = @projection.name
-    div
-      = link_to 'Edit', edit_admin_fedex_discount_projection_path(@projection), class: 'btn btn-primary'
-      = link_to 'Back', admin_fedex_discount_projections_path, class: 'btn btn-secondary'
+div.max-w-7xl.mx-auto.px-4.sm:px-6.lg:px-8
+  / Breadcrumbs
+  nav.flex.mb-6 aria-label="Breadcrumb"
+    ol.flex.items-center.space-x-4
+      li
+        div
+          = link_to "javascript:history.back()", class: "text-gray-400 hover:text-gray-500" do
+            svg.flex-shrink-0.h-5.w-5[xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"]
+              path[d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"]
+      li
+        div.flex.items-center
+          svg.flex-shrink-0.h-5.w-5.text-gray-300[xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20"]
+            path[d="M5.555 17.776l8-16 .894.448-8 16-.894-.448z"]
+          span.ml-4.text-sm.font-medium.text-gray-500.hover:text-gray-700 = @projection.name
 
-  - if notice.present?
-    .alert.alert-success.alert-dismissible.fade.show role="alert"
-      = notice
-      button.btn-close type="button" data-bs-dismiss="alert" aria-label="Close"
+  div.md:flex.md:items-center.md:justify-between
+    div.flex-1.min-w-0
+      h2.text-2xl.font-bold.leading-7.text-gray-900.sm:text-3xl.sm:truncate
+        = @projection.name
+      p.mt-1.text-sm.text-gray-500
+        | FedEx discount projection details and configuration
+    
+    div.mt-4.flex.md:mt-0.md:ml-4
+      = link_to edit_admin_fedex_discount_projection_path(@projection), class: "inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" do
+        svg.-ml-1.mr-2.h-5.w-5.text-gray-500[xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"]
+          path[d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"]
+        | Edit Projection
+      = button_to admin_fedex_discount_projection_path(@projection), method: :delete, form: { data: { turbo_confirm: "Are you sure you want to delete this projection? This action cannot be undone." } }, class: "ml-3 inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500" do
+        svg.-ml-1.mr-2.h-5.w-5[xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"]
+          path[fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"]
+        | Delete
 
-  .row.mb-4
-    .col-md-12
-      .card
-        .card-header.bg-primary.text-white
-          h5.mb-0 Basic Settings
-        .card-body
-          .row
-            .col-md-4
-              p
-                strong Dim Divisor:
-                |  #{@projection.fedex_discount_basic&.dim_divisor || "Not set"}
-            .col-md-4
-              p
-                strong Envelope Earned Discount:
-                |  #{@projection.fedex_discount_basic&.envelope_earned_discount || "0"}%
-            .col-md-4
-              p
-                strong Pak/Box Earned Discount:
-                |  #{@projection.fedex_discount_basic&.pakbox_earned_discount || "0"}%
+  / Basic Settings
+  div.mt-6.bg-white.shadow.overflow-hidden.sm:rounded-lg
+    div.px-4.py-5.sm:px-6
+      h3.text-lg.leading-6.font-medium.text-gray-900 Basic Settings
+      p.mt-1.max-w-2xl.text-sm.text-gray-500 Basic configuration for FedEx discounts.
+    
+    div.border-t.border-gray-200
+      dl
+        div.bg-gray-50.px-4.py-5.sm:grid.sm:grid-cols-3.sm:gap-4.sm:px-6
+          dt.text-sm.font-medium.text-gray-500 Name
+          dd.mt-1.text-sm.text-gray-900.sm:mt-0.sm:col-span-2 = @projection.name
+        
+        div.bg-white.px-4.py-5.sm:grid.sm:grid-cols-3.sm:gap-4.sm:px-6
+          dt.text-sm.font-medium.text-gray-500 Shipping Invoice
+          dd.mt-1.text-sm.text-gray-900.sm:mt-0.sm:col-span-2
+            - if @projection.shipping_invoice
+              = link_to @projection.shipping_invoice.name, admin_shipping_invoice_path(@projection.shipping_invoice), class: "text-blue-600 hover:text-blue-900"
+            - else
+              | Not associated with any invoice
+        
+        div.bg-gray-50.px-4.py-5.sm:grid.sm:grid-cols-3.sm:gap-4.sm:px-6
+          dt.text-sm.font-medium.text-gray-500 Dim Divisor
+          dd.mt-1.text-sm.text-gray-900.sm:mt-0.sm:col-span-2 = @projection.fedex_discount_basic&.dim_divisor || "Not set"
+        
+        div.bg-white.px-4.py-5.sm:grid.sm:grid-cols-3.sm:gap-4.sm:px-6
+          dt.text-sm.font-medium.text-gray-500 Envelope Earned Discount
+          dd.mt-1.text-sm.text-gray-900.sm:mt-0.sm:col-span-2 = "#{@projection.fedex_discount_basic&.envelope_earned_discount || '0'}%"
+        
+        div.bg-gray-50.px-4.py-5.sm:grid.sm:grid-cols-3.sm:gap-4.sm:px-6
+          dt.text-sm.font-medium.text-gray-500 Pak/Box Earned Discount
+          dd.mt-1.text-sm.text-gray-900.sm:mt-0.sm:col-span-2 = "#{@projection.fedex_discount_basic&.pakbox_earned_discount || '0'}%"
 
-  .row.mb-4
-    .col-md-12
-      .card
-        .card-header.bg-primary.text-white
-          h5.mb-0 Envelope Zone Discounts
-        .card-body
-          .table-responsive
-            table.table.table-bordered
-              thead
-                tr
-                  th Zone 2
-                  th Zone 3
-                  th Zone 4
-                  th Zone 5
-                  th Zone 6
-                  th Zone 7
-                  th Zone 8
-                  th Zone 9-10
-                  th Zone 13-16
-              tbody
-                tr
-                  td #{@projection.fedex_envelope_zone_discount&.zone_2_discount || "0"}%
-                  td #{@projection.fedex_envelope_zone_discount&.zone_3_discount || "0"}%
-                  td #{@projection.fedex_envelope_zone_discount&.zone_4_discount || "0"}%
-                  td #{@projection.fedex_envelope_zone_discount&.zone_5_discount || "0"}%
-                  td #{@projection.fedex_envelope_zone_discount&.zone_6_discount || "0"}%
-                  td #{@projection.fedex_envelope_zone_discount&.zone_7_discount || "0"}%
-                  td #{@projection.fedex_envelope_zone_discount&.zone_8_discount || "0"}%
-                  td #{@projection.fedex_envelope_zone_discount&.zone_9_10_discount || "0"}%
-                  td #{@projection.fedex_envelope_zone_discount&.zone_13_16_discount || "0"}%
+  / Envelope Zone Discounts
+  div.mt-8.bg-white.shadow.overflow-hidden.sm:rounded-lg
+    div.px-4.py-5.sm:px-6
+      h3.text-lg.leading-6.font-medium.text-gray-900 Envelope Zone Discounts
+      p.mt-1.max-w-2xl.text-sm.text-gray-500 Zone-specific discounts for envelopes.
+    
+    div.border-t.border-gray-200.px-4.py-5.sm:p-0
+      div.overflow-x-auto
+        table.min-w-full.divide-y.divide-gray-200
+          thead.bg-gray-50
+            tr
+              th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 2
+              th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 3
+              th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 4
+              th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 5
+              th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 6
+              th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 7
+              th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 8
+              th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 9-10
+              th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 13-16
+          tbody.bg-white.divide-y.divide-gray-200
+            tr
+              td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = "#{@projection.fedex_envelope_zone_discount&.zone_2_discount || '0'}%"
+              td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = "#{@projection.fedex_envelope_zone_discount&.zone_3_discount || '0'}%"
+              td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = "#{@projection.fedex_envelope_zone_discount&.zone_4_discount || '0'}%"
+              td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = "#{@projection.fedex_envelope_zone_discount&.zone_5_discount || '0'}%"
+              td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = "#{@projection.fedex_envelope_zone_discount&.zone_6_discount || '0'}%"
+              td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = "#{@projection.fedex_envelope_zone_discount&.zone_7_discount || '0'}%"
+              td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = "#{@projection.fedex_envelope_zone_discount&.zone_8_discount || '0'}%"
+              td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = "#{@projection.fedex_envelope_zone_discount&.zone_9_10_discount || '0'}%"
+              td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = "#{@projection.fedex_envelope_zone_discount&.zone_13_16_discount || '0'}%"
 
-  .row.mb-4
-    .col-md-12
-      .card
-        .card-header.bg-primary.text-white
-          h5.mb-0 Pak/Box Zone Discounts
-        .card-body
-          .table-responsive
-            table.table.table-bordered
-              thead
-                tr
-                  th Low Weight
-                  th Max Weight
-                  th Zone 2
-                  th Zone 3
-                  th Zone 4
-                  th Zone 5
-                  th Zone 6
-                  th Zone 7
-                  th Zone 8
-                  th Zone 9-10
-                  th Zone 13-16
-              tbody
-                - @projection.fedex_pak_box_zone_discounts.each do |discount|
-                  tr
-                    td #{discount.low_weight || "0"}
-                    td #{discount.max_weight || "0"}
-                    td #{discount.zone_2_discount || "0"}%
-                    td #{discount.zone_3_discount || "0"}%
-                    td #{discount.zone_4_discount || "0"}%
-                    td #{discount.zone_5_discount || "0"}%
-                    td #{discount.zone_6_discount || "0"}%
-                    td #{discount.zone_7_discount || "0"}%
-                    td #{discount.zone_8_discount || "0"}%
-                    td #{discount.zone_9_10_discount || "0"}%
-                    td #{discount.zone_13_16_discount || "0"}%
+  / Pak/Box Zone Discounts
+  div.mt-8.bg-white.shadow.overflow-hidden.sm:rounded-lg
+    div.px-4.py-5.sm:px-6
+      h3.text-lg.leading-6.font-medium.text-gray-900 Pak/Box Zone Discounts
+      p.mt-1.max-w-2xl.text-sm.text-gray-500 Weight and zone-specific discounts for pak/box shipments.
+    
+    div.border-t.border-gray-200.px-4.py-5.sm:p-0
+      div.overflow-x-auto
+        table.min-w-full.divide-y.divide-gray-200
+          thead.bg-gray-50
+            tr
+              th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Low Weight
+              th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Max Weight
+              th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 2
+              th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 3
+              th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 4
+              th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 5
+              th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 6
+              th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 7
+              th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 8
+              th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 9-10
+              th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 13-16
+          tbody.bg-white.divide-y.divide-gray-200
+            - @projection.fedex_pak_box_zone_discounts.each do |discount|
+              tr
+                td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = discount.low_weight || "0"
+                td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = discount.max_weight || "0"
+                td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = "#{discount.zone_2_discount || '0'}%"
+                td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = "#{discount.zone_3_discount || '0'}%"
+                td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = "#{discount.zone_4_discount || '0'}%"
+                td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = "#{discount.zone_5_discount || '0'}%"
+                td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = "#{discount.zone_6_discount || '0'}%"
+                td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = "#{discount.zone_7_discount || '0'}%"
+                td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = "#{discount.zone_8_discount || '0'}%"
+                td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = "#{discount.zone_9_10_discount || '0'}%"
+                td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = "#{discount.zone_13_16_discount || '0'}%"
 
-  .row.mb-4
-    .col-md-12
-      .card
-        .card-header.bg-primary.text-white
-          h5.mb-0
-            | Envelope Minimum Charges ($#{@projection.fedex_envelope_minimum_charge&.envelope_min_charge})
-        .card-body
-          h6.mb-3 Percentage Reduction
-          .table-responsive.mb-4
-            table.table.table-bordered
-              thead
-                tr
-                  th Zone 2
-                  th Zone 3
-                  th Zone 4
-                  th Zone 5
-                  th Zone 6
-                  th Zone 7
-                  th Zone 8
-                  th Zone 9-10
-                  th Zone 13-16
-              tbody
-                tr
-                  td #{@projection.fedex_envelope_minimum_charge&.zone_2_percentage_reduction || "0"}%
-                  td #{@projection.fedex_envelope_minimum_charge&.zone_3_percentage_reduction || "0"}%
-                  td #{@projection.fedex_envelope_minimum_charge&.zone_4_percentage_reduction || "0"}%
-                  td #{@projection.fedex_envelope_minimum_charge&.zone_5_percentage_reduction || "0"}%
-                  td #{@projection.fedex_envelope_minimum_charge&.zone_6_percentage_reduction || "0"}%
-                  td #{@projection.fedex_envelope_minimum_charge&.zone_7_percentage_reduction || "0"}%
-                  td #{@projection.fedex_envelope_minimum_charge&.zone_8_percentage_reduction || "0"}%
-                  td #{@projection.fedex_envelope_minimum_charge&.zone_9_10_percentage_reduction || "0"}%
-                  td #{@projection.fedex_envelope_minimum_charge&.zone_13_16_percentage_reduction || "0"}%
+  / Envelope Minimum Charges
+  div.mt-8.bg-white.shadow.overflow-hidden.sm:rounded-lg
+    div.px-4.py-5.sm:px-6
+      h3.text-lg.leading-6.font-medium.text-gray-900 Envelope Minimum Charges
+      p.mt-1.max-w-2xl.text-sm.text-gray-500 
+        | Base minimum charge: $#{@projection.fedex_envelope_minimum_charge&.envelope_min_charge || "0"}
+    
+    div.border-t.border-gray-200
+      div.px-4.py-5.sm:px-6
+        h4.text-md.leading-6.font-medium.text-gray-700 Zone-Specific Minimum Charges
+        div.mt-4.overflow-x-auto
+          table.min-w-full.divide-y.divide-gray-200
+            thead.bg-gray-50
+              tr
+                th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 2
+                th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 3
+                th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 4
+                th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 5
+                th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 6
+                th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 7
+                th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 8
+                th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 9-10
+                th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 13-16
+            tbody.bg-white.divide-y.divide-gray-200
+              tr
+                td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = "$#{@projection.fedex_envelope_minimum_charge&.zone_2_min_charge || '0'}"
+                td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = "$#{@projection.fedex_envelope_minimum_charge&.zone_3_min_charge || '0'}"
+                td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = "$#{@projection.fedex_envelope_minimum_charge&.zone_4_min_charge || '0'}"
+                td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = "$#{@projection.fedex_envelope_minimum_charge&.zone_5_min_charge || '0'}"
+                td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = "$#{@projection.fedex_envelope_minimum_charge&.zone_6_min_charge || '0'}"
+                td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = "$#{@projection.fedex_envelope_minimum_charge&.zone_7_min_charge || '0'}"
+                td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = "$#{@projection.fedex_envelope_minimum_charge&.zone_8_min_charge || '0'}"
+                td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = "$#{@projection.fedex_envelope_minimum_charge&.zone_9_10_min_charge || '0'}"
+                td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = "$#{@projection.fedex_envelope_minimum_charge&.zone_13_16_min_charge || '0'}"
+                
+      div.px-4.py-5.sm:px-6
+        h4.text-md.leading-6.font-medium.text-gray-700 Percentage Reduction
+        div.mt-4.overflow-x-auto
+          table.min-w-full.divide-y.divide-gray-200
+            thead.bg-gray-50
+              tr
+                th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 2
+                th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 3
+                th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 4
+                th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 5
+                th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 6
+                th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 7
+                th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 8
+                th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 9-10
+                th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 13-16
+            tbody.bg-white.divide-y.divide-gray-200
+              tr
+                td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = "#{@projection.fedex_envelope_minimum_charge&.zone_2_percentage_reduction || '0'}%"
+                td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = "#{@projection.fedex_envelope_minimum_charge&.zone_3_percentage_reduction || '0'}%"
+                td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = "#{@projection.fedex_envelope_minimum_charge&.zone_4_percentage_reduction || '0'}%"
+                td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = "#{@projection.fedex_envelope_minimum_charge&.zone_5_percentage_reduction || '0'}%"
+                td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = "#{@projection.fedex_envelope_minimum_charge&.zone_6_percentage_reduction || '0'}%"
+                td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = "#{@projection.fedex_envelope_minimum_charge&.zone_7_percentage_reduction || '0'}%"
+                td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = "#{@projection.fedex_envelope_minimum_charge&.zone_8_percentage_reduction || '0'}%"
+                td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = "#{@projection.fedex_envelope_minimum_charge&.zone_9_10_percentage_reduction || '0'}%"
+                td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = "#{@projection.fedex_envelope_minimum_charge&.zone_13_16_percentage_reduction || '0'}%"
 
-          h6.mb-3 Dollar Reduction
-          .table-responsive
-            table.table.table-bordered
-              thead
-                tr
-                  th Zone 2
-                  th Zone 3
-                  th Zone 4
-                  th Zone 5
-                  th Zone 6
-                  th Zone 7
-                  th Zone 8
-                  th Zone 9-10
-                  th Zone 13-16
-              tbody
-                tr
-                  td $#{@projection.fedex_envelope_minimum_charge&.zone_2_dollar_reduction || "0"}
-                  td $#{@projection.fedex_envelope_minimum_charge&.zone_3_dollar_reduction || "0"}
-                  td $#{@projection.fedex_envelope_minimum_charge&.zone_4_dollar_reduction || "0"}
-                  td $#{@projection.fedex_envelope_minimum_charge&.zone_5_dollar_reduction || "0"}
-                  td $#{@projection.fedex_envelope_minimum_charge&.zone_6_dollar_reduction || "0"}
-                  td $#{@projection.fedex_envelope_minimum_charge&.zone_7_dollar_reduction || "0"}
-                  td $#{@projection.fedex_envelope_minimum_charge&.zone_8_dollar_reduction || "0"}
-                  td $#{@projection.fedex_envelope_minimum_charge&.zone_9_10_dollar_reduction || "0"}
-                  td $#{@projection.fedex_envelope_minimum_charge&.zone_13_16_dollar_reduction || "0"}
+      div.px-4.py-5.sm:px-6
+        h4.text-md.leading-6.font-medium.text-gray-700 Dollar Reduction
+        div.mt-4.overflow-x-auto
+          table.min-w-full.divide-y.divide-gray-200
+            thead.bg-gray-50
+              tr
+                th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 2
+                th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 3
+                th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 4
+                th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 5
+                th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 6
+                th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 7
+                th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 8
+                th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 9-10
+                th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 13-16
+            tbody.bg-white.divide-y.divide-gray-200
+              tr
+                td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = "$#{@projection.fedex_envelope_minimum_charge&.zone_2_dollar_reduction || '0'}"
+                td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = "$#{@projection.fedex_envelope_minimum_charge&.zone_3_dollar_reduction || '0'}"
+                td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = "$#{@projection.fedex_envelope_minimum_charge&.zone_4_dollar_reduction || '0'}"
+                td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = "$#{@projection.fedex_envelope_minimum_charge&.zone_5_dollar_reduction || '0'}"
+                td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = "$#{@projection.fedex_envelope_minimum_charge&.zone_6_dollar_reduction || '0'}"
+                td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = "$#{@projection.fedex_envelope_minimum_charge&.zone_7_dollar_reduction || '0'}"
+                td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = "$#{@projection.fedex_envelope_minimum_charge&.zone_8_dollar_reduction || '0'}"
+                td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = "$#{@projection.fedex_envelope_minimum_charge&.zone_9_10_dollar_reduction || '0'}"
+                td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = "$#{@projection.fedex_envelope_minimum_charge&.zone_13_16_dollar_reduction || '0'}"
 
-  .row.mb-4
-    .col-md-12
-      .card
-        .card-header.bg-primary.text-white
-          h5.mb-0
-            | Pak/Box Minimum Charges ($#{@projection.fedex_pak_box_minimum_charge&.pakbox_min_charge})
-        .card-body
-          h6.mb-3 Percentage Reduction
-          .table-responsive.mb-4
-            table.table.table-bordered
-              thead
-                tr
-                  th Zone 2
-                  th Zone 3
-                  th Zone 4
-                  th Zone 5
-                  th Zone 6
-                  th Zone 7
-                  th Zone 8
-                  th Zone 9-10
-                  th Zone 13-16
-              tbody
-                tr
-                  td #{@projection.fedex_pak_box_minimum_charge&.zone_2_percentage_reduction || "0"}%
-                  td #{@projection.fedex_pak_box_minimum_charge&.zone_3_percentage_reduction || "0"}%
-                  td #{@projection.fedex_pak_box_minimum_charge&.zone_4_percentage_reduction || "0"}%
-                  td #{@projection.fedex_pak_box_minimum_charge&.zone_5_percentage_reduction || "0"}%
-                  td #{@projection.fedex_pak_box_minimum_charge&.zone_6_percentage_reduction || "0"}%
-                  td #{@projection.fedex_pak_box_minimum_charge&.zone_7_percentage_reduction || "0"}%
-                  td #{@projection.fedex_pak_box_minimum_charge&.zone_8_percentage_reduction || "0"}%
-                  td #{@projection.fedex_pak_box_minimum_charge&.zone_9_10_percentage_reduction || "0"}%
-                  td #{@projection.fedex_pak_box_minimum_charge&.zone_13_16_percentage_reduction || "0"}%
+  / Pak/Box Minimum Charges
+  div.mt-8.bg-white.shadow.overflow-hidden.sm:rounded-lg.mb-8
+    div.px-4.py-5.sm:px-6
+      h3.text-lg.leading-6.font-medium.text-gray-900 Pak/Box Minimum Charges
+      p.mt-1.max-w-2xl.text-sm.text-gray-500 
+        | Base minimum charge: $#{@projection.fedex_pak_box_minimum_charge&.pakbox_min_charge || "0"}
+    
+    div.border-t.border-gray-200
+      div.px-4.py-5.sm:px-6
+        h4.text-md.leading-6.font-medium.text-gray-700 Percentage Reduction
+        div.mt-4.overflow-x-auto
+          table.min-w-full.divide-y.divide-gray-200
+            thead.bg-gray-50
+              tr
+                th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 2
+                th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 3
+                th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 4
+                th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 5
+                th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 6
+                th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 7
+                th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 8
+                th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 9-10
+                th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 13-16
+            tbody.bg-white.divide-y.divide-gray-200
+              tr
+                td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = "#{@projection.fedex_pak_box_minimum_charge&.zone_2_percentage_reduction || '0'}%"
+                td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = "#{@projection.fedex_pak_box_minimum_charge&.zone_3_percentage_reduction || '0'}%"
+                td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = "#{@projection.fedex_pak_box_minimum_charge&.zone_4_percentage_reduction || '0'}%"
+                td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = "#{@projection.fedex_pak_box_minimum_charge&.zone_5_percentage_reduction || '0'}%"
+                td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = "#{@projection.fedex_pak_box_minimum_charge&.zone_6_percentage_reduction || '0'}%"
+                td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = "#{@projection.fedex_pak_box_minimum_charge&.zone_7_percentage_reduction || '0'}%"
+                td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = "#{@projection.fedex_pak_box_minimum_charge&.zone_8_percentage_reduction || '0'}%"
+                td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = "#{@projection.fedex_pak_box_minimum_charge&.zone_9_10_percentage_reduction || '0'}%"
+                td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = "#{@projection.fedex_pak_box_minimum_charge&.zone_13_16_percentage_reduction || '0'}%"
 
-          h6.mb-3 Dollar Reduction
-          .table-responsive
-            table.table.table-bordered
-              thead
-                tr
-                  th Zone 2
-                  th Zone 3
-                  th Zone 4
-                  th Zone 5
-                  th Zone 6
-                  th Zone 7
-                  th Zone 8
-                  th Zone 9-10
-                  th Zone 13-16
-              tbody
-                tr
-                  td $#{@projection.fedex_pak_box_minimum_charge&.zone_2_dollar_reduction || "0"}
-                  td $#{@projection.fedex_pak_box_minimum_charge&.zone_3_dollar_reduction || "0"}
-                  td $#{@projection.fedex_pak_box_minimum_charge&.zone_4_dollar_reduction || "0"}
-                  td $#{@projection.fedex_pak_box_minimum_charge&.zone_5_dollar_reduction || "0"}
-                  td $#{@projection.fedex_pak_box_minimum_charge&.zone_6_dollar_reduction || "0"}
-                  td $#{@projection.fedex_pak_box_minimum_charge&.zone_7_dollar_reduction || "0"}
-                  td $#{@projection.fedex_pak_box_minimum_charge&.zone_8_dollar_reduction || "0"}
-                  td $#{@projection.fedex_pak_box_minimum_charge&.zone_9_10_dollar_reduction || "0"}
-                  td $#{@projection.fedex_pak_box_minimum_charge&.zone_13_16_dollar_reduction || "0"} 
+      div.px-4.py-5.sm:px-6
+        h4.text-md.leading-6.font-medium.text-gray-700 Dollar Reduction
+        div.mt-4.overflow-x-auto
+          table.min-w-full.divide-y.divide-gray-200
+            thead.bg-gray-50
+              tr
+                th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 2
+                th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 3
+                th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 4
+                th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 5
+                th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 6
+                th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 7
+                th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 8
+                th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 9-10
+                th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 13-16
+            tbody.bg-white.divide-y.divide-gray-200
+              tr
+                td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = "$#{@projection.fedex_pak_box_minimum_charge&.zone_2_dollar_reduction || '0'}"
+                td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = "$#{@projection.fedex_pak_box_minimum_charge&.zone_3_dollar_reduction || '0'}"
+                td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = "$#{@projection.fedex_pak_box_minimum_charge&.zone_4_dollar_reduction || '0'}"
+                td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = "$#{@projection.fedex_pak_box_minimum_charge&.zone_5_dollar_reduction || '0'}"
+                td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = "$#{@projection.fedex_pak_box_minimum_charge&.zone_6_dollar_reduction || '0'}"
+                td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = "$#{@projection.fedex_pak_box_minimum_charge&.zone_7_dollar_reduction || '0'}"
+                td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = "$#{@projection.fedex_pak_box_minimum_charge&.zone_8_dollar_reduction || '0'}"
+                td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = "$#{@projection.fedex_pak_box_minimum_charge&.zone_9_10_dollar_reduction || '0'}"
+                td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = "$#{@projection.fedex_pak_box_minimum_charge&.zone_13_16_dollar_reduction || '0'}" 

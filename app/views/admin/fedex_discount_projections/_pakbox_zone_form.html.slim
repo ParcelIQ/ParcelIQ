@@ -34,27 +34,27 @@ div.bg-white.shadow.rounded-lg.overflow-hidden
               = form.fields_for :fedex_pak_box_zone_discounts do |pakbox_form|
                 tr.weight-range-row
                   td.px-2.py-1
-                    = pakbox_form.number_field :low_weight, step: 0.01, min: 0, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                    = pakbox_form.number_field :low_weight, step: 0.01, min: 0, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm", style: "min-width: 80px;"
                   td.px-2.py-1
-                    = pakbox_form.number_field :max_weight, step: 0.01, min: 0, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                    = pakbox_form.number_field :max_weight, step: 0.01, min: 0, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm", style: "min-width: 80px;"
                   td.px-2.py-1
-                    = pakbox_form.number_field :zone_2_discount, step: 0.01, min: 0, max: 100, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                    = pakbox_form.number_field :zone_2_discount, step: 0.01, min: 0, max: 100, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm", style: "min-width: 70px;"
                   td.px-2.py-1
-                    = pakbox_form.number_field :zone_3_discount, step: 0.01, min: 0, max: 100, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                    = pakbox_form.number_field :zone_3_discount, step: 0.01, min: 0, max: 100, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm", style: "min-width: 70px;"
                   td.px-2.py-1
-                    = pakbox_form.number_field :zone_4_discount, step: 0.01, min: 0, max: 100, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                    = pakbox_form.number_field :zone_4_discount, step: 0.01, min: 0, max: 100, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm", style: "min-width: 70px;"
                   td.px-2.py-1
-                    = pakbox_form.number_field :zone_5_discount, step: 0.01, min: 0, max: 100, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                    = pakbox_form.number_field :zone_5_discount, step: 0.01, min: 0, max: 100, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm", style: "min-width: 70px;"
                   td.px-2.py-1
-                    = pakbox_form.number_field :zone_6_discount, step: 0.01, min: 0, max: 100, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                    = pakbox_form.number_field :zone_6_discount, step: 0.01, min: 0, max: 100, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm", style: "min-width: 70px;"
                   td.px-2.py-1
-                    = pakbox_form.number_field :zone_7_discount, step: 0.01, min: 0, max: 100, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                    = pakbox_form.number_field :zone_7_discount, step: 0.01, min: 0, max: 100, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm", style: "min-width: 70px;"
                   td.px-2.py-1
-                    = pakbox_form.number_field :zone_8_discount, step: 0.01, min: 0, max: 100, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                    = pakbox_form.number_field :zone_8_discount, step: 0.01, min: 0, max: 100, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm", style: "min-width: 70px;"
                   td.px-2.py-1
-                    = pakbox_form.number_field :zone_9_10_discount, step: 0.01, min: 0, max: 100, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                    = pakbox_form.number_field :zone_9_10_discount, step: 0.01, min: 0, max: 100, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm", style: "min-width: 70px;"
                   td.px-2.py-1
-                    = pakbox_form.number_field :zone_13_16_discount, step: 0.01, min: 0, max: 100, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                    = pakbox_form.number_field :zone_13_16_discount, step: 0.01, min: 0, max: 100, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm", style: "min-width: 70px;"
                   td.px-2.py-1
                     - if pakbox_form.object.persisted?
                       div.flex.items-center
@@ -67,40 +67,111 @@ div.bg-white.shadow.rounded-lg.overflow-hidden
                         | Remove
 
 javascript:
-  document.addEventListener('DOMContentLoaded', function() {
-    // Add new weight range
-    document.getElementById('add-weight-range').addEventListener('click', function() {
-      var lastRow = document.querySelector('#pakbox-discounts-table tbody tr:last-child');
-      if (lastRow) {
-        var newRow = lastRow.cloneNode(true);
-        
-        // Clear input values
-        var inputs = newRow.querySelectorAll('input[type="number"]');
-        inputs.forEach(function(input) {
-          input.value = '';
-        });
-        
-        // Update input names and IDs to have the correct index
-        var time = new Date().getTime();
-        var regexp = new RegExp('fedex_discount_projection\\[fedex_pak_box_zone_discounts_attributes\\]\\[\\d+\\]', 'g');
-        newRow.innerHTML = newRow.innerHTML.replace(regexp, 'fedex_discount_projection[fedex_pak_box_zone_discounts_attributes][' + time + ']');
-        
-        // Add remove button event listener
-        var removeBtn = newRow.querySelector('.remove-weight-range');
-        if (removeBtn) {
-          removeBtn.addEventListener('click', function() {
-            newRow.remove();
-          });
-        }
-        
-        document.querySelector('#pakbox-discounts-table tbody').appendChild(newRow);
+  // Run immediately to ensure initialization happens regardless of load event timing
+  (function() {
+    // Function to initialize form functionality
+    function initPakboxZoneForm() {
+      var addWeightRangeBtn = document.getElementById('add-weight-range');
+      if (addWeightRangeBtn) {
+        // Use direct function to avoid closure issues
+        addWeightRangeBtn.onclick = function(e) {
+          e.preventDefault();
+          addWeightRange();
+          return false;
+        };
       }
-    });
+      
+      // Set up event delegation for remove buttons
+      var table = document.getElementById('pakbox-discounts-table');
+      if (table) {
+        table.onclick = function(event) {
+          var target = event.target;
+          if (target.classList.contains('remove-weight-range') || 
+              (target.closest && target.closest('.remove-weight-range'))) {
+            event.preventDefault();
+            var row = target.closest('tr');
+            if (row) row.remove();
+            return false;
+          }
+        };
+      }
+    }
     
-    // Remove weight range (for dynamically added rows)
-    document.querySelectorAll('.remove-weight-range').forEach(function(btn) {
-      btn.addEventListener('click', function() {
-        this.closest('tr').remove();
-      });
-    });
-  }); 
+    function addWeightRange() {
+      var table = document.getElementById('pakbox-discounts-table');
+      
+      if (!table) {
+        return;
+      }
+      
+      // Try different methods to find the last row
+      var allRows = table.querySelectorAll('tbody tr');
+      
+      var tbody = table.querySelector('tbody');
+      if (!tbody) {
+        tbody = document.createElement('tbody');
+        table.appendChild(tbody);
+      }
+      
+      var lastRow = null;
+      
+      // Method 1: Direct tbody child
+      if (allRows.length > 0) {
+        lastRow = allRows[allRows.length - 1];
+      }
+      
+      // If still no row, try to find a template row or create one
+      if (!lastRow && tbody.querySelector('.weight-range-row')) {
+        lastRow = tbody.querySelector('.weight-range-row');
+      }
+      
+      if (!lastRow) {
+        return;
+      }
+      
+      var newRow = lastRow.cloneNode(true);
+      
+      // Force clearing all input values - more aggressive approach
+      setTimeout(function() {
+        // Get all input elements
+        var inputs = newRow.querySelectorAll('input');
+        
+        // Clear each input value
+        inputs.forEach(function(input) {
+          if (input.type === 'checkbox') {
+            input.checked = false;
+          } else {
+            // Force empty value and remove any default values
+            input.value = '';
+            input.defaultValue = '';
+            input.setAttribute('value', '');
+          }
+        });
+      }, 0);
+      
+      // Update input names and IDs with a unique timestamp
+      var time = new Date().getTime();
+      var regexp = new RegExp('fedex_discount_projection\\[fedex_pak_box_zone_discounts_attributes\\]\\[\\d+\\]', 'g');
+      newRow.innerHTML = newRow.innerHTML.replace(regexp, 'fedex_discount_projection[fedex_pak_box_zone_discounts_attributes][' + time + ']');
+      
+      tbody.appendChild(newRow);
+    }
+    
+    // Initialize on DOM ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initPakboxZoneForm);
+    } else {
+      // DOM already loaded, run immediately
+      initPakboxZoneForm();
+    }
+    
+    // Also initialize on Turbolinks events if available
+    if (typeof Turbolinks !== 'undefined') {
+      document.addEventListener('turbolinks:load', initPakboxZoneForm);
+    }
+    
+    // Re-initialize if Rails UJS AJAX requests are used
+    if (typeof Rails !== 'undefined') {
+      document.addEventListener('ajax:complete', initPakboxZoneForm);
+    }
+  })(); 

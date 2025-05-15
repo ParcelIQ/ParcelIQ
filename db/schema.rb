@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_09_181749) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_15_052357) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -100,6 +100,10 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_09_181749) do
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "shipping_invoice_id"
+    t.bigint "company_id", null: false
+    t.index ["company_id"], name: "index_fedex_discount_projections_on_company_id"
+    t.index ["shipping_invoice_id"], name: "index_fedex_discount_projections_on_shipping_invoice_id"
   end
 
   create_table "fedex_envelope_minimum_charges", force: :cascade do |t|
@@ -125,6 +129,15 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_09_181749) do
     t.decimal "zone_13_16_dollar_reduction", precision: 10, scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal "zone_2_min_charge", precision: 10, scale: 2
+    t.decimal "zone_3_min_charge", precision: 10, scale: 2
+    t.decimal "zone_4_min_charge", precision: 10, scale: 2
+    t.decimal "zone_5_min_charge", precision: 10, scale: 2
+    t.decimal "zone_6_min_charge", precision: 10, scale: 2
+    t.decimal "zone_7_min_charge", precision: 10, scale: 2
+    t.decimal "zone_8_min_charge", precision: 10, scale: 2
+    t.decimal "zone_9_10_min_charge", precision: 10, scale: 2
+    t.decimal "zone_13_16_min_charge", precision: 10, scale: 2
     t.index ["fedex_discount_projection_id"], name: "idx_fedex_env_min_charges_on_proj_id"
   end
 
@@ -555,6 +568,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_09_181749) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "fedex_discount_basics", "fedex_discount_projections"
+  add_foreign_key "fedex_discount_projections", "companies"
+  add_foreign_key "fedex_discount_projections", "shipping_invoices"
   add_foreign_key "fedex_envelope_minimum_charges", "fedex_discount_projections"
   add_foreign_key "fedex_envelope_zone_discounts", "fedex_discount_projections"
   add_foreign_key "fedex_invoice_entries", "shipping_invoices"

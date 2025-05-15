@@ -3,6 +3,7 @@ class Company < ApplicationRecord
   has_many :users, dependent: :restrict_with_error
   has_many :shipping_invoices, dependent: :destroy
   has_many :prior_spends, dependent: :destroy
+  has_many :fedex_discount_projections, dependent: :destroy
 
   validates :name, presence: true
   validates :subdomain, presence: true, uniqueness: true,

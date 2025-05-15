@@ -28,6 +28,11 @@
               div.mt-1.relative
                 = form.text_field :name, class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition duration-200 ease-in-out hover:border-gray-400"
 
+            div.col-span-6.sm:col-span-4
+              = form.label :shipping_invoice_id, "Shipping Invoice (Optional)", class: "block text-sm font-medium text-gray-700"
+              div.mt-1.relative
+                = form.collection_select :shipping_invoice_id, @shipping_invoices, :id, :name, { include_blank: "-- Select Shipping Invoice --" }, class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition duration-200 ease-in-out hover:border-gray-400"
+
             = form.fields_for :fedex_discount_basic do |basic_form|
               div.col-span-6.sm:col-span-2
                 = basic_form.label :dim_divisor, "Dim Divisor", class: "block text-sm font-medium text-gray-700"

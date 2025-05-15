@@ -1,4 +1,6 @@
 class FedexDiscountProjection < ApplicationRecord
+  belongs_to :shipping_invoice, optional: true
+  belongs_to :company
   has_one :fedex_discount_basic, dependent: :destroy
   has_one :fedex_envelope_zone_discount, dependent: :destroy
   has_many :fedex_pak_box_zone_discounts, dependent: :destroy
@@ -6,6 +8,9 @@ class FedexDiscountProjection < ApplicationRecord
   has_one :fedex_pak_box_minimum_charge, dependent: :destroy
 
   validates :name, presence: true
+
+  # Scopes
+  scope :by_company, ->(company_id) { where(company_id: company_id) }
 
   accepts_nested_attributes_for :fedex_discount_basic, allow_destroy: true
   accepts_nested_attributes_for :fedex_envelope_zone_discount, allow_destroy: true
@@ -25,6 +30,7 @@ class FedexDiscountProjection < ApplicationRecord
   def duplicate
     new_projection = self.dup
     new_projection.name = "#{name} (Copy)"
+    new_projection.company = company
     new_projection.save
 
     # Copy basic settings

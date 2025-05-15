@@ -7,7 +7,7 @@ div.mt-8.bg-white.shadow.overflow-hidden.sm:rounded-lg
       | New Projection
 
   div.border-t.border-gray-200
-    - projections = FedexDiscountProjection.all
+    - projections = @shipping_invoice.fedex_discount_projections.where(company: current_company)
     - if projections.any?
       div.overflow-x-auto
         table.min-w-full.divide-y.divide-gray-200

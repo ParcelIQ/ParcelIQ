@@ -3,6 +3,8 @@ class ShippingInvoice < ApplicationRecord
   has_one_attached :csv_file
   has_many :ups_invoice_entries, dependent: :destroy
   has_many :fedex_invoice_entries, dependent: :destroy
+  has_many :fedex_priority_overnight_discount_projections, dependent: :nullify
+  has_many :fedex_international_priority_import_discount_projections, dependent: :nullify
 
   # Constants for carrier options
   CARRIERS = [ "FedEx", "UPS" ].freeze
@@ -24,9 +26,9 @@ class ShippingInvoice < ApplicationRecord
   def process_invoice_data
     case carrier
     when "UPS"
-      ProcessUpsInvoiceJob.perform_now(self.id)
+      ProcessUpsInvoiceJob.perform_later(self.id)
     when "FedEx"
-      ProcessFedexInvoiceJob.perform_now(self.id)
+      ProcessFedexInvoiceJob.perform_later(self.id)
     end
   end
 

@@ -1,0 +1,34 @@
+div.bg-white.shadow.rounded-lg.overflow-hidden
+  div.px-4.py-5.sm:p-6.border-b.border-gray-200
+    div.md:grid.md:grid-cols-3.md:gap-6
+      div.md:col-span-1
+        h3.text-lg.font-medium.leading-6.text-gray-900 Envelope Zone Discounts
+        p.mt-1.text-sm.text-gray-500
+          | Set discount percentages for each zone.
+      
+      div.mt-5.md:mt-0.md:col-span-2
+        = form.fields_for :fedex_envelope_zone_discount do |envelope_form|
+          div.overflow-x-auto
+            table.min-w-full.divide-y.divide-gray-200
+              thead.bg-gray-50
+                tr
+                  th.px-3.py-2.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 2
+                  th.px-3.py-2.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 3
+                  th.px-3.py-2.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 4
+                  th.px-3.py-2.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 5
+                  th.px-3.py-2.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 6
+                  th.px-3.py-2.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 7
+                  th.px-3.py-2.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 8
+                  th.px-3.py-2.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 9-10
+                  th.px-3.py-2.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 13-16
+              tbody.bg-white.divide-y.divide-gray-200
+                tr
+                  td.px-2.py-1 = envelope_form.number_field :zone_2_discount, step: 0.01, min: 0, max: 100, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  td.px-2.py-1 = envelope_form.number_field :zone_3_discount, step: 0.01, min: 0, max: 100, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  td.px-2.py-1 = envelope_form.number_field :zone_4_discount, step: 0.01, min: 0, max: 100, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  td.px-2.py-1 = envelope_form.number_field :zone_5_discount, step: 0.01, min: 0, max: 100, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  td.px-2.py-1 = envelope_form.number_field :zone_6_discount, step: 0.01, min: 0, max: 100, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  td.px-2.py-1 = envelope_form.number_field :zone_7_discount, step: 0.01, min: 0, max: 100, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  td.px-2.py-1 = envelope_form.number_field :zone_8_discount, step: 0.01, min: 0, max: 100, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  td.px-2.py-1 = envelope_form.number_field :zone_9_10_discount, step: 0.01, min: 0, max: 100, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  td.px-2.py-1 = envelope_form.number_field :zone_13_16_discount, step: 0.01, min: 0, max: 100, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" 

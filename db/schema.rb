@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_09_181749) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_15_084927) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -84,6 +84,248 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_09_181749) do
     t.index ["active"], name: "index_companies_on_active"
     t.index ["domain"], name: "index_companies_on_domain", unique: true
     t.index ["subdomain"], name: "index_companies_on_subdomain", unique: true
+  end
+
+  create_table "fedex_box_minimum_charge_internationals", force: :cascade do |t|
+    t.decimal "box_min_charge"
+    t.decimal "zone_a_percentage_reduction"
+    t.decimal "zone_b_percentage_reduction"
+    t.decimal "zone_c_percentage_reduction"
+    t.decimal "zone_d_percentage_reduction"
+    t.decimal "zone_e_percentage_reduction"
+    t.decimal "zone_f_percentage_reduction"
+    t.decimal "zone_g_percentage_reduction"
+    t.decimal "zone_h_percentage_reduction"
+    t.decimal "zone_i_percentage_reduction"
+    t.decimal "zone_j_percentage_reduction"
+    t.decimal "zone_k_percentage_reduction"
+    t.decimal "zone_l_percentage_reduction"
+    t.decimal "zone_m_percentage_reduction"
+    t.decimal "zone_n_percentage_reduction"
+    t.decimal "zone_o_percentage_reduction"
+    t.decimal "zone_p_percentage_reduction"
+    t.decimal "zone_a_dollar_reduction"
+    t.decimal "zone_b_dollar_reduction"
+    t.decimal "zone_c_dollar_reduction"
+    t.decimal "zone_d_dollar_reduction"
+    t.decimal "zone_e_dollar_reduction"
+    t.decimal "zone_f_dollar_reduction"
+    t.decimal "zone_g_dollar_reduction"
+    t.decimal "zone_h_dollar_reduction"
+    t.decimal "zone_i_dollar_reduction"
+    t.decimal "zone_j_dollar_reduction"
+    t.decimal "zone_k_dollar_reduction"
+    t.decimal "zone_l_dollar_reduction"
+    t.decimal "zone_m_dollar_reduction"
+    t.decimal "zone_n_dollar_reduction"
+    t.decimal "zone_o_dollar_reduction"
+    t.decimal "zone_p_dollar_reduction"
+    t.bigint "fedex_international_priority_import_discount_projection_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.decimal "zone_a_min_charge"
+    t.decimal "zone_b_min_charge"
+    t.decimal "zone_c_min_charge"
+    t.decimal "zone_d_min_charge"
+    t.decimal "zone_e_min_charge"
+    t.decimal "zone_f_min_charge"
+    t.decimal "zone_g_min_charge"
+    t.decimal "zone_h_min_charge"
+    t.decimal "zone_i_min_charge"
+    t.decimal "zone_j_min_charge"
+    t.decimal "zone_k_min_charge"
+    t.decimal "zone_l_min_charge"
+    t.decimal "zone_m_min_charge"
+    t.decimal "zone_n_min_charge"
+    t.decimal "zone_o_min_charge"
+    t.decimal "zone_p_min_charge"
+    t.index ["fedex_international_priority_import_discount_projection_id"], name: "idx_on_fedex_international_priority_import_discount_58e3435384"
+  end
+
+  create_table "fedex_box_zone_discount_internationals", force: :cascade do |t|
+    t.decimal "low_weight"
+    t.decimal "max_weight"
+    t.decimal "zone_a_discount"
+    t.decimal "zone_b_discount"
+    t.decimal "zone_c_discount"
+    t.decimal "zone_d_discount"
+    t.decimal "zone_e_discount"
+    t.decimal "zone_f_discount"
+    t.decimal "zone_g_discount"
+    t.decimal "zone_h_discount"
+    t.decimal "zone_i_discount"
+    t.decimal "zone_j_discount"
+    t.decimal "zone_k_discount"
+    t.decimal "zone_l_discount"
+    t.decimal "zone_m_discount"
+    t.decimal "zone_n_discount"
+    t.decimal "zone_o_discount"
+    t.decimal "zone_p_discount"
+    t.bigint "fedex_international_priority_import_discount_projection_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["fedex_international_priority_import_discount_projection_id"], name: "idx_on_fedex_international_priority_import_discount_59fef15f2f"
+  end
+
+  create_table "fedex_discount_basic_internationals", force: :cascade do |t|
+    t.integer "dim_divisor"
+    t.decimal "envelope_earned_discount"
+    t.decimal "pak_earned_discount"
+    t.decimal "box_earned_discount"
+    t.bigint "fedex_international_priority_import_discount_projection_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["fedex_international_priority_import_discount_projection_id"], name: "idx_on_fedex_international_priority_import_discount_e967d7fa6b"
+  end
+
+  create_table "fedex_discount_basics", force: :cascade do |t|
+    t.bigint "fedex_priority_overnight_discount_projection_id", null: false
+    t.decimal "dim_divisor", precision: 10, scale: 2
+    t.decimal "envelope_earned_discount", precision: 5, scale: 2
+    t.decimal "pakbox_earned_discount", precision: 5, scale: 2
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["fedex_priority_overnight_discount_projection_id"], name: "idx_on_fedex_priority_overnight_discount_projection_77d41a8a7e"
+  end
+
+  create_table "fedex_envelope_minimum_charge_internationals", force: :cascade do |t|
+    t.decimal "envelope_min_charge"
+    t.decimal "zone_a_min_charge"
+    t.decimal "zone_b_min_charge"
+    t.decimal "zone_c_min_charge"
+    t.decimal "zone_d_min_charge"
+    t.decimal "zone_e_min_charge"
+    t.decimal "zone_f_min_charge"
+    t.decimal "zone_g_min_charge"
+    t.decimal "zone_h_min_charge"
+    t.decimal "zone_i_min_charge"
+    t.decimal "zone_j_min_charge"
+    t.decimal "zone_k_min_charge"
+    t.decimal "zone_l_min_charge"
+    t.decimal "zone_m_min_charge"
+    t.decimal "zone_n_min_charge"
+    t.decimal "zone_o_min_charge"
+    t.decimal "zone_p_min_charge"
+    t.decimal "zone_a_percentage_reduction"
+    t.decimal "zone_b_percentage_reduction"
+    t.decimal "zone_c_percentage_reduction"
+    t.decimal "zone_d_percentage_reduction"
+    t.decimal "zone_e_percentage_reduction"
+    t.decimal "zone_f_percentage_reduction"
+    t.decimal "zone_g_percentage_reduction"
+    t.decimal "zone_h_percentage_reduction"
+    t.decimal "zone_i_percentage_reduction"
+    t.decimal "zone_j_percentage_reduction"
+    t.decimal "zone_k_percentage_reduction"
+    t.decimal "zone_l_percentage_reduction"
+    t.decimal "zone_m_percentage_reduction"
+    t.decimal "zone_n_percentage_reduction"
+    t.decimal "zone_o_percentage_reduction"
+    t.decimal "zone_p_percentage_reduction"
+    t.decimal "zone_a_dollar_reduction"
+    t.decimal "zone_b_dollar_reduction"
+    t.decimal "zone_c_dollar_reduction"
+    t.decimal "zone_d_dollar_reduction"
+    t.decimal "zone_e_dollar_reduction"
+    t.decimal "zone_f_dollar_reduction"
+    t.decimal "zone_g_dollar_reduction"
+    t.decimal "zone_h_dollar_reduction"
+    t.decimal "zone_i_dollar_reduction"
+    t.decimal "zone_j_dollar_reduction"
+    t.decimal "zone_k_dollar_reduction"
+    t.decimal "zone_l_dollar_reduction"
+    t.decimal "zone_m_dollar_reduction"
+    t.decimal "zone_n_dollar_reduction"
+    t.decimal "zone_o_dollar_reduction"
+    t.decimal "zone_p_dollar_reduction"
+    t.bigint "fedex_international_priority_import_discount_projection_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["fedex_international_priority_import_discount_projection_id"], name: "idx_on_fedex_international_priority_import_discount_201d7bcc9c"
+  end
+
+  create_table "fedex_envelope_minimum_charges", force: :cascade do |t|
+    t.bigint "fedex_priority_overnight_discount_projection_id", null: false
+    t.decimal "envelope_min_charge", precision: 10, scale: 2, default: "34.71"
+    t.decimal "zone_2_percentage_reduction", precision: 5, scale: 2
+    t.decimal "zone_3_percentage_reduction", precision: 5, scale: 2
+    t.decimal "zone_4_percentage_reduction", precision: 5, scale: 2
+    t.decimal "zone_5_percentage_reduction", precision: 5, scale: 2
+    t.decimal "zone_6_percentage_reduction", precision: 5, scale: 2
+    t.decimal "zone_7_percentage_reduction", precision: 5, scale: 2
+    t.decimal "zone_8_percentage_reduction", precision: 5, scale: 2
+    t.decimal "zone_9_10_percentage_reduction", precision: 5, scale: 2
+    t.decimal "zone_13_16_percentage_reduction", precision: 5, scale: 2
+    t.decimal "zone_2_dollar_reduction", precision: 10, scale: 2
+    t.decimal "zone_3_dollar_reduction", precision: 10, scale: 2
+    t.decimal "zone_4_dollar_reduction", precision: 10, scale: 2
+    t.decimal "zone_5_dollar_reduction", precision: 10, scale: 2
+    t.decimal "zone_6_dollar_reduction", precision: 10, scale: 2
+    t.decimal "zone_7_dollar_reduction", precision: 10, scale: 2
+    t.decimal "zone_8_dollar_reduction", precision: 10, scale: 2
+    t.decimal "zone_9_10_dollar_reduction", precision: 10, scale: 2
+    t.decimal "zone_13_16_dollar_reduction", precision: 10, scale: 2
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.decimal "zone_2_min_charge", precision: 10, scale: 2
+    t.decimal "zone_3_min_charge", precision: 10, scale: 2
+    t.decimal "zone_4_min_charge", precision: 10, scale: 2
+    t.decimal "zone_5_min_charge", precision: 10, scale: 2
+    t.decimal "zone_6_min_charge", precision: 10, scale: 2
+    t.decimal "zone_7_min_charge", precision: 10, scale: 2
+    t.decimal "zone_8_min_charge", precision: 10, scale: 2
+    t.decimal "zone_9_10_min_charge", precision: 10, scale: 2
+    t.decimal "zone_13_16_min_charge", precision: 10, scale: 2
+    t.index ["fedex_priority_overnight_discount_projection_id"], name: "idx_fedex_env_min_charges_on_proj_id"
+  end
+
+  create_table "fedex_envelope_zone_discount_internationals", force: :cascade do |t|
+    t.decimal "zone_a_discount"
+    t.decimal "zone_b_discount"
+    t.decimal "zone_c_discount"
+    t.decimal "zone_d_discount"
+    t.decimal "zone_e_discount"
+    t.decimal "zone_f_discount"
+    t.decimal "zone_g_discount"
+    t.decimal "zone_h_discount"
+    t.decimal "zone_i_discount"
+    t.decimal "zone_j_discount"
+    t.decimal "zone_k_discount"
+    t.decimal "zone_l_discount"
+    t.decimal "zone_m_discount"
+    t.decimal "zone_n_discount"
+    t.decimal "zone_o_discount"
+    t.decimal "zone_p_discount"
+    t.bigint "fedex_international_priority_import_discount_projection_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["fedex_international_priority_import_discount_projection_id"], name: "idx_on_fedex_international_priority_import_discount_af45134bcd"
+  end
+
+  create_table "fedex_envelope_zone_discounts", force: :cascade do |t|
+    t.bigint "fedex_priority_overnight_discount_projection_id", null: false
+    t.decimal "zone_2_discount", precision: 5, scale: 2
+    t.decimal "zone_3_discount", precision: 5, scale: 2
+    t.decimal "zone_4_discount", precision: 5, scale: 2
+    t.decimal "zone_5_discount", precision: 5, scale: 2
+    t.decimal "zone_6_discount", precision: 5, scale: 2
+    t.decimal "zone_7_discount", precision: 5, scale: 2
+    t.decimal "zone_8_discount", precision: 5, scale: 2
+    t.decimal "zone_9_10_discount", precision: 5, scale: 2
+    t.decimal "zone_13_16_discount", precision: 5, scale: 2
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["fedex_priority_overnight_discount_projection_id"], name: "idx_fedex_env_zone_disc_on_proj_id"
+  end
+
+  create_table "fedex_international_priority_import_discount_projections", force: :cascade do |t|
+    t.string "name"
+    t.bigint "company_id", null: false
+    t.bigint "shipping_invoice_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "idx_on_company_id_4f3940c6ce"
+    t.index ["shipping_invoice_id"], name: "idx_on_shipping_invoice_id_ce5a31a0aa"
   end
 
   create_table "fedex_invoice_entries", force: :cascade do |t|
@@ -195,6 +437,147 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_09_181749) do
     t.index ["invoice_date"], name: "index_fedex_invoice_entries_on_invoice_date"
     t.index ["invoice_number"], name: "index_fedex_invoice_entries_on_invoice_number"
     t.index ["shipping_invoice_id"], name: "index_fedex_invoice_entries_on_shipping_invoice_id"
+  end
+
+  create_table "fedex_pak_box_minimum_charges", force: :cascade do |t|
+    t.bigint "fedex_priority_overnight_discount_projection_id", null: false
+    t.decimal "zone_2_percentage_reduction", precision: 5, scale: 2
+    t.decimal "zone_3_percentage_reduction", precision: 5, scale: 2
+    t.decimal "zone_4_percentage_reduction", precision: 5, scale: 2
+    t.decimal "zone_5_percentage_reduction", precision: 5, scale: 2
+    t.decimal "zone_6_percentage_reduction", precision: 5, scale: 2
+    t.decimal "zone_7_percentage_reduction", precision: 5, scale: 2
+    t.decimal "zone_8_percentage_reduction", precision: 5, scale: 2
+    t.decimal "zone_9_10_percentage_reduction", precision: 5, scale: 2
+    t.decimal "zone_13_16_percentage_reduction", precision: 5, scale: 2
+    t.decimal "zone_2_dollar_reduction", precision: 10, scale: 2
+    t.decimal "zone_3_dollar_reduction", precision: 10, scale: 2
+    t.decimal "zone_4_dollar_reduction", precision: 10, scale: 2
+    t.decimal "zone_5_dollar_reduction", precision: 10, scale: 2
+    t.decimal "zone_6_dollar_reduction", precision: 10, scale: 2
+    t.decimal "zone_7_dollar_reduction", precision: 10, scale: 2
+    t.decimal "zone_8_dollar_reduction", precision: 10, scale: 2
+    t.decimal "zone_9_10_dollar_reduction", precision: 10, scale: 2
+    t.decimal "zone_13_16_dollar_reduction", precision: 10, scale: 2
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.decimal "zone_2_min_charge", precision: 10, scale: 2
+    t.decimal "zone_3_min_charge", precision: 10, scale: 2
+    t.decimal "zone_4_min_charge", precision: 10, scale: 2
+    t.decimal "zone_5_min_charge", precision: 10, scale: 2
+    t.decimal "zone_6_min_charge", precision: 10, scale: 2
+    t.decimal "zone_7_min_charge", precision: 10, scale: 2
+    t.decimal "zone_8_min_charge", precision: 10, scale: 2
+    t.decimal "zone_9_10_min_charge", precision: 10, scale: 2
+    t.decimal "zone_13_16_min_charge", precision: 10, scale: 2
+    t.index ["fedex_priority_overnight_discount_projection_id"], name: "idx_fedex_pak_box_min_charges_on_proj_id"
+  end
+
+  create_table "fedex_pak_box_zone_discounts", force: :cascade do |t|
+    t.bigint "fedex_priority_overnight_discount_projection_id", null: false
+    t.decimal "low_weight", precision: 10, scale: 2
+    t.decimal "max_weight", precision: 10, scale: 2
+    t.decimal "zone_2_discount", precision: 5, scale: 2
+    t.decimal "zone_3_discount", precision: 5, scale: 2
+    t.decimal "zone_4_discount", precision: 5, scale: 2
+    t.decimal "zone_5_discount", precision: 5, scale: 2
+    t.decimal "zone_6_discount", precision: 5, scale: 2
+    t.decimal "zone_7_discount", precision: 5, scale: 2
+    t.decimal "zone_8_discount", precision: 5, scale: 2
+    t.decimal "zone_9_10_discount", precision: 5, scale: 2
+    t.decimal "zone_13_16_discount", precision: 5, scale: 2
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["fedex_priority_overnight_discount_projection_id"], name: "idx_fedex_pak_box_zone_disc_on_proj_id"
+  end
+
+  create_table "fedex_pak_minimum_charge_internationals", force: :cascade do |t|
+    t.decimal "pak_min_charge"
+    t.decimal "zone_a_percentage_reduction"
+    t.decimal "zone_b_percentage_reduction"
+    t.decimal "zone_c_percentage_reduction"
+    t.decimal "zone_d_percentage_reduction"
+    t.decimal "zone_e_percentage_reduction"
+    t.decimal "zone_f_percentage_reduction"
+    t.decimal "zone_g_percentage_reduction"
+    t.decimal "zone_h_percentage_reduction"
+    t.decimal "zone_i_percentage_reduction"
+    t.decimal "zone_j_percentage_reduction"
+    t.decimal "zone_k_percentage_reduction"
+    t.decimal "zone_l_percentage_reduction"
+    t.decimal "zone_m_percentage_reduction"
+    t.decimal "zone_n_percentage_reduction"
+    t.decimal "zone_o_percentage_reduction"
+    t.decimal "zone_p_percentage_reduction"
+    t.decimal "zone_a_dollar_reduction"
+    t.decimal "zone_b_dollar_reduction"
+    t.decimal "zone_c_dollar_reduction"
+    t.decimal "zone_d_dollar_reduction"
+    t.decimal "zone_e_dollar_reduction"
+    t.decimal "zone_f_dollar_reduction"
+    t.decimal "zone_g_dollar_reduction"
+    t.decimal "zone_h_dollar_reduction"
+    t.decimal "zone_i_dollar_reduction"
+    t.decimal "zone_j_dollar_reduction"
+    t.decimal "zone_k_dollar_reduction"
+    t.decimal "zone_l_dollar_reduction"
+    t.decimal "zone_m_dollar_reduction"
+    t.decimal "zone_n_dollar_reduction"
+    t.decimal "zone_o_dollar_reduction"
+    t.decimal "zone_p_dollar_reduction"
+    t.bigint "fedex_international_priority_import_discount_projection_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.decimal "zone_a_min_charge"
+    t.decimal "zone_b_min_charge"
+    t.decimal "zone_c_min_charge"
+    t.decimal "zone_d_min_charge"
+    t.decimal "zone_e_min_charge"
+    t.decimal "zone_f_min_charge"
+    t.decimal "zone_g_min_charge"
+    t.decimal "zone_h_min_charge"
+    t.decimal "zone_i_min_charge"
+    t.decimal "zone_j_min_charge"
+    t.decimal "zone_k_min_charge"
+    t.decimal "zone_l_min_charge"
+    t.decimal "zone_m_min_charge"
+    t.decimal "zone_n_min_charge"
+    t.decimal "zone_o_min_charge"
+    t.decimal "zone_p_min_charge"
+    t.index ["fedex_international_priority_import_discount_projection_id"], name: "idx_on_fedex_international_priority_import_discount_5266e68c5c"
+  end
+
+  create_table "fedex_pak_zone_discount_internationals", force: :cascade do |t|
+    t.decimal "zone_a_discount"
+    t.decimal "zone_b_discount"
+    t.decimal "zone_c_discount"
+    t.decimal "zone_d_discount"
+    t.decimal "zone_e_discount"
+    t.decimal "zone_f_discount"
+    t.decimal "zone_g_discount"
+    t.decimal "zone_h_discount"
+    t.decimal "zone_i_discount"
+    t.decimal "zone_j_discount"
+    t.decimal "zone_k_discount"
+    t.decimal "zone_l_discount"
+    t.decimal "zone_m_discount"
+    t.decimal "zone_n_discount"
+    t.decimal "zone_o_discount"
+    t.decimal "zone_p_discount"
+    t.bigint "fedex_international_priority_import_discount_projection_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["fedex_international_priority_import_discount_projection_id"], name: "idx_on_fedex_international_priority_import_discount_21d67aa9af"
+  end
+
+  create_table "fedex_priority_overnight_discount_projections", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "shipping_invoice_id"
+    t.bigint "company_id", null: false
+    t.index ["company_id"], name: "idx_on_company_id_9326b5eccb"
+    t.index ["shipping_invoice_id"], name: "idx_on_shipping_invoice_id_e1b77ef3b4"
   end
 
   create_table "prior_spends", force: :cascade do |t|
@@ -433,7 +816,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_09_181749) do
     t.datetime "last_sign_in_at"
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
-    t.string "role", default: "admin"
+    t.string "role", default: "customer"
     t.string "invitation_token"
     t.datetime "invitation_created_at"
     t.datetime "invitation_sent_at"
@@ -452,7 +835,23 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_09_181749) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "fedex_box_minimum_charge_internationals", "fedex_international_priority_import_discount_projections"
+  add_foreign_key "fedex_box_zone_discount_internationals", "fedex_international_priority_import_discount_projections"
+  add_foreign_key "fedex_discount_basic_internationals", "fedex_international_priority_import_discount_projections"
+  add_foreign_key "fedex_discount_basics", "fedex_priority_overnight_discount_projections"
+  add_foreign_key "fedex_envelope_minimum_charge_internationals", "fedex_international_priority_import_discount_projections"
+  add_foreign_key "fedex_envelope_minimum_charges", "fedex_priority_overnight_discount_projections"
+  add_foreign_key "fedex_envelope_zone_discount_internationals", "fedex_international_priority_import_discount_projections"
+  add_foreign_key "fedex_envelope_zone_discounts", "fedex_priority_overnight_discount_projections"
+  add_foreign_key "fedex_international_priority_import_discount_projections", "companies"
+  add_foreign_key "fedex_international_priority_import_discount_projections", "shipping_invoices"
   add_foreign_key "fedex_invoice_entries", "shipping_invoices"
+  add_foreign_key "fedex_pak_box_minimum_charges", "fedex_priority_overnight_discount_projections"
+  add_foreign_key "fedex_pak_box_zone_discounts", "fedex_priority_overnight_discount_projections"
+  add_foreign_key "fedex_pak_minimum_charge_internationals", "fedex_international_priority_import_discount_projections"
+  add_foreign_key "fedex_pak_zone_discount_internationals", "fedex_international_priority_import_discount_projections"
+  add_foreign_key "fedex_priority_overnight_discount_projections", "companies"
+  add_foreign_key "fedex_priority_overnight_discount_projections", "shipping_invoices"
   add_foreign_key "prior_spends", "companies"
   add_foreign_key "shipping_invoices", "companies"
   add_foreign_key "solid_queue_blocked_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade

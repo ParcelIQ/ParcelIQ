@@ -28,83 +28,83 @@ h3.text-lg.font-medium.leading-6.text-gray-900.mb-4 UPS Invoice Entries
       = form_with url: reprocess_admin_shipping_invoice_path(@shipping_invoice), method: :post do |f|
         = f.submit "Process Now", class: "inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
 
-div.mb-6
-  = form_with url: admin_shipping_invoice_path(@shipping_invoice), method: :get, class: "relative" do |f|
-    div.absolute.inset-y-0.left-0.flex.items-center.pl-3.pointer-events-none
-      svg.w-5.h-5.text-gray-400[xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"]
-        path[fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"]
-    = f.text_field :query, placeholder: "Search by tracking #, invoice #, or recipient...", value: params[:query], class: "block w-full pl-10 pr-12 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-    - if params[:query].present?
-      = link_to "×", admin_shipping_invoice_path(@shipping_invoice), class: "absolute inset-y-0 right-0 flex items-center pr-4 mr-3 text-gray-400 hover:text-gray-600"
-
 - if @ups_invoice_entries.present?
-  div.overflow-x-auto
-    table.min-w-full.divide-y.divide-gray-200
-      thead.bg-gray-50
-        tr
-          th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider scope="col"
-            = link_to admin_shipping_invoice_path(@shipping_invoice, sort: 'invoice_date', direction: params[:sort] == 'invoice_date' && params[:direction] == 'asc' ? 'desc' : 'asc', query: params[:query]), class: "group flex items-center" do
-              span Invoice Date
-              - if params[:sort] == 'invoice_date'
-                - if params[:direction] == 'asc'
-                  svg.ml-1.h-4.w-4.text-gray-400.group-hover:text-gray-500[xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"]
-                    path[fill-rule="evenodd" d="M14.707 10.293a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 111.414-1.414L9 12.586V5a1 1 0 012 0v7.586l2.293-2.293a1 1 0 011.414 0z" clip-rule="evenodd"]
-                - else
-                  svg.ml-1.h-4.w-4.text-gray-400.group-hover:text-gray-500[xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"]
-                    path[fill-rule="evenodd" d="M5.293 9.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 7.414V15a1 1 0 01-2 0V7.414L6.707 9.707a1 1 0 01-1.414 0z" clip-rule="evenodd"]
-                    
-          th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider scope="col"
-            = link_to admin_shipping_invoice_path(@shipping_invoice, sort: 'invoice_number', direction: params[:sort] == 'invoice_number' && params[:direction] == 'asc' ? 'desc' : 'asc', query: params[:query]), class: "group flex items-center" do
-              span Invoice #
-              - if params[:sort] == 'invoice_number'
-                - if params[:direction] == 'asc'
-                  svg.ml-1.h-4.w-4.text-gray-400.group-hover:text-gray-500[xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"]
-                    path[fill-rule="evenodd" d="M14.707 10.293a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 111.414-1.414L9 12.586V5a1 1 0 012 0v7.586l2.293-2.293a1 1 0 011.414 0z" clip-rule="evenodd"]
-                - else
-                  svg.ml-1.h-4.w-4.text-gray-400.group-hover:text-gray-500[xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"]
-                    path[fill-rule="evenodd" d="M5.293 9.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 7.414V15a1 1 0 01-2 0V7.414L6.707 9.707a1 1 0 01-1.414 0z" clip-rule="evenodd"]
-                    
-          th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider scope="col"
-            = link_to admin_shipping_invoice_path(@shipping_invoice, sort: 'tracking_number', direction: params[:sort] == 'tracking_number' && params[:direction] == 'asc' ? 'desc' : 'asc', query: params[:query]), class: "group flex items-center" do
-              span Tracking #
-              - if params[:sort] == 'tracking_number'
-                - if params[:direction] == 'asc'
-                  svg.ml-1.h-4.w-4.text-gray-400.group-hover:text-gray-500[xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"]
-                    path[fill-rule="evenodd" d="M14.707 10.293a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 111.414-1.414L9 12.586V5a1 1 0 012 0v7.586l2.293-2.293a1 1 0 011.414 0z" clip-rule="evenodd"]
-                - else
-                  svg.ml-1.h-4.w-4.text-gray-400.group-hover:text-gray-500[xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"]
-                    path[fill-rule="evenodd" d="M5.293 9.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 7.414V15a1 1 0 01-2 0V7.414L6.707 9.707a1 1 0 01-1.414 0z" clip-rule="evenodd"]
-                    
-          th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider scope="col"
-            = link_to admin_shipping_invoice_path(@shipping_invoice, sort: 'net_amount', direction: params[:sort] == 'net_amount' && params[:direction] == 'asc' ? 'desc' : 'asc', query: params[:query]), class: "group flex items-center" do
-              span Amount
-              - if params[:sort] == 'net_amount'
-                - if params[:direction] == 'asc'
-                  svg.ml-1.h-4.w-4.text-gray-400.group-hover:text-gray-500[xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"]
-                    path[fill-rule="evenodd" d="M14.707 10.293a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 111.414-1.414L9 12.586V5a1 1 0 012 0v7.586l2.293-2.293a1 1 0 011.414 0z" clip-rule="evenodd"]
-                - else
-                  svg.ml-1.h-4.w-4.text-gray-400.group-hover:text-gray-500[xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"]
-                    path[fill-rule="evenodd" d="M5.293 9.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 7.414V15a1 1 0 01-2 0V7.414L6.707 9.707a1 1 0 01-1.414 0z" clip-rule="evenodd"]
-                    
-          th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider scope="col" Receiver
-          th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider scope="col" Charge Description
-          th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider scope="col" Weight
-      tbody.bg-white.divide-y.divide-gray-200
-        - @ups_invoice_entries.each do |entry|
+  div.mb-6
+    = form_with url: admin_shipping_invoice_path(@shipping_invoice), method: :get, class: "relative" do |f|
+      div.absolute.inset-y-0.left-0.flex.items-center.pl-3.pointer-events-none
+        svg.w-5.h-5.text-gray-400[xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"]
+          path[fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"]
+      = f.text_field :query, placeholder: "Search by tracking #, invoice #, or recipient...", value: params[:query], class: "block w-full pl-10 pr-12 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+      - if params[:query].present?
+        = link_to "×", admin_shipping_invoice_path(@shipping_invoice), class: "absolute inset-y-0 right-0 flex items-center pr-4 mr-3 text-gray-400 hover:text-gray-600"
+
+    div.overflow-x-auto
+      table.min-w-full.divide-y.divide-gray-200
+        thead.bg-gray-50
           tr
-            td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = entry.invoice_date
-            td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = entry.invoice_number
-            td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = entry.tracking_number
-            td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500
-              = number_to_currency(entry.net_amount, unit: entry.transaction_currency_code)
-            td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500
-              = entry.receiver_name
-              div.text-xs.text-gray-400 #{entry.receiver_city}, #{entry.receiver_state}
-            td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = entry.charge_description
-            td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500
-              | #{entry.billed_weight} #{entry.billed_weight_unit}
+            th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider scope="col"
+              = link_to admin_shipping_invoice_path(@shipping_invoice, sort: 'invoice_date', direction: params[:sort] == 'invoice_date' && params[:direction] == 'asc' ? 'desc' : 'asc', query: params[:query]), class: "group flex items-center" do
+                span Invoice Date
+                - if params[:sort] == 'invoice_date'
+                  - if params[:direction] == 'asc'
+                    svg.ml-1.h-4.w-4.text-gray-400.group-hover:text-gray-500[xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"]
+                      path[fill-rule="evenodd" d="M14.707 10.293a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 111.414-1.414L9 12.586V5a1 1 0 012 0v7.586l2.293-2.293a1 1 0 011.414 0z" clip-rule="evenodd"]
+                  - else
+                    svg.ml-1.h-4.w-4.text-gray-400.group-hover:text-gray-500[xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"]
+                      path[fill-rule="evenodd" d="M5.293 9.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 7.414V15a1 1 0 01-2 0V7.414L6.707 9.707a1 1 0 01-1.414 0z" clip-rule="evenodd"]
+                      
+            th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider scope="col"
+              = link_to admin_shipping_invoice_path(@shipping_invoice, sort: 'invoice_number', direction: params[:sort] == 'invoice_number' && params[:direction] == 'asc' ? 'desc' : 'asc', query: params[:query]), class: "group flex items-center" do
+                span Invoice #
+                - if params[:sort] == 'invoice_number'
+                  - if params[:direction] == 'asc'
+                    svg.ml-1.h-4.w-4.text-gray-400.group-hover:text-gray-500[xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"]
+                      path[fill-rule="evenodd" d="M14.707 10.293a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 111.414-1.414L9 12.586V5a1 1 0 012 0v7.586l2.293-2.293a1 1 0 011.414 0z" clip-rule="evenodd"]
+                  - else
+                    svg.ml-1.h-4.w-4.text-gray-400.group-hover:text-gray-500[xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"]
+                      path[fill-rule="evenodd" d="M5.293 9.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 7.414V15a1 1 0 01-2 0V7.414L6.707 9.707a1 1 0 01-1.414 0z" clip-rule="evenodd"]
+                      
+            th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider scope="col"
+              = link_to admin_shipping_invoice_path(@shipping_invoice, sort: 'tracking_number', direction: params[:sort] == 'tracking_number' && params[:direction] == 'asc' ? 'desc' : 'asc', query: params[:query]), class: "group flex items-center" do
+                span Tracking #
+                - if params[:sort] == 'tracking_number'
+                  - if params[:direction] == 'asc'
+                    svg.ml-1.h-4.w-4.text-gray-400.group-hover:text-gray-500[xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"]
+                      path[fill-rule="evenodd" d="M14.707 10.293a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 111.414-1.414L9 12.586V5a1 1 0 012 0v7.586l2.293-2.293a1 1 0 011.414 0z" clip-rule="evenodd"]
+                  - else
+                    svg.ml-1.h-4.w-4.text-gray-400.group-hover:text-gray-500[xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"]
+                      path[fill-rule="evenodd" d="M5.293 9.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 7.414V15a1 1 0 01-2 0V7.414L6.707 9.707a1 1 0 01-1.414 0z" clip-rule="evenodd"]
+                      
+            th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider scope="col"
+              = link_to admin_shipping_invoice_path(@shipping_invoice, sort: 'net_amount', direction: params[:sort] == 'net_amount' && params[:direction] == 'asc' ? 'desc' : 'asc', query: params[:query]), class: "group flex items-center" do
+                span Amount
+                - if params[:sort] == 'net_amount'
+                  - if params[:direction] == 'asc'
+                    svg.ml-1.h-4.w-4.text-gray-400.group-hover:text-gray-500[xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"]
+                      path[fill-rule="evenodd" d="M14.707 10.293a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 111.414-1.414L9 12.586V5a1 1 0 012 0v7.586l2.293-2.293a1 1 0 011.414 0z" clip-rule="evenodd"]
+                  - else
+                    svg.ml-1.h-4.w-4.text-gray-400.group-hover:text-gray-500[xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"]
+                      path[fill-rule="evenodd" d="M5.293 9.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 7.414V15a1 1 0 01-2 0V7.414L6.707 9.707a1 1 0 01-1.414 0z" clip-rule="evenodd"]
+                      
+            th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider scope="col" Receiver
+            th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider scope="col" Charge Description
+            th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider scope="col" Weight
+        tbody.bg-white.divide-y.divide-gray-200
+          - @ups_invoice_entries.each do |entry|
+            tr
+              td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = entry.invoice_date
+              td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = entry.invoice_number
+              td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = entry.tracking_number
+              td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500
+                = number_to_currency(entry.net_amount, unit: entry.transaction_currency_code)
+              td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500
+                = entry.receiver_name
+                div.text-xs.text-gray-400 #{entry.receiver_city}, #{entry.receiver_state}
+              td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = entry.charge_description
+              td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500
+                | #{entry.billed_weight} #{entry.billed_weight_unit}
   
-  div.mt-4
-    = paginate @ups_invoice_entries
+      div.mt-4
+        = paginate @ups_invoice_entries
 - else
   p.text-gray-500 No UPS invoice entries found yet. 

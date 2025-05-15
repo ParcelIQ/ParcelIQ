@@ -1,0 +1,90 @@
+div.bg-white.shadow.rounded-lg.overflow-hidden
+  div.px-4.py-5.sm:p-6.border-b.border-gray-200
+    div.md:grid.md:grid-cols-3.md:gap-6
+      div.md:col-span-1
+        h3.text-lg.font-medium.leading-6.text-gray-900 Envelope Zone Discounts
+        p.mt-1.text-sm.text-gray-500
+          | Set discount percentages for each international zone.
+      
+      div.mt-5.md:mt-0.md:col-span-2
+        = form.fields_for :fedex_envelope_zone_discount_international do |zone_form|
+          div.grid.grid-cols-6.gap-6
+            div.col-span-6.sm:col-span-3
+              = zone_form.label :zone_a_discount, "Zone A (%)", class: "block text-sm font-medium text-gray-700"
+              div.mt-1.relative
+                = zone_form.number_field :zone_a_discount, step: 0.01, min: 0, max: 100, class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition duration-200 ease-in-out hover:border-gray-400"
+            
+            div.col-span-6.sm:col-span-3
+              = zone_form.label :zone_b_discount, "Zone B (%)", class: "block text-sm font-medium text-gray-700"
+              div.mt-1.relative
+                = zone_form.number_field :zone_b_discount, step: 0.01, min: 0, max: 100, class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition duration-200 ease-in-out hover:border-gray-400"
+            
+            div.col-span-6.sm:col-span-3
+              = zone_form.label :zone_c_discount, "Zone C (%)", class: "block text-sm font-medium text-gray-700"
+              div.mt-1.relative
+                = zone_form.number_field :zone_c_discount, step: 0.01, min: 0, max: 100, class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition duration-200 ease-in-out hover:border-gray-400"
+            
+            div.col-span-6.sm:col-span-3
+              = zone_form.label :zone_d_discount, "Zone D (%)", class: "block text-sm font-medium text-gray-700"
+              div.mt-1.relative
+                = zone_form.number_field :zone_d_discount, step: 0.01, min: 0, max: 100, class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition duration-200 ease-in-out hover:border-gray-400"
+            
+            div.col-span-6.sm:col-span-3
+              = zone_form.label :zone_e_discount, "Zone E (%)", class: "block text-sm font-medium text-gray-700"
+              div.mt-1.relative
+                = zone_form.number_field :zone_e_discount, step: 0.01, min: 0, max: 100, class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition duration-200 ease-in-out hover:border-gray-400"
+            
+            div.col-span-6.sm:col-span-3
+              = zone_form.label :zone_f_discount, "Zone F (%)", class: "block text-sm font-medium text-gray-700"
+              div.mt-1.relative
+                = zone_form.number_field :zone_f_discount, step: 0.01, min: 0, max: 100, class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition duration-200 ease-in-out hover:border-gray-400"
+            
+            div.col-span-6.sm:col-span-3
+              = zone_form.label :zone_g_discount, "Zone G (%)", class: "block text-sm font-medium text-gray-700"
+              div.mt-1.relative
+                = zone_form.number_field :zone_g_discount, step: 0.01, min: 0, max: 100, class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition duration-200 ease-in-out hover:border-gray-400"
+            
+            div.col-span-6.sm:col-span-3
+              = zone_form.label :zone_h_discount, "Zone H (%)", class: "block text-sm font-medium text-gray-700"
+              div.mt-1.relative
+                = zone_form.number_field :zone_h_discount, step: 0.01, min: 0, max: 100, class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition duration-200 ease-in-out hover:border-gray-400"
+            
+            div.col-span-6.sm:col-span-3
+              = zone_form.label :zone_i_discount, "Zone I (%)", class: "block text-sm font-medium text-gray-700"
+              div.mt-1.relative
+                = zone_form.number_field :zone_i_discount, step: 0.01, min: 0, max: 100, class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition duration-200 ease-in-out hover:border-gray-400"
+            
+            div.col-span-6.sm:col-span-3
+              = zone_form.label :zone_j_discount, "Zone J (%)", class: "block text-sm font-medium text-gray-700"
+              div.mt-1.relative
+                = zone_form.number_field :zone_j_discount, step: 0.01, min: 0, max: 100, class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition duration-200 ease-in-out hover:border-gray-400"
+            
+            div.col-span-6.sm:col-span-3
+              = zone_form.label :zone_k_discount, "Zone K (%)", class: "block text-sm font-medium text-gray-700"
+              div.mt-1.relative
+                = zone_form.number_field :zone_k_discount, step: 0.01, min: 0, max: 100, class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition duration-200 ease-in-out hover:border-gray-400"
+            
+            div.col-span-6.sm:col-span-3
+              = zone_form.label :zone_l_discount, "Zone L (%)", class: "block text-sm font-medium text-gray-700"
+              div.mt-1.relative
+                = zone_form.number_field :zone_l_discount, step: 0.01, min: 0, max: 100, class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition duration-200 ease-in-out hover:border-gray-400"
+            
+            div.col-span-6.sm:col-span-3
+              = zone_form.label :zone_m_discount, "Zone M (%)", class: "block text-sm font-medium text-gray-700"
+              div.mt-1.relative
+                = zone_form.number_field :zone_m_discount, step: 0.01, min: 0, max: 100, class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition duration-200 ease-in-out hover:border-gray-400"
+            
+            div.col-span-6.sm:col-span-3
+              = zone_form.label :zone_n_discount, "Zone N (%)", class: "block text-sm font-medium text-gray-700"
+              div.mt-1.relative
+                = zone_form.number_field :zone_n_discount, step: 0.01, min: 0, max: 100, class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition duration-200 ease-in-out hover:border-gray-400"
+            
+            div.col-span-6.sm:col-span-3
+              = zone_form.label :zone_o_discount, "Zone O (%)", class: "block text-sm font-medium text-gray-700"
+              div.mt-1.relative
+                = zone_form.number_field :zone_o_discount, step: 0.01, min: 0, max: 100, class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition duration-200 ease-in-out hover:border-gray-400"
+            
+            div.col-span-6.sm:col-span-3
+              = zone_form.label :zone_p_discount, "Zone P (%)", class: "block text-sm font-medium text-gray-700"
+              div.mt-1.relative
+                = zone_form.number_field :zone_p_discount, step: 0.01, min: 0, max: 100, class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition duration-200 ease-in-out hover:border-gray-400" 

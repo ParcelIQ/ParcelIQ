@@ -29,8 +29,8 @@ class Admin::FedexPriorityOvernightDiscountProjectionsController < Admin::BaseCo
     @projection.build_fedex_discount_basic
     @projection.build_fedex_envelope_zone_discount
     @projection.fedex_pak_box_zone_discounts.build
-    @projection.build_fedex_envelope_minimum_charge(envelope_min_charge: 34.71)
-    @projection.build_fedex_pak_box_minimum_charge(pakbox_min_charge: 42.31)
+    @projection.build_fedex_envelope_minimum_charge
+    @projection.build_fedex_pak_box_minimum_charge
   end
 
   def edit
@@ -40,6 +40,13 @@ class Admin::FedexPriorityOvernightDiscountProjectionsController < Admin::BaseCo
   def create
     @projection = FedexPriorityOvernightDiscountProjection.new(projection_params)
     @projection.company = current_company
+
+    # Ensure required associations are built
+    @projection.build_fedex_discount_basic unless @projection.fedex_discount_basic
+    @projection.build_fedex_envelope_zone_discount unless @projection.fedex_envelope_zone_discount
+    @projection.build_fedex_envelope_minimum_charge unless @projection.fedex_envelope_minimum_charge
+    @projection.build_fedex_pak_box_minimum_charge unless @projection.fedex_pak_box_minimum_charge
+    @projection.fedex_pak_box_zone_discounts.build if @projection.fedex_pak_box_zone_discounts.empty?
 
     respond_to do |format|
       if @projection.save
@@ -120,7 +127,10 @@ class Admin::FedexPriorityOvernightDiscountProjectionsController < Admin::BaseCo
         :zone_8_dollar_reduction, :zone_9_10_dollar_reduction, :zone_13_16_dollar_reduction
       ],
       fedex_pak_box_minimum_charge_attributes: [
-        :id, :pakbox_min_charge,
+        :id,
+        :zone_2_min_charge, :zone_3_min_charge, :zone_4_min_charge,
+        :zone_5_min_charge, :zone_6_min_charge, :zone_7_min_charge,
+        :zone_8_min_charge, :zone_9_10_min_charge, :zone_13_16_min_charge,
         :zone_2_percentage_reduction, :zone_3_percentage_reduction, :zone_4_percentage_reduction,
         :zone_5_percentage_reduction, :zone_6_percentage_reduction, :zone_7_percentage_reduction,
         :zone_8_percentage_reduction, :zone_9_10_percentage_reduction, :zone_13_16_percentage_reduction,

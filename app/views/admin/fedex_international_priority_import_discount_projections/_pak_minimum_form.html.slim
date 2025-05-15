@@ -1,0 +1,84 @@
+= f.fields_for :fedex_pak_minimum_charge_international do |min_f|
+  .border.rounded-md.p-4
+    h3.text-lg.font-medium.leading-7.text-gray-900.mb-3 Pak Minimum Charges
+    
+    .grid.grid-cols-1.gap-y-4.sm:grid-cols-2.gap-x-4.mb-6
+      .sm:col-span-2
+        = min_f.label :pak_min_charge, "Global Minimum Charge ($)", class: "block text-sm font-medium leading-6 text-gray-900"
+        .mt-2
+          = min_f.number_field :pak_min_charge, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", step: 0.01
+
+    h4.text-md.font-medium.leading-7.text-gray-900.mb-3 Zone-Specific Reductions
+
+    .overflow-x-auto
+      table.min-w-full.border-collapse.border.border-gray-300
+        thead
+          tr
+            th.py-2.px-4.bg-gray-50.border.border-gray-300.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone
+            th.py-2.px-4.bg-gray-50.border.border-gray-300.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Percentage Reduction (%)
+            th.py-2.px-4.bg-gray-50.border.border-gray-300.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Dollar Reduction ($)
+        tbody
+          tr
+            td.py-2.px-4.border.border-gray-300 A
+            td.py-2.px-4.border.border-gray-300= min_f.number_field :zone_a_percentage_reduction, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", step: 0.01
+            td.py-2.px-4.border.border-gray-300= min_f.number_field :zone_a_dollar_reduction, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", step: 0.01
+          tr
+            td.py-2.px-4.border.border-gray-300 B
+            td.py-2.px-4.border.border-gray-300= min_f.number_field :zone_b_percentage_reduction, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", step: 0.01
+            td.py-2.px-4.border.border-gray-300= min_f.number_field :zone_b_dollar_reduction, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", step: 0.01
+          tr
+            td.py-2.px-4.border.border-gray-300 C
+            td.py-2.px-4.border.border-gray-300= min_f.number_field :zone_c_percentage_reduction, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", step: 0.01
+            td.py-2.px-4.border.border-gray-300= min_f.number_field :zone_c_dollar_reduction, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", step: 0.01
+          tr
+            td.py-2.px-4.border.border-gray-300 D
+            td.py-2.px-4.border.border-gray-300= min_f.number_field :zone_d_percentage_reduction, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", step: 0.01
+            td.py-2.px-4.border.border-gray-300= min_f.number_field :zone_d_dollar_reduction, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", step: 0.01
+          tr
+            td.py-2.px-4.border.border-gray-300 E
+            td.py-2.px-4.border.border-gray-300= min_f.number_field :zone_e_percentage_reduction, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", step: 0.01
+            td.py-2.px-4.border.border-gray-300= min_f.number_field :zone_e_dollar_reduction, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", step: 0.01
+          tr
+            td.py-2.px-4.border.border-gray-300 F
+            td.py-2.px-4.border.border-gray-300= min_f.number_field :zone_f_percentage_reduction, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", step: 0.01
+            td.py-2.px-4.border.border-gray-300= min_f.number_field :zone_f_dollar_reduction, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", step: 0.01
+          tr
+            td.py-2.px-4.border.border-gray-300 G
+            td.py-2.px-4.border.border-gray-300= min_f.number_field :zone_g_percentage_reduction, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", step: 0.01
+            td.py-2.px-4.border.border-gray-300= min_f.number_field :zone_g_dollar_reduction, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", step: 0.01
+          tr
+            td.py-2.px-4.border.border-gray-300 H
+            td.py-2.px-4.border.border-gray-300= min_f.number_field :zone_h_percentage_reduction, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", step: 0.01
+            td.py-2.px-4.border.border-gray-300= min_f.number_field :zone_h_dollar_reduction, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", step: 0.01
+          tr
+            td.py-2.px-4.border.border-gray-300 I
+            td.py-2.px-4.border.border-gray-300= min_f.number_field :zone_i_percentage_reduction, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", step: 0.01
+            td.py-2.px-4.border.border-gray-300= min_f.number_field :zone_i_dollar_reduction, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", step: 0.01
+          tr
+            td.py-2.px-4.border.border-gray-300 J
+            td.py-2.px-4.border.border-gray-300= min_f.number_field :zone_j_percentage_reduction, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", step: 0.01
+            td.py-2.px-4.border.border-gray-300= min_f.number_field :zone_j_dollar_reduction, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", step: 0.01
+          tr
+            td.py-2.px-4.border.border-gray-300 K
+            td.py-2.px-4.border.border-gray-300= min_f.number_field :zone_k_percentage_reduction, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", step: 0.01
+            td.py-2.px-4.border.border-gray-300= min_f.number_field :zone_k_dollar_reduction, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", step: 0.01
+          tr
+            td.py-2.px-4.border.border-gray-300 L
+            td.py-2.px-4.border.border-gray-300= min_f.number_field :zone_l_percentage_reduction, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", step: 0.01
+            td.py-2.px-4.border.border-gray-300= min_f.number_field :zone_l_dollar_reduction, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", step: 0.01
+          tr
+            td.py-2.px-4.border.border-gray-300 M
+            td.py-2.px-4.border.border-gray-300= min_f.number_field :zone_m_percentage_reduction, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", step: 0.01
+            td.py-2.px-4.border.border-gray-300= min_f.number_field :zone_m_dollar_reduction, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", step: 0.01
+          tr
+            td.py-2.px-4.border.border-gray-300 N
+            td.py-2.px-4.border.border-gray-300= min_f.number_field :zone_n_percentage_reduction, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", step: 0.01
+            td.py-2.px-4.border.border-gray-300= min_f.number_field :zone_n_dollar_reduction, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", step: 0.01
+          tr
+            td.py-2.px-4.border.border-gray-300 O
+            td.py-2.px-4.border.border-gray-300= min_f.number_field :zone_o_percentage_reduction, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", step: 0.01
+            td.py-2.px-4.border.border-gray-300= min_f.number_field :zone_o_dollar_reduction, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", step: 0.01
+          tr
+            td.py-2.px-4.border.border-gray-300 P
+            td.py-2.px-4.border.border-gray-300= min_f.number_field :zone_p_percentage_reduction, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", step: 0.01
+            td.py-2.px-4.border.border-gray-300= min_f.number_field :zone_p_dollar_reduction, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", step: 0.01 

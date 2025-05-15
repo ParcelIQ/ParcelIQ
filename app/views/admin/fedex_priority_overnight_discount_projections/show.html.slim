@@ -224,10 +224,35 @@ div.max-w-7xl.mx-auto.px-4.sm:px-6.lg:px-8
   div.mt-8.bg-white.shadow.overflow-hidden.sm:rounded-lg.mb-8
     div.px-4.py-5.sm:px-6
       h3.text-lg.leading-6.font-medium.text-gray-900 Pak/Box Minimum Charges
-      p.mt-1.max-w-2xl.text-sm.text-gray-500 
-        | Base minimum charge: $#{@projection.fedex_pak_box_minimum_charge&.pakbox_min_charge || "0"}
     
     div.border-t.border-gray-200
+      div.px-4.py-5.sm:px-6
+        h4.text-md.leading-6.font-medium.text-gray-700 Zone-Specific Minimum Charges
+        div.mt-4.overflow-x-auto
+          table.min-w-full.divide-y.divide-gray-200
+            thead.bg-gray-50
+              tr
+                th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 2
+                th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 3
+                th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 4
+                th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 5
+                th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 6
+                th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 7
+                th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 8
+                th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 9-10
+                th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone 13-16
+            tbody.bg-white.divide-y.divide-gray-200
+              tr
+                td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = "$#{@projection.fedex_pak_box_minimum_charge&.zone_2_min_charge || '0'}"
+                td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = "$#{@projection.fedex_pak_box_minimum_charge&.zone_3_min_charge || '0'}"
+                td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = "$#{@projection.fedex_pak_box_minimum_charge&.zone_4_min_charge || '0'}"
+                td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = "$#{@projection.fedex_pak_box_minimum_charge&.zone_5_min_charge || '0'}"
+                td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = "$#{@projection.fedex_pak_box_minimum_charge&.zone_6_min_charge || '0'}"
+                td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = "$#{@projection.fedex_pak_box_minimum_charge&.zone_7_min_charge || '0'}"
+                td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = "$#{@projection.fedex_pak_box_minimum_charge&.zone_8_min_charge || '0'}"
+                td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = "$#{@projection.fedex_pak_box_minimum_charge&.zone_9_10_min_charge || '0'}"
+                td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = "$#{@projection.fedex_pak_box_minimum_charge&.zone_13_16_min_charge || '0'}"
+                
       div.px-4.py-5.sm:px-6
         h4.text-md.leading-6.font-medium.text-gray-700 Percentage Reduction
         div.mt-4.overflow-x-auto

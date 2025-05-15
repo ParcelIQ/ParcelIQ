@@ -1,0 +1,213 @@
+.nested-form-container data-controller="nested-form" data-nested-form-wrapper-selector-value=".nested-form-wrapper"
+  template data-nested-form-target="template"
+    = f.fields_for :fedex_box_zone_discount_internationals, FedexBoxZoneDiscountInternational.new, child_index: 'NEW_RECORD' do |zone_f|
+      .nested-form-wrapper.mb-4.border.rounded-md.p-4 data-new-record=true
+        .flex.justify-between.items-center.mb-4
+          h3.text-lg.font-medium.leading-7.text-gray-900 Box Zone Discounts - Weight Range
+          button.text-red-600.hover:text-red-800 type="button" data-action="nested-form#remove"
+            = heroicon "trash", options: { class: "h-5 w-5" }
+        
+        .grid.grid-cols-1.gap-y-6.sm:grid-cols-2.gap-x-4.mb-6
+          .sm:col-span-1
+            = zone_f.label :low_weight, "Low Weight (lbs)", class: "block text-sm font-medium leading-6 text-gray-900"
+            .mt-2
+              = zone_f.number_field :low_weight, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", step: 0.01
+          
+          .sm:col-span-1
+            = zone_f.label :max_weight, "Max Weight (lbs)", class: "block text-sm font-medium leading-6 text-gray-900"
+            .mt-2
+              = zone_f.number_field :max_weight, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", step: 0.01
+        
+        p.text-sm.text-gray-500.mb-4 Enter the percentage discount for each zone.
+        
+        .grid.grid-cols-1.gap-y-4.sm:grid-cols-8.gap-x-4
+          .sm:col-span-2
+            = zone_f.label :zone_a_discount, "Zone A (%)", class: "block text-sm font-medium leading-6 text-gray-900"
+            .mt-2
+              = zone_f.number_field :zone_a_discount, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", step: 0.01
+          
+          .sm:col-span-2
+            = zone_f.label :zone_b_discount, "Zone B (%)", class: "block text-sm font-medium leading-6 text-gray-900"
+            .mt-2
+              = zone_f.number_field :zone_b_discount, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", step: 0.01
+          
+          .sm:col-span-2
+            = zone_f.label :zone_c_discount, "Zone C (%)", class: "block text-sm font-medium leading-6 text-gray-900"
+            .mt-2
+              = zone_f.number_field :zone_c_discount, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", step: 0.01
+          
+          .sm:col-span-2
+            = zone_f.label :zone_d_discount, "Zone D (%)", class: "block text-sm font-medium leading-6 text-gray-900"
+            .mt-2
+              = zone_f.number_field :zone_d_discount, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", step: 0.01
+          
+          .sm:col-span-2
+            = zone_f.label :zone_e_discount, "Zone E (%)", class: "block text-sm font-medium leading-6 text-gray-900"
+            .mt-2
+              = zone_f.number_field :zone_e_discount, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", step: 0.01
+          
+          .sm:col-span-2
+            = zone_f.label :zone_f_discount, "Zone F (%)", class: "block text-sm font-medium leading-6 text-gray-900"
+            .mt-2
+              = zone_f.number_field :zone_f_discount, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", step: 0.01
+          
+          .sm:col-span-2
+            = zone_f.label :zone_g_discount, "Zone G (%)", class: "block text-sm font-medium leading-6 text-gray-900"
+            .mt-2
+              = zone_f.number_field :zone_g_discount, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", step: 0.01
+          
+          .sm:col-span-2
+            = zone_f.label :zone_h_discount, "Zone H (%)", class: "block text-sm font-medium leading-6 text-gray-900"
+            .mt-2
+              = zone_f.number_field :zone_h_discount, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", step: 0.01
+          
+          .sm:col-span-2
+            = zone_f.label :zone_i_discount, "Zone I (%)", class: "block text-sm font-medium leading-6 text-gray-900"
+            .mt-2
+              = zone_f.number_field :zone_i_discount, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", step: 0.01
+          
+          .sm:col-span-2
+            = zone_f.label :zone_j_discount, "Zone J (%)", class: "block text-sm font-medium leading-6 text-gray-900"
+            .mt-2
+              = zone_f.number_field :zone_j_discount, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", step: 0.01
+          
+          .sm:col-span-2
+            = zone_f.label :zone_k_discount, "Zone K (%)", class: "block text-sm font-medium leading-6 text-gray-900"
+            .mt-2
+              = zone_f.number_field :zone_k_discount, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", step: 0.01
+          
+          .sm:col-span-2
+            = zone_f.label :zone_l_discount, "Zone L (%)", class: "block text-sm font-medium leading-6 text-gray-900"
+            .mt-2
+              = zone_f.number_field :zone_l_discount, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", step: 0.01
+          
+          .sm:col-span-2
+            = zone_f.label :zone_m_discount, "Zone M (%)", class: "block text-sm font-medium leading-6 text-gray-900"
+            .mt-2
+              = zone_f.number_field :zone_m_discount, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", step: 0.01
+          
+          .sm:col-span-2
+            = zone_f.label :zone_n_discount, "Zone N (%)", class: "block text-sm font-medium leading-6 text-gray-900"
+            .mt-2
+              = zone_f.number_field :zone_n_discount, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", step: 0.01
+          
+          .sm:col-span-2
+            = zone_f.label :zone_o_discount, "Zone O (%)", class: "block text-sm font-medium leading-6 text-gray-900"
+            .mt-2
+              = zone_f.number_field :zone_o_discount, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", step: 0.01
+          
+          .sm:col-span-2
+            = zone_f.label :zone_p_discount, "Zone P (%)", class: "block text-sm font-medium leading-6 text-gray-900"
+            .mt-2
+              = zone_f.number_field :zone_p_discount, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", step: 0.01
+        
+        = zone_f.hidden_field :_destroy
+
+  = f.fields_for :fedex_box_zone_discount_internationals do |zone_f|
+    - unless zone_f.object.new_record?
+      .nested-form-wrapper.mb-4.border.rounded-md.p-4
+        .flex.justify-between.items-center.mb-4
+          h3.text-lg.font-medium.leading-7.text-gray-900 Box Zone Discounts - Weight Range
+          button.text-red-600.hover:text-red-800 type="button" data-action="nested-form#remove"
+            = heroicon "trash", options: { class: "h-5 w-5" }
+        
+        .grid.grid-cols-1.gap-y-6.sm:grid-cols-2.gap-x-4.mb-6
+          .sm:col-span-1
+            = zone_f.label :low_weight, "Low Weight (lbs)", class: "block text-sm font-medium leading-6 text-gray-900"
+            .mt-2
+              = zone_f.number_field :low_weight, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", step: 0.01
+          
+          .sm:col-span-1
+            = zone_f.label :max_weight, "Max Weight (lbs)", class: "block text-sm font-medium leading-6 text-gray-900"
+            .mt-2
+              = zone_f.number_field :max_weight, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", step: 0.01
+        
+        p.text-sm.text-gray-500.mb-4 Enter the percentage discount for each zone.
+        
+        .grid.grid-cols-1.gap-y-4.sm:grid-cols-8.gap-x-4
+          .sm:col-span-2
+            = zone_f.label :zone_a_discount, "Zone A (%)", class: "block text-sm font-medium leading-6 text-gray-900"
+            .mt-2
+              = zone_f.number_field :zone_a_discount, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", step: 0.01
+          
+          .sm:col-span-2
+            = zone_f.label :zone_b_discount, "Zone B (%)", class: "block text-sm font-medium leading-6 text-gray-900"
+            .mt-2
+              = zone_f.number_field :zone_b_discount, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", step: 0.01
+          
+          .sm:col-span-2
+            = zone_f.label :zone_c_discount, "Zone C (%)", class: "block text-sm font-medium leading-6 text-gray-900"
+            .mt-2
+              = zone_f.number_field :zone_c_discount, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", step: 0.01
+          
+          .sm:col-span-2
+            = zone_f.label :zone_d_discount, "Zone D (%)", class: "block text-sm font-medium leading-6 text-gray-900"
+            .mt-2
+              = zone_f.number_field :zone_d_discount, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", step: 0.01
+          
+          .sm:col-span-2
+            = zone_f.label :zone_e_discount, "Zone E (%)", class: "block text-sm font-medium leading-6 text-gray-900"
+            .mt-2
+              = zone_f.number_field :zone_e_discount, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", step: 0.01
+          
+          .sm:col-span-2
+            = zone_f.label :zone_f_discount, "Zone F (%)", class: "block text-sm font-medium leading-6 text-gray-900"
+            .mt-2
+              = zone_f.number_field :zone_f_discount, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", step: 0.01
+          
+          .sm:col-span-2
+            = zone_f.label :zone_g_discount, "Zone G (%)", class: "block text-sm font-medium leading-6 text-gray-900"
+            .mt-2
+              = zone_f.number_field :zone_g_discount, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", step: 0.01
+          
+          .sm:col-span-2
+            = zone_f.label :zone_h_discount, "Zone H (%)", class: "block text-sm font-medium leading-6 text-gray-900"
+            .mt-2
+              = zone_f.number_field :zone_h_discount, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", step: 0.01
+          
+          .sm:col-span-2
+            = zone_f.label :zone_i_discount, "Zone I (%)", class: "block text-sm font-medium leading-6 text-gray-900"
+            .mt-2
+              = zone_f.number_field :zone_i_discount, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", step: 0.01
+          
+          .sm:col-span-2
+            = zone_f.label :zone_j_discount, "Zone J (%)", class: "block text-sm font-medium leading-6 text-gray-900"
+            .mt-2
+              = zone_f.number_field :zone_j_discount, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", step: 0.01
+          
+          .sm:col-span-2
+            = zone_f.label :zone_k_discount, "Zone K (%)", class: "block text-sm font-medium leading-6 text-gray-900"
+            .mt-2
+              = zone_f.number_field :zone_k_discount, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", step: 0.01
+          
+          .sm:col-span-2
+            = zone_f.label :zone_l_discount, "Zone L (%)", class: "block text-sm font-medium leading-6 text-gray-900"
+            .mt-2
+              = zone_f.number_field :zone_l_discount, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", step: 0.01
+          
+          .sm:col-span-2
+            = zone_f.label :zone_m_discount, "Zone M (%)", class: "block text-sm font-medium leading-6 text-gray-900"
+            .mt-2
+              = zone_f.number_field :zone_m_discount, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", step: 0.01
+          
+          .sm:col-span-2
+            = zone_f.label :zone_n_discount, "Zone N (%)", class: "block text-sm font-medium leading-6 text-gray-900"
+            .mt-2
+              = zone_f.number_field :zone_n_discount, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", step: 0.01
+          
+          .sm:col-span-2
+            = zone_f.label :zone_o_discount, "Zone O (%)", class: "block text-sm font-medium leading-6 text-gray-900"
+            .mt-2
+              = zone_f.number_field :zone_o_discount, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", step: 0.01
+          
+          .sm:col-span-2
+            = zone_f.label :zone_p_discount, "Zone P (%)", class: "block text-sm font-medium leading-6 text-gray-900"
+            .mt-2
+              = zone_f.number_field :zone_p_discount, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", step: 0.01
+        
+        = zone_f.hidden_field :_destroy
+  
+  .mt-4
+    button.inline-flex.items-center.rounded-md.bg-white.px-3.py-2.text-sm.font-semibold.text-gray-900.shadow-sm.ring-1.ring-inset.ring-gray-300.hover:bg-gray-50.focus-visible:outline.focus-visible:ring-2.focus-visible:ring-offset-2.focus-visible:ring-indigo-600 type="button" data-action="nested-form#add"
+      = heroicon "plus", options: { class: "h-4 w-4 mr-1" }
+      | Add Weight Range 

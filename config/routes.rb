@@ -60,9 +60,16 @@ Rails.application.routes.draw do
       member do
         post :reprocess
       end
+      resources :fedex_priority_overnight_discount_projections, only: [ :index, :new ]
+      resources :fedex_international_priority_import_discount_projections, only: [ :index, :new ]
     end
     resources :prior_spends
     resources :fedex_priority_overnight_discount_projections do
+      member do
+        post :duplicate
+      end
+    end
+    resources :fedex_international_priority_import_discount_projections do
       member do
         post :duplicate
       end

@@ -25,6 +25,11 @@ class FedexPriorityOvernightDiscountProjection < ApplicationRecord
     create_fedex_envelope_zone_discount if fedex_envelope_zone_discount.nil?
     create_fedex_envelope_minimum_charge if fedex_envelope_minimum_charge.nil?
     create_fedex_pak_box_minimum_charge if fedex_pak_box_minimum_charge.nil?
+
+    # Ensure at least one pak/box zone discount exists
+    if fedex_pak_box_zone_discounts.empty?
+      fedex_pak_box_zone_discounts.create(low_weight: 0, max_weight: 1)
+    end
   end
 
   def duplicate

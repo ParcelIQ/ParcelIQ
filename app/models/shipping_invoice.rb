@@ -4,6 +4,7 @@ class ShippingInvoice < ApplicationRecord
   has_many :ups_invoice_entries, dependent: :destroy
   has_many :fedex_invoice_entries, dependent: :destroy
   has_many :fedex_priority_overnight_discount_projections, dependent: :nullify
+  has_many :fedex_international_priority_import_discount_projections, dependent: :nullify
 
   # Constants for carrier options
   CARRIERS = [ "FedEx", "UPS" ].freeze

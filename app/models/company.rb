@@ -4,6 +4,7 @@ class Company < ApplicationRecord
   has_many :shipping_invoices, dependent: :destroy
   has_many :prior_spends, dependent: :destroy
   has_many :fedex_priority_overnight_discount_projections, dependent: :destroy
+  has_many :fedex_international_priority_import_discount_projections, dependent: :destroy
 
   validates :name, presence: true
   validates :subdomain, presence: true, uniqueness: true,

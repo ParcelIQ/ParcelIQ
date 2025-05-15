@@ -1,0 +1,17 @@
+- content_for :page_title, "New FedEx International Priority Import Discount Projection"
+
+- if @shipping_invoice.present?
+  .flex.justify-between.items-center.mb-4
+    h1.text-2xl.font-bold.text-gray-900 
+      | New FedEx International Priority Import Discount Projection for 
+      = @shipping_invoice.name
+    = link_to admin_shipping_invoice_path(@shipping_invoice), class: "inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50" do
+      | Back to Invoice
+- else
+  .flex.justify-between.items-center.mb-4
+    h1.text-2xl.font-bold.text-gray-900 New FedEx International Priority Import Discount Projection
+    = link_to admin_fedex_international_priority_import_discount_projections_path, class: "inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50" do
+      | Back to List
+
+.bg-white.shadow.sm:rounded-lg.mb-4
+  = render "form", projection: @projection 

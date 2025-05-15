@@ -1,0 +1,79 @@
+= form_with model: [:admin, projection], data: { turbo: false }, class: "p-6" do |f|
+  - if projection.errors.any?
+    #error_explanation.rounded-md.bg-red-50.p-4.mb-4
+      .flex
+        .flex-shrink-0
+          = heroicon "exclamation-circle", variant: :solid, options: { class: "h-5 w-5 text-red-400" }
+        .ml-3
+          h3.text-sm.font-medium.text-red-800 There were some errors with your submission
+          .mt-2.text-sm.text-red-700
+            ul.list-disc.pl-5.space-y-1
+              - projection.errors.full_messages.each do |message|
+                li= message
+
+  .grid.grid-cols-1.gap-y-6.sm:grid-cols-6.mb-6
+    .sm:col-span-4
+      = f.label :name, class: "block text-sm font-medium leading-6 text-gray-900"
+      .mt-2
+        = f.text_field :name, required: true, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+
+    .sm:col-span-2
+      = f.label :shipping_invoice_id, "Shipping Invoice", class: "block text-sm font-medium leading-6 text-gray-900"
+      .mt-2
+        = f.collection_select :shipping_invoice_id, @shipping_invoices, :id, :name, { include_blank: "None" }, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
+
+  .grid.grid-cols-1.gap-6.mb-6
+    .col-span-1
+      = f.fields_for :fedex_discount_basic_international do |basic_f|
+        .border.rounded-md.p-4
+          h3.text-lg.font-medium.leading-7.text-gray-900.mb-3 Basic Settings
+          .grid.grid-cols-1.gap-y-6.sm:grid-cols-3
+            .sm:col-span-1
+              = basic_f.label :dim_divisor, "Dim Divisor", class: "block text-sm font-medium leading-6 text-gray-900"
+              .mt-2
+                = basic_f.number_field :dim_divisor, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+            .sm:col-span-1
+              = basic_f.label :envelope_earned_discount, "Envelope Earned Discount (%)", class: "block text-sm font-medium leading-6 text-gray-900"
+              .mt-2
+                = basic_f.number_field :envelope_earned_discount, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", step: 0.01
+            .sm:col-span-1
+              = basic_f.label :pakbox_earned_discount, "Pak/Box Earned Discount (%)", class: "block text-sm font-medium leading-6 text-gray-900"
+              .mt-2
+                = basic_f.number_field :pakbox_earned_discount, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6", step: 0.01
+
+  ul.mb-6.flex.flex-wrap.-mb-px.text-sm.font-medium.text-center.border-b.border-gray-200
+    li.mr-2
+      a href="#envelope_zone" data-tabs-target="envelope_zone" class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 text-gray-500" Envelope Zone
+    li.mr-2
+      a href="#pak_zone" data-tabs-target="pak_zone" class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 text-gray-500" Pak Zone
+    li.mr-2
+      a href="#box_zone" data-tabs-target="box_zone" class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 text-gray-500" Box Zone
+    li.mr-2
+      a href="#envelope_minimum" data-tabs-target="envelope_minimum" class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 text-gray-500" Envelope Minimum
+    li.mr-2
+      a href="#pak_minimum" data-tabs-target="pak_minimum" class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 text-gray-500" Pak Minimum
+    li.mr-2
+      a href="#box_minimum" data-tabs-target="box_minimum" class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 text-gray-500" Box Minimum
+
+  div data-tabs-content
+    div id="envelope_zone" data-tabs-content-item="envelope_zone" class="hidden pt-4"
+      = render "envelope_zone_form", f: f
+
+    div id="pak_zone" data-tabs-content-item="pak_zone" class="hidden pt-4"
+      = render "pak_zone_form", f: f
+
+    div id="box_zone" data-tabs-content-item="box_zone" class="hidden pt-4"
+      = render "box_zone_form", f: f
+
+    div id="envelope_minimum" data-tabs-content-item="envelope_minimum" class="hidden pt-4"
+      = render "envelope_minimum_form", f: f
+
+    div id="pak_minimum" data-tabs-content-item="pak_minimum" class="hidden pt-4"
+      = render "pak_minimum_form", f: f
+
+    div id="box_minimum" data-tabs-content-item="box_minimum" class="hidden pt-4"
+      = render "box_minimum_form", f: f
+
+  .mt-6.flex.items-center.justify-end.gap-x-6
+    = link_to "Cancel", admin_fedex_international_priority_import_discount_projections_path, class: "text-sm font-semibold leading-6 text-gray-900"
+    = f.submit "Save", class: "rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" 

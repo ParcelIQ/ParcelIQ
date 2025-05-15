@@ -1,4 +1,4 @@
-- prior_transportation_spend = ::PriorSpend::Fetcher.new(current_company).transportation_spend
+- prior_transportation_spend = ::PriorSpendService::Fetcher.new(current_company).transportation_spend
 - current_transportation_data = ::Reports::BaseTransportationSpend.new(current_company, start_date: params[:start_date], end_date: params[:end_date]).execute
 - total_prior = prior_transportation_spend.sum { |_, data| data[:spend] }
 - total_current = current_transportation_data[:total_spend]

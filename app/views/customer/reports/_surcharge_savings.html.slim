@@ -1,4 +1,4 @@
-- prior_surcharge_spend = ::PriorSpend::Fetcher.new(current_company).surcharge_spend
+- prior_surcharge_spend = ::PriorSpendService::Fetcher.new(current_company).surcharge_spend
 - current_surcharge_data = ::Reports::SurchargeSpend.new(current_company, start_date: params[:start_date], end_date: params[:end_date]).execute
 - total_prior = prior_surcharge_spend.sum { |_, data| data[:spend] }
 - total_current = current_surcharge_data[:total_spend]

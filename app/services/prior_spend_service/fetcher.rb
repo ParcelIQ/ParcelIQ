@@ -1,4 +1,4 @@
-module PriorSpend
+module PriorSpendService
   class Fetcher
     def initialize(company)
       @company = company

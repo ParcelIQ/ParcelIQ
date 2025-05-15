@@ -1,4 +1,4 @@
-- prior_dimensional_spend = ::PriorSpend::Fetcher.new(current_company).dimensional_spend
+- prior_dimensional_spend = ::PriorSpendService::Fetcher.new(current_company).dimensional_spend
 - # Assuming we have a current report for dimensional charges, similar to surcharge and transportation
 - # For now, we'll use placeholder data
 - total_prior = prior_dimensional_spend.sum { |_, data| data[:spend] }

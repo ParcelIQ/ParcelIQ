@@ -1,5 +1,5 @@
 class FedexEnvelopeZoneDiscount < ApplicationRecord
-  belongs_to :fedex_discount_projection
+  belongs_to :fedex_priority_overnight_discount_projection, foreign_key: "fedex_priority_overnight_discount_projection_id"
 
   ZONE_FIELDS = %i[
     zone_2_discount zone_3_discount zone_4_discount zone_5_discount

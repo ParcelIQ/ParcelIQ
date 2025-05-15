@@ -1,4 +1,4 @@
-class FedexDiscountProjection < ApplicationRecord
+class FedexPriorityOvernightDiscountProjection < ApplicationRecord
   belongs_to :shipping_invoice, optional: true
   belongs_to :company
   has_one :fedex_discount_basic, dependent: :destroy
@@ -35,27 +35,27 @@ class FedexDiscountProjection < ApplicationRecord
 
     # Copy basic settings
     if fedex_discount_basic.present?
-      new_projection.create_fedex_discount_basic(fedex_discount_basic.attributes.except("id", "fedex_discount_projection_id", "created_at", "updated_at"))
+      new_projection.create_fedex_discount_basic(fedex_discount_basic.attributes.except("id", "fedex_priority_overnight_discount_projection_id", "created_at", "updated_at"))
     end
 
     # Copy envelope zone discounts
     if fedex_envelope_zone_discount.present?
-      new_projection.create_fedex_envelope_zone_discount(fedex_envelope_zone_discount.attributes.except("id", "fedex_discount_projection_id", "created_at", "updated_at"))
+      new_projection.create_fedex_envelope_zone_discount(fedex_envelope_zone_discount.attributes.except("id", "fedex_priority_overnight_discount_projection_id", "created_at", "updated_at"))
     end
 
     # Copy pak/box zone discounts
     fedex_pak_box_zone_discounts.each do |discount|
-      new_projection.fedex_pak_box_zone_discounts.create(discount.attributes.except("id", "fedex_discount_projection_id", "created_at", "updated_at"))
+      new_projection.fedex_pak_box_zone_discounts.create(discount.attributes.except("id", "fedex_priority_overnight_discount_projection_id", "created_at", "updated_at"))
     end
 
     # Copy envelope minimum charges
     if fedex_envelope_minimum_charge.present?
-      new_projection.create_fedex_envelope_minimum_charge(fedex_envelope_minimum_charge.attributes.except("id", "fedex_discount_projection_id", "created_at", "updated_at"))
+      new_projection.create_fedex_envelope_minimum_charge(fedex_envelope_minimum_charge.attributes.except("id", "fedex_priority_overnight_discount_projection_id", "created_at", "updated_at"))
     end
 
     # Copy pak/box minimum charges
     if fedex_pak_box_minimum_charge.present?
-      new_projection.create_fedex_pak_box_minimum_charge(fedex_pak_box_minimum_charge.attributes.except("id", "fedex_discount_projection_id", "created_at", "updated_at"))
+      new_projection.create_fedex_pak_box_minimum_charge(fedex_pak_box_minimum_charge.attributes.except("id", "fedex_priority_overnight_discount_projection_id", "created_at", "updated_at"))
     end
 
     new_projection

@@ -1,5 +1,5 @@
 class FedexPakBoxZoneDiscount < ApplicationRecord
-  belongs_to :fedex_discount_projection
+  belongs_to :fedex_priority_overnight_discount_projection, foreign_key: "fedex_priority_overnight_discount_projection_id"
 
   validates :low_weight, numericality: { greater_than_or_equal_to: 0, allow_nil: true }
   validates :max_weight, numericality: { greater_than: 0, allow_nil: true }

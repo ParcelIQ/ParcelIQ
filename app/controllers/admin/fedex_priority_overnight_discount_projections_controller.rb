@@ -1,4 +1,4 @@
-class Admin::FedexDiscountProjectionsController < Admin::BaseController
+class Admin::FedexPriorityOvernightDiscountProjectionsController < Admin::BaseController
   before_action :set_projection, only: [ :show, :edit, :update, :destroy, :duplicate ]
   before_action :set_shipping_invoices, only: [ :new, :edit, :create, :update ]
 
@@ -6,9 +6,9 @@ class Admin::FedexDiscountProjectionsController < Admin::BaseController
     # If viewing from a shipping invoice, filter projections
     if params[:shipping_invoice_id].present?
       @shipping_invoice = ShippingInvoice.find_by(id: params[:shipping_invoice_id])
-      @projections = @shipping_invoice&.fedex_discount_projections&.where(company: current_company) || FedexDiscountProjection.none
+      @projections = @shipping_invoice&.fedex_priority_overnight_discount_projections&.where(company: current_company) || FedexPriorityOvernightDiscountProjection.none
     else
-      @projections = FedexDiscountProjection.where(company: current_company)
+      @projections = FedexPriorityOvernightDiscountProjection.where(company: current_company)
     end
   end
 
@@ -16,7 +16,7 @@ class Admin::FedexDiscountProjectionsController < Admin::BaseController
   end
 
   def new
-    @projection = FedexDiscountProjection.new
+    @projection = FedexPriorityOvernightDiscountProjection.new
     @projection.company = current_company
     @projection.shipping_invoice_id = params[:shipping_invoice_id] if params[:shipping_invoice_id].present?
 
@@ -38,12 +38,12 @@ class Admin::FedexDiscountProjectionsController < Admin::BaseController
   end
 
   def create
-    @projection = FedexDiscountProjection.new(projection_params)
+    @projection = FedexPriorityOvernightDiscountProjection.new(projection_params)
     @projection.company = current_company
 
     respond_to do |format|
       if @projection.save
-        format.html { redirect_to edit_admin_fedex_discount_projection_path(@projection), notice: "FedEx discount projection was successfully created." }
+        format.html { redirect_to edit_admin_fedex_priority_overnight_discount_projection_path(@projection), notice: "FedEx Priority Overnight discount projection was successfully created." }
         format.json { render :show, status: :created, location: @projection }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -55,7 +55,7 @@ class Admin::FedexDiscountProjectionsController < Admin::BaseController
   def update
     respond_to do |format|
       if @projection.update(projection_params)
-        format.html { redirect_to edit_admin_fedex_discount_projection_path(@projection), notice: "FedEx discount projection was successfully updated." }
+        format.html { redirect_to edit_admin_fedex_priority_overnight_discount_projection_path(@projection), notice: "FedEx Priority Overnight discount projection was successfully updated." }
         format.json { render :show, status: :ok, location: @projection }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -67,7 +67,7 @@ class Admin::FedexDiscountProjectionsController < Admin::BaseController
   def destroy
     @projection.destroy
     respond_to do |format|
-      format.html { redirect_to admin_fedex_discount_projections_path, notice: "FedEx discount projection was successfully destroyed." }
+      format.html { redirect_to admin_fedex_priority_overnight_discount_projections_path, notice: "FedEx Priority Overnight discount projection was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -76,7 +76,7 @@ class Admin::FedexDiscountProjectionsController < Admin::BaseController
     new_projection = @projection.duplicate
 
     respond_to do |format|
-      format.html { redirect_to edit_admin_fedex_discount_projection_path(new_projection), notice: "FedEx discount projection was successfully duplicated." }
+      format.html { redirect_to edit_admin_fedex_priority_overnight_discount_projection_path(new_projection), notice: "FedEx Priority Overnight discount projection was successfully duplicated." }
       format.json { render :show, status: :created, location: new_projection }
     end
   end
@@ -84,7 +84,7 @@ class Admin::FedexDiscountProjectionsController < Admin::BaseController
   private
 
   def set_projection
-    @projection = current_company.fedex_discount_projections.find(params[:id])
+    @projection = current_company.fedex_priority_overnight_discount_projections.find(params[:id])
   end
 
   def set_shipping_invoices
@@ -92,7 +92,7 @@ class Admin::FedexDiscountProjectionsController < Admin::BaseController
   end
 
   def projection_params
-    params.require(:fedex_discount_projection).permit(
+    params.require(:fedex_priority_overnight_discount_projection).permit(
       :name,
       :shipping_invoice_id,
       fedex_discount_basic_attributes: [

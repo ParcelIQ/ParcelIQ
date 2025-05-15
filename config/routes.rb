@@ -62,7 +62,7 @@ Rails.application.routes.draw do
       end
     end
     resources :prior_spends
-    resources :fedex_discount_projections do
+    resources :fedex_priority_overnight_discount_projections do
       member do
         post :duplicate
       end

@@ -1,5 +1,5 @@
 class FedexEnvelopeMinimumCharge < ApplicationRecord
-  belongs_to :fedex_discount_projection
+  belongs_to :fedex_priority_overnight_discount_projection, foreign_key: "fedex_priority_overnight_discount_projection_id"
 
   validates :envelope_min_charge, numericality: { greater_than: 0, allow_nil: true }
 

@@ -151,8 +151,8 @@ javascript:
       
       // Update input names and IDs with a unique timestamp
       var time = new Date().getTime();
-      var regexp = new RegExp('fedex_discount_projection\\[fedex_pak_box_zone_discounts_attributes\\]\\[\\d+\\]', 'g');
-      newRow.innerHTML = newRow.innerHTML.replace(regexp, 'fedex_discount_projection[fedex_pak_box_zone_discounts_attributes][' + time + ']');
+      var regexp = new RegExp('fedex_priority_overnight_discount_projection\\[fedex_pak_box_zone_discounts_attributes\\]\\[\\d+\\]', 'g');
+      newRow.innerHTML = newRow.innerHTML.replace(regexp, 'fedex_priority_overnight_discount_projection[fedex_pak_box_zone_discounts_attributes][' + time + ']');
       
       tbody.appendChild(newRow);
     }

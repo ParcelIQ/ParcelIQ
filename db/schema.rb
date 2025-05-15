@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_15_052357) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_15_053141) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -87,27 +87,17 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_15_052357) do
   end
 
   create_table "fedex_discount_basics", force: :cascade do |t|
-    t.bigint "fedex_discount_projection_id", null: false
+    t.bigint "fedex_priority_overnight_discount_projection_id", null: false
     t.decimal "dim_divisor", precision: 10, scale: 2
     t.decimal "envelope_earned_discount", precision: 5, scale: 2
     t.decimal "pakbox_earned_discount", precision: 5, scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["fedex_discount_projection_id"], name: "index_fedex_discount_basics_on_fedex_discount_projection_id"
-  end
-
-  create_table "fedex_discount_projections", force: :cascade do |t|
-    t.string "name", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "shipping_invoice_id"
-    t.bigint "company_id", null: false
-    t.index ["company_id"], name: "index_fedex_discount_projections_on_company_id"
-    t.index ["shipping_invoice_id"], name: "index_fedex_discount_projections_on_shipping_invoice_id"
+    t.index ["fedex_priority_overnight_discount_projection_id"], name: "idx_on_fedex_priority_overnight_discount_projection_77d41a8a7e"
   end
 
   create_table "fedex_envelope_minimum_charges", force: :cascade do |t|
-    t.bigint "fedex_discount_projection_id", null: false
+    t.bigint "fedex_priority_overnight_discount_projection_id", null: false
     t.decimal "envelope_min_charge", precision: 10, scale: 2, default: "34.71"
     t.decimal "zone_2_percentage_reduction", precision: 5, scale: 2
     t.decimal "zone_3_percentage_reduction", precision: 5, scale: 2
@@ -138,11 +128,11 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_15_052357) do
     t.decimal "zone_8_min_charge", precision: 10, scale: 2
     t.decimal "zone_9_10_min_charge", precision: 10, scale: 2
     t.decimal "zone_13_16_min_charge", precision: 10, scale: 2
-    t.index ["fedex_discount_projection_id"], name: "idx_fedex_env_min_charges_on_proj_id"
+    t.index ["fedex_priority_overnight_discount_projection_id"], name: "idx_fedex_env_min_charges_on_proj_id"
   end
 
   create_table "fedex_envelope_zone_discounts", force: :cascade do |t|
-    t.bigint "fedex_discount_projection_id", null: false
+    t.bigint "fedex_priority_overnight_discount_projection_id", null: false
     t.decimal "zone_2_discount", precision: 5, scale: 2
     t.decimal "zone_3_discount", precision: 5, scale: 2
     t.decimal "zone_4_discount", precision: 5, scale: 2
@@ -154,7 +144,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_15_052357) do
     t.decimal "zone_13_16_discount", precision: 5, scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["fedex_discount_projection_id"], name: "idx_fedex_env_zone_disc_on_proj_id"
+    t.index ["fedex_priority_overnight_discount_projection_id"], name: "idx_fedex_env_zone_disc_on_proj_id"
   end
 
   create_table "fedex_invoice_entries", force: :cascade do |t|
@@ -269,7 +259,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_15_052357) do
   end
 
   create_table "fedex_pak_box_minimum_charges", force: :cascade do |t|
-    t.bigint "fedex_discount_projection_id", null: false
+    t.bigint "fedex_priority_overnight_discount_projection_id", null: false
     t.decimal "pakbox_min_charge", precision: 10, scale: 2, default: "42.31"
     t.decimal "zone_2_percentage_reduction", precision: 5, scale: 2
     t.decimal "zone_3_percentage_reduction", precision: 5, scale: 2
@@ -291,11 +281,11 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_15_052357) do
     t.decimal "zone_13_16_dollar_reduction", precision: 10, scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["fedex_discount_projection_id"], name: "idx_fedex_pak_box_min_charges_on_proj_id"
+    t.index ["fedex_priority_overnight_discount_projection_id"], name: "idx_fedex_pak_box_min_charges_on_proj_id"
   end
 
   create_table "fedex_pak_box_zone_discounts", force: :cascade do |t|
-    t.bigint "fedex_discount_projection_id", null: false
+    t.bigint "fedex_priority_overnight_discount_projection_id", null: false
     t.decimal "low_weight", precision: 10, scale: 2
     t.decimal "max_weight", precision: 10, scale: 2
     t.decimal "zone_2_discount", precision: 5, scale: 2
@@ -309,7 +299,17 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_15_052357) do
     t.decimal "zone_13_16_discount", precision: 5, scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["fedex_discount_projection_id"], name: "idx_fedex_pak_box_zone_disc_on_proj_id"
+    t.index ["fedex_priority_overnight_discount_projection_id"], name: "idx_fedex_pak_box_zone_disc_on_proj_id"
+  end
+
+  create_table "fedex_priority_overnight_discount_projections", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "shipping_invoice_id"
+    t.bigint "company_id", null: false
+    t.index ["company_id"], name: "idx_on_company_id_9326b5eccb"
+    t.index ["shipping_invoice_id"], name: "idx_on_shipping_invoice_id_e1b77ef3b4"
   end
 
   create_table "prior_spends", force: :cascade do |t|
@@ -567,14 +567,14 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_15_052357) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "fedex_discount_basics", "fedex_discount_projections"
-  add_foreign_key "fedex_discount_projections", "companies"
-  add_foreign_key "fedex_discount_projections", "shipping_invoices"
-  add_foreign_key "fedex_envelope_minimum_charges", "fedex_discount_projections"
-  add_foreign_key "fedex_envelope_zone_discounts", "fedex_discount_projections"
+  add_foreign_key "fedex_discount_basics", "fedex_priority_overnight_discount_projections"
+  add_foreign_key "fedex_envelope_minimum_charges", "fedex_priority_overnight_discount_projections"
+  add_foreign_key "fedex_envelope_zone_discounts", "fedex_priority_overnight_discount_projections"
   add_foreign_key "fedex_invoice_entries", "shipping_invoices"
-  add_foreign_key "fedex_pak_box_minimum_charges", "fedex_discount_projections"
-  add_foreign_key "fedex_pak_box_zone_discounts", "fedex_discount_projections"
+  add_foreign_key "fedex_pak_box_minimum_charges", "fedex_priority_overnight_discount_projections"
+  add_foreign_key "fedex_pak_box_zone_discounts", "fedex_priority_overnight_discount_projections"
+  add_foreign_key "fedex_priority_overnight_discount_projections", "companies"
+  add_foreign_key "fedex_priority_overnight_discount_projections", "shipping_invoices"
   add_foreign_key "prior_spends", "companies"
   add_foreign_key "shipping_invoices", "companies"
   add_foreign_key "solid_queue_blocked_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade

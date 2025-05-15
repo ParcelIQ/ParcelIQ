@@ -19,7 +19,7 @@
         div.md:col-span-1
           h3.text-lg.font-medium.leading-6.text-gray-900 Basic Information
           p.mt-1.text-sm.text-gray-500
-            | Core parameters for the FedEx discount projection.
+            | Core parameters for the FedEx Priority Overnight discount projection.
         
         div.mt-5.md:mt-0.md:col-span-2
           div.grid.grid-cols-6.gap-6
@@ -55,5 +55,5 @@
   = render 'pakbox_minimum_form', form: form
   
   div.flex.justify-end.py-4.px-4.text-right.sm:px-6.rounded-b-lg
-    = link_to 'Cancel', admin_fedex_discount_projections_path, class: "bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150 ease-in-out"
+    = link_to 'Cancel', admin_fedex_priority_overnight_discount_projections_path, class: "bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150 ease-in-out"
     = form.submit 'Save Projection', class: "ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150 ease-in-out" 

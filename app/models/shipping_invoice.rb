@@ -3,7 +3,7 @@ class ShippingInvoice < ApplicationRecord
   has_one_attached :csv_file
   has_many :ups_invoice_entries, dependent: :destroy
   has_many :fedex_invoice_entries, dependent: :destroy
-  has_many :fedex_discount_projections, dependent: :nullify
+  has_many :fedex_priority_overnight_discount_projections, dependent: :nullify
 
   # Constants for carrier options
   CARRIERS = [ "FedEx", "UPS" ].freeze

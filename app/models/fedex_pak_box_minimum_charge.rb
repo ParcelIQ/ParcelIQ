@@ -1,5 +1,5 @@
 class FedexPakBoxMinimumCharge < ApplicationRecord
-  belongs_to :fedex_discount_projection
+  belongs_to :fedex_priority_overnight_discount_projection
 
   validates :pakbox_min_charge, numericality: { greater_than: 0, allow_nil: true }
 

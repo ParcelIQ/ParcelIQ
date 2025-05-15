@@ -26,9 +26,9 @@ class ShippingInvoice < ApplicationRecord
   def process_invoice_data
     case carrier
     when "UPS"
-      ProcessUpsInvoiceJob.perform_now(self.id)
+      ProcessUpsInvoiceJob.perform_later(self.id)
     when "FedEx"
-      ProcessFedexInvoiceJob.perform_now(self.id)
+      ProcessFedexInvoiceJob.perform_later(self.id)
     end
   end
 

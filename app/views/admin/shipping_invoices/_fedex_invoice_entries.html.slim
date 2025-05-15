@@ -61,7 +61,18 @@ h3.text-lg.font-medium.leading-6.text-gray-900.mb-4 FedEx Invoice Entries
               td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500
                 | #{entry.actual_weight_amount} #{entry.actual_weight_units}
     
-    div.mt-4
-      = paginate @fedex_invoice_entries
+    div.mt-6.px-6.flex.justify-between.items-center
+      - if @fedex_invoice_entries.total_pages > 1
+        div.text-sm.text-gray-700
+          | Showing 
+          span.font-medium = @fedex_invoice_entries.offset_value + 1
+          |  to 
+          span.font-medium = [@fedex_invoice_entries.offset_value + @fedex_invoice_entries.limit_value, @fedex_invoice_entries.total_count].min
+          |  of 
+          span.font-medium = @fedex_invoice_entries.total_count
+          |  entries
+      
+      div.pagination-wrapper
+        = paginate @fedex_invoice_entries
 - else
   p.text-gray-500 No FedEx invoice entries found yet. 

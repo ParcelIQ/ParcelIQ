@@ -1,5 +1,5 @@
 class FedexBoxZoneDiscountInternational < ApplicationRecord
-  belongs_to :fedex_international_priority_import_discount_projection, foreign_key: "fedex_international_priority_import_discount_projection_id"
+  belongs_to :fedex_international_priority_import_discount_projection, foreign_key: "fedex_international_priority_import_discount_projection_id", optional: true
 
   validates :low_weight, numericality: { greater_than_or_equal_to: 0, allow_nil: true }
   validates :max_weight, numericality: { greater_than: 0, allow_nil: true }

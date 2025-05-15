@@ -1,44 +1,38 @@
 div.mt-8.bg-white.shadow.overflow-hidden.sm:rounded-lg
   div.px-4.py-5.sm:px-6.flex.justify-between.items-center
     h3.text-lg.font-medium.leading-6.text-gray-900 FedEx International Priority Import Discount Projections
-    = link_to new_admin_shipping_invoice_fedex_international_priority_import_discount_projection_path(@shipping_invoice), class: "inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" do
-      svg.-ml-0.5.mr-2.h-4.w-4[xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"]
+    = link_to new_admin_shipping_invoice_fedex_international_priority_import_discount_projection_path(@shipping_invoice), class: "inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" do
+      svg.-ml-1.mr-2.h-5.w-5[xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"]
         path[fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd"]
-      | Add Projection
+      | New Projection
   
-  - projections = @shipping_invoice.fedex_international_priority_import_discount_projections.where(company: current_company)
+  div.border-t.border-gray-200
+    - projections = @shipping_invoice.fedex_international_priority_import_discount_projections.where(company: current_company)
   
-  - if projections.any?
-    div.overflow-x-auto
-      table.min-w-full.divide-y.divide-gray-200
-        thead.bg-gray-50
-          tr
-            th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider scope="col" Projection Name
-            th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider scope="col" Created
-            th.px-6.py-3.text-right.text-xs.font-medium.text-gray-500.uppercase.tracking-wider scope="col" Actions
-        tbody.bg-white.divide-y.divide-gray-200
-          - projections.each do |projection|
+    - if projections.any?
+      div.overflow-x-auto
+        table.min-w-full.divide-y.divide-gray-200
+          thead.bg-gray-50
             tr
-              td.px-6.py-4.whitespace-nowrap.text-sm.font-medium.text-gray-900
-                = link_to projection.name, admin_fedex_international_priority_import_discount_projection_path(projection), class: "text-indigo-600 hover:text-indigo-900"
-              td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500
-                = time_ago_in_words(projection.created_at)
-                |  ago
-              td.px-6.py-4.whitespace-nowrap.text-right.text-sm.font-medium
-                div.flex.justify-end.space-x-3
-                  = link_to edit_admin_fedex_international_priority_import_discount_projection_path(projection), class: "text-indigo-600 hover:text-indigo-900" do
-                    svg.h-5.w-5[xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"]
-                      path[d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"]
-                  = link_to duplicate_admin_fedex_international_priority_import_discount_projection_path(projection), method: :post, class: "text-indigo-600 hover:text-indigo-900", data: { turbo_method: :post } do
-                    svg.h-5.w-5[xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"]
-                      path[d="M7 9a2 2 0 012-2h6a2 2 0 012 2v6a2 2 0 01-2 2H9a2 2 0 01-2-2V9z"]
-                      path[d="M5 3a2 2 0 00-2 2v6a2 2 0 002 2V5h8a2 2 0 00-2-2H5z"]
-                  = link_to admin_fedex_international_priority_import_discount_projection_path(projection), method: :delete, class: "text-red-600 hover:text-red-900", data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to delete this projection? This cannot be undone." } do
-                    svg.h-5.w-5[xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"]
-                      path[fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"]
-  - else
-    div.border-t.border-gray-200.px-4.py-5.text-center
-      p.text-sm.text-gray-500.py-5 
-        | No FedEx International Priority Import discount projections have been created for this invoice.
-        br
-        = link_to "Create New Projection", new_admin_shipping_invoice_fedex_international_priority_import_discount_projection_path(@shipping_invoice), class: "mt-2 inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" 
+              th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider scope="col" Name
+              th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider scope="col" Dim Divisor
+              th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider scope="col" Envelope Discount
+              th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider scope="col" Pak/Box Discount
+              th.px-6.py-3.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider scope="col" Created At
+              th.px-6.py-3.text-right.text-xs.font-medium.text-gray-500.uppercase.tracking-wider scope="col" Actions
+          tbody.bg-white.divide-y.divide-gray-200
+            - projections.each do |projection|
+              tr
+                td.px-6.py-4.whitespace-nowrap.text-sm.font-medium.text-gray-900
+                  = link_to projection.name, admin_fedex_international_priority_import_discount_projection_path(projection), class: "text-blue-600 hover:text-blue-900"
+                td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = projection.fedex_discount_basic_international&.dim_divisor
+                td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = "#{projection.fedex_discount_basic_international&.envelope_earned_discount}%"
+                td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = "#{projection.fedex_discount_basic_international&.box_earned_discount}%"
+                td.px-6.py-4.whitespace-nowrap.text-sm.text-gray-500 = projection.created_at.strftime("%B %d, %Y")
+                td.px-6.py-4.whitespace-nowrap.text-right.text-sm.font-medium
+                  = link_to "View", admin_fedex_international_priority_import_discount_projection_path(projection), class: "text-blue-600 hover:text-blue-900 mr-4"
+                  = link_to "Edit", edit_admin_fedex_international_priority_import_discount_projection_path(projection), class: "text-blue-600 hover:text-blue-900"
+    - else
+      div.text-center.py-6
+        p.text-gray-500.text-sm No projections found
+        = link_to "Create your first projection", new_admin_shipping_invoice_fedex_international_priority_import_discount_projection_path(@shipping_invoice), class: "mt-2 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-blue-700 bg-blue-100 hover:bg-blue-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" 

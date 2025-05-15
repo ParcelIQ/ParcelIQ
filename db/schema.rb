@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_15_080001) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_15_084927) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -123,6 +123,22 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_15_080001) do
     t.bigint "fedex_international_priority_import_discount_projection_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal "zone_a_min_charge"
+    t.decimal "zone_b_min_charge"
+    t.decimal "zone_c_min_charge"
+    t.decimal "zone_d_min_charge"
+    t.decimal "zone_e_min_charge"
+    t.decimal "zone_f_min_charge"
+    t.decimal "zone_g_min_charge"
+    t.decimal "zone_h_min_charge"
+    t.decimal "zone_i_min_charge"
+    t.decimal "zone_j_min_charge"
+    t.decimal "zone_k_min_charge"
+    t.decimal "zone_l_min_charge"
+    t.decimal "zone_m_min_charge"
+    t.decimal "zone_n_min_charge"
+    t.decimal "zone_o_min_charge"
+    t.decimal "zone_p_min_charge"
     t.index ["fedex_international_priority_import_discount_projection_id"], name: "idx_on_fedex_international_priority_import_discount_58e3435384"
   end
 
@@ -154,7 +170,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_15_080001) do
   create_table "fedex_discount_basic_internationals", force: :cascade do |t|
     t.integer "dim_divisor"
     t.decimal "envelope_earned_discount"
-    t.decimal "pakbox_earned_discount"
+    t.decimal "pak_earned_discount"
+    t.decimal "box_earned_discount"
     t.bigint "fedex_international_priority_import_discount_projection_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -511,6 +528,22 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_15_080001) do
     t.bigint "fedex_international_priority_import_discount_projection_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal "zone_a_min_charge"
+    t.decimal "zone_b_min_charge"
+    t.decimal "zone_c_min_charge"
+    t.decimal "zone_d_min_charge"
+    t.decimal "zone_e_min_charge"
+    t.decimal "zone_f_min_charge"
+    t.decimal "zone_g_min_charge"
+    t.decimal "zone_h_min_charge"
+    t.decimal "zone_i_min_charge"
+    t.decimal "zone_j_min_charge"
+    t.decimal "zone_k_min_charge"
+    t.decimal "zone_l_min_charge"
+    t.decimal "zone_m_min_charge"
+    t.decimal "zone_n_min_charge"
+    t.decimal "zone_o_min_charge"
+    t.decimal "zone_p_min_charge"
     t.index ["fedex_international_priority_import_discount_projection_id"], name: "idx_on_fedex_international_priority_import_discount_5266e68c5c"
   end
 
@@ -783,7 +816,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_15_080001) do
     t.datetime "last_sign_in_at"
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
-    t.string "role", default: "admin"
+    t.string "role", default: "customer"
     t.string "invitation_token"
     t.datetime "invitation_created_at"
     t.datetime "invitation_sent_at"

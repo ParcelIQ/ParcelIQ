@@ -1,7 +1,5 @@
 class FedexEnvelopeMinimumChargeInternational < ApplicationRecord
-  belongs_to :fedex_international_priority_import_discount_projection, foreign_key: "fedex_international_priority_import_discount_projection_id"
-
-  validates :envelope_min_charge, numericality: { greater_than_or_equal_to: 0, allow_nil: true }
+  belongs_to :fedex_international_priority_import_discount_projection, foreign_key: "fedex_international_priority_import_discount_projection_id", optional: true
 
   ZONE_FIELDS = {
     min_charge: %i[

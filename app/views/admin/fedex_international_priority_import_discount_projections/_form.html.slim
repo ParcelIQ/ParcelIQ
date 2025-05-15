@@ -39,15 +39,20 @@
                 div.mt-1.relative
                   = basic_form.number_field :dim_divisor, step: 0.01, class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition duration-200 ease-in-out hover:border-gray-400"
               
-              div.col-span-6.sm:col-span-3
+              div.col-span-6.sm:col-span-2
                 = basic_form.label :envelope_earned_discount, "Envelope Earned Discount (%)", class: "block text-sm font-medium text-gray-700"
                 div.mt-1.relative
                   = basic_form.number_field :envelope_earned_discount, step: 0.01, min: 0, max: 100, class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition duration-200 ease-in-out hover:border-gray-400"
               
-              div.col-span-6.sm:col-span-3
-                = basic_form.label :pakbox_earned_discount, "Pak/Box Earned Discount (%)", class: "block text-sm font-medium text-gray-700"
+              div.col-span-6.sm:col-span-2
+                = basic_form.label :pak_earned_discount, "Pak Earned Discount (%)", class: "block text-sm font-medium text-gray-700"
                 div.mt-1.relative
-                  = basic_form.number_field :pakbox_earned_discount, step: 0.01, min: 0, max: 100, class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition duration-200 ease-in-out hover:border-gray-400"
+                  = basic_form.number_field :pak_earned_discount, step: 0.01, min: 0, max: 100, class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition duration-200 ease-in-out hover:border-gray-400"
+
+              div.col-span-6.sm:col-span-2
+                = basic_form.label :box_earned_discount, "Box Earned Discount (%)", class: "block text-sm font-medium text-gray-700"
+                div.mt-1.relative
+                  = basic_form.number_field :box_earned_discount, step: 0.01, min: 0, max: 100, class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition duration-200 ease-in-out hover:border-gray-400"
 
   = render 'envelope_zone_form', form: form
   = render 'pak_zone_form', form: form

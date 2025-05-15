@@ -8,12 +8,6 @@ div.bg-white.shadow.rounded-lg.overflow-hidden
       
       div.mt-5.md:mt-0.md:col-span-2
         = form.fields_for :fedex_envelope_minimum_charge_international do |min_form|
-          div.grid.grid-cols-6.gap-6.mb-6
-            div.col-span-6.sm:col-span-3
-              = min_form.label :envelope_min_charge, "Global Minimum Charge ($)", class: "block text-sm font-medium text-gray-700"
-              div.mt-1.relative
-                = min_form.number_field :envelope_min_charge, step: 0.01, min: 0, class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition duration-200 ease-in-out hover:border-gray-400"
-          
           h4.text-md.font-medium.text-gray-900.mb-3 Zone-Specific Minimum Charges
           
           div.overflow-x-auto

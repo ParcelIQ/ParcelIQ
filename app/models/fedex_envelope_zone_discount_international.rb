@@ -1,5 +1,5 @@
 class FedexEnvelopeZoneDiscountInternational < ApplicationRecord
-  belongs_to :fedex_international_priority_import_discount_projection, foreign_key: "fedex_international_priority_import_discount_projection_id"
+  belongs_to :fedex_international_priority_import_discount_projection, foreign_key: "fedex_international_priority_import_discount_projection_id", optional: true
 
   ZONE_FIELDS = %i[
     zone_a_discount zone_b_discount zone_c_discount zone_d_discount

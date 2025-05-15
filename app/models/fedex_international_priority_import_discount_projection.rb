@@ -22,15 +22,15 @@ class FedexInternationalPriorityImportDiscountProjection < ApplicationRecord
   accepts_nested_attributes_for :fedex_pak_minimum_charge_international, allow_destroy: true
   accepts_nested_attributes_for :fedex_box_minimum_charge_international, allow_destroy: true
 
-  after_create :create_associated_records
+  before_validation :build_associated_records
 
-  def create_associated_records
-    create_fedex_discount_basic_international if fedex_discount_basic_international.nil?
-    create_fedex_envelope_zone_discount_international if fedex_envelope_zone_discount_international.nil?
-    create_fedex_pak_zone_discount_international if fedex_pak_zone_discount_international.nil?
-    create_fedex_envelope_minimum_charge_international if fedex_envelope_minimum_charge_international.nil?
-    create_fedex_pak_minimum_charge_international if fedex_pak_minimum_charge_international.nil?
-    create_fedex_box_minimum_charge_international if fedex_box_minimum_charge_international.nil?
+  def build_associated_records
+    build_fedex_discount_basic_international if fedex_discount_basic_international.nil?
+    build_fedex_envelope_zone_discount_international if fedex_envelope_zone_discount_international.nil?
+    build_fedex_pak_zone_discount_international if fedex_pak_zone_discount_international.nil?
+    build_fedex_envelope_minimum_charge_international if fedex_envelope_minimum_charge_international.nil?
+    build_fedex_pak_minimum_charge_international if fedex_pak_minimum_charge_international.nil?
+    build_fedex_box_minimum_charge_international if fedex_box_minimum_charge_international.nil?
   end
 
   def duplicate

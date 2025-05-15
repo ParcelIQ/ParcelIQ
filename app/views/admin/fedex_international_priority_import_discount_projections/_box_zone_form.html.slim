@@ -9,150 +9,195 @@ div.bg-white.shadow.rounded-lg.overflow-hidden
       div.mt-5.md:mt-0.md:col-span-2
         div.flex.justify-between.items-center.mb-4
           p.text-sm.text-gray-500 Configure discounts by weight ranges
-          button.inline-flex.items-center.px-3.py-1.border.border-transparent.rounded-md.shadow-sm.text-sm.font-medium.text-white.bg-blue-600.hover:bg-blue-700.focus:outline-none.focus:ring-2.focus:ring-offset-2.focus:ring-blue-500 type="button" data-action="nested-form#add"
+          button.inline-flex.items-center.px-3.py-1.border.border-transparent.rounded-md.shadow-sm.text-sm.font-medium.text-white.bg-blue-600.hover:bg-blue-700.focus:outline-none.focus:ring-2.focus:ring-offset-2.focus:ring-blue-500#add-weight-range type="button"
             svg.-ml-0.5.mr-1.h-4.w-4[xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"]
               path[fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"]
             | Add Weight Range
             
-  .nested-form-container data-controller="nested-form" data-nested-form-wrapper-selector-value=".nested-form-wrapper"
-    template data-nested-form-target="template"
-      = form.fields_for :fedex_box_zone_discount_internationals, FedexBoxZoneDiscountInternational.new, child_index: 'NEW_RECORD' do |zone_form|
-        .nested-form-wrapper.bg-white.shadow.rounded-lg.overflow-hidden.mb-4 data-new-record=true
-          div.px-4.py-5.sm:p-6.border-b.border-gray-200
-            .flex.justify-between.items-center.mb-4
-              h3.text-lg.font-medium.text-gray-900 Box Zone Discounts - Weight Range
-              button.text-red-600.hover:text-red-800.focus:outline-none type="button" data-action="nested-form#remove"
-                svg.h-5.w-5[xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"]
-                  path[fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"]
-            
-            .grid.grid-cols-6.gap-6.mb-6
-              div.col-span-6.sm:col-span-3
-                = zone_form.label :low_weight, "Low Weight (lbs)", class: "block text-sm font-medium text-gray-700"
-                div.mt-1.relative
-                  = zone_form.number_field :low_weight, step: 0.01, min: 0, class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition duration-200 ease-in-out hover:border-gray-400"
-              
-              div.col-span-6.sm:col-span-3
-                = zone_form.label :max_weight, "Max Weight (lbs)", class: "block text-sm font-medium text-gray-700"
-                div.mt-1.relative
-                  = zone_form.number_field :max_weight, step: 0.01, min: 0, class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition duration-200 ease-in-out hover:border-gray-400"
-            
-            p.text-sm.text-gray-500.mb-4 Enter the percentage discount for each zone.
-            
-            div.grid.grid-cols-6.gap-6
-              div.col-span-6.sm:col-span-3
-                = zone_form.label :zone_a_discount, "Zone A (%)", class: "block text-sm font-medium text-gray-700"
-                div.mt-1.relative
-                  = zone_form.number_field :zone_a_discount, step: 0.01, min: 0, max: 100, class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition duration-200 ease-in-out hover:border-gray-400"
-              
-              div.col-span-6.sm:col-span-3
-                = zone_form.label :zone_b_discount, "Zone B (%)", class: "block text-sm font-medium text-gray-700"
-                div.mt-1.relative
-                  = zone_form.number_field :zone_b_discount, step: 0.01, min: 0, max: 100, class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition duration-200 ease-in-out hover:border-gray-400"
-              
-              div.col-span-6.sm:col-span-3
-                = zone_form.label :zone_c_discount, "Zone C (%)", class: "block text-sm font-medium text-gray-700"
-                div.mt-1.relative
-                  = zone_form.number_field :zone_c_discount, step: 0.01, min: 0, max: 100, class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition duration-200 ease-in-out hover:border-gray-400"
-              
-              div.col-span-6.sm:col-span-3
-                = zone_form.label :zone_d_discount, "Zone D (%)", class: "block text-sm font-medium text-gray-700"
-                div.mt-1.relative
-                  = zone_form.number_field :zone_d_discount, step: 0.01, min: 0, max: 100, class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition duration-200 ease-in-out hover:border-gray-400"
-              
-              div.col-span-6.sm:col-span-3
-                = zone_form.label :zone_e_discount, "Zone E (%)", class: "block text-sm font-medium text-gray-700"
-                div.mt-1.relative
-                  = zone_form.number_field :zone_e_discount, step: 0.01, min: 0, max: 100, class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition duration-200 ease-in-out hover:border-gray-400"
-              
-              div.col-span-6.sm:col-span-3
-                = zone_form.label :zone_f_discount, "Zone F (%)", class: "block text-sm font-medium text-gray-700"
-                div.mt-1.relative
-                  = zone_form.number_field :zone_f_discount, step: 0.01, min: 0, max: 100, class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition duration-200 ease-in-out hover:border-gray-400"
-              
-              div.col-span-6.sm:col-span-3
-                = zone_form.label :zone_g_discount, "Zone G (%)", class: "block text-sm font-medium text-gray-700"
-                div.mt-1.relative
-                  = zone_form.number_field :zone_g_discount, step: 0.01, min: 0, max: 100, class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition duration-200 ease-in-out hover:border-gray-400"
-              
-              div.col-span-6.sm:col-span-3
-                = zone_form.label :zone_h_discount, "Zone H (%)", class: "block text-sm font-medium text-gray-700"
-                div.mt-1.relative
-                  = zone_form.number_field :zone_h_discount, step: 0.01, min: 0, max: 100, class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition duration-200 ease-in-out hover:border-gray-400"
-              
-              div.col-span-6.sm:col-span-3
-                = zone_form.label :zone_i_discount, "Zone I (%)", class: "block text-sm font-medium text-gray-700"
-                div.mt-1.relative
-                  = zone_form.number_field :zone_i_discount, step: 0.01, min: 0, max: 100, class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition duration-200 ease-in-out hover:border-gray-400"
-              
-              div.col-span-6.sm:col-span-3
-                = zone_form.label :zone_j_discount, "Zone J (%)", class: "block text-sm font-medium text-gray-700"
-                div.mt-1.relative
-                  = zone_form.number_field :zone_j_discount, step: 0.01, min: 0, max: 100, class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition duration-200 ease-in-out hover:border-gray-400"
-              
-              div.col-span-6.sm:col-span-3
-                = zone_form.label :zone_k_discount, "Zone K (%)", class: "block text-sm font-medium text-gray-700"
-                div.mt-1.relative
-                  = zone_form.number_field :zone_k_discount, step: 0.01, min: 0, max: 100, class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition duration-200 ease-in-out hover:border-gray-400"
-              
-              div.col-span-6.sm:col-span-3
-                = zone_form.label :zone_l_discount, "Zone L (%)", class: "block text-sm font-medium text-gray-700"
-                div.mt-1.relative
-                  = zone_form.number_field :zone_l_discount, step: 0.01, min: 0, max: 100, class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition duration-200 ease-in-out hover:border-gray-400"
-              
-              div.col-span-6.sm:col-span-3
-                = zone_form.label :zone_m_discount, "Zone M (%)", class: "block text-sm font-medium text-gray-700"
-                div.mt-1.relative
-                  = zone_form.number_field :zone_m_discount, step: 0.01, min: 0, max: 100, class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition duration-200 ease-in-out hover:border-gray-400"
-              
-              div.col-span-6.sm:col-span-3
-                = zone_form.label :zone_n_discount, "Zone N (%)", class: "block text-sm font-medium text-gray-700"
-                div.mt-1.relative
-                  = zone_form.number_field :zone_n_discount, step: 0.01, min: 0, max: 100, class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition duration-200 ease-in-out hover:border-gray-400"
-              
-              div.col-span-6.sm:col-span-3
-                = zone_form.label :zone_o_discount, "Zone O (%)", class: "block text-sm font-medium text-gray-700"
-                div.mt-1.relative
-                  = zone_form.number_field :zone_o_discount, step: 0.01, min: 0, max: 100, class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition duration-200 ease-in-out hover:border-gray-400"
-              
-              div.col-span-6.sm:col-span-3
-                = zone_form.label :zone_p_discount, "Zone P (%)", class: "block text-sm font-medium text-gray-700"
-                div.mt-1.relative
-                  = zone_form.number_field :zone_p_discount, step: 0.01, min: 0, max: 100, class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition duration-200 ease-in-out hover:border-gray-400"
-            
-            = zone_form.hidden_field :_destroy
+        div.overflow-x-auto
+          table.min-w-full.divide-y.divide-gray-200#box-discounts-table
+            thead.bg-gray-50
+              tr
+                th.px-3.py-2.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Low Weight
+                th.px-3.py-2.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Max Weight
+                th.px-3.py-2.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone A
+                th.px-3.py-2.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone B
+                th.px-3.py-2.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone C
+                th.px-3.py-2.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone D
+                th.px-3.py-2.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone E
+                th.px-3.py-2.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone F
+                th.px-3.py-2.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone G
+                th.px-3.py-2.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone H
+                th.px-3.py-2.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone I
+                th.px-3.py-2.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone J
+                th.px-3.py-2.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone K
+                th.px-3.py-2.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone L
+                th.px-3.py-2.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone M
+                th.px-3.py-2.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone N
+                th.px-3.py-2.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone O
+                th.px-3.py-2.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider Zone P
+                th.px-3.py-2.text-left.text-xs.font-medium.text-gray-500.uppercase.tracking-wider 
+            tbody.bg-white.divide-y.divide-gray-200
+              = form.fields_for :fedex_box_zone_discount_internationals do |zone_form|
+                tr.weight-range-row
+                  td.px-2.py-1
+                    = zone_form.number_field :low_weight, step: 0.01, min: 0, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm", style: "min-width: 80px;"
+                  td.px-2.py-1
+                    = zone_form.number_field :max_weight, step: 0.01, min: 0, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm", style: "min-width: 80px;"
+                  td.px-2.py-1
+                    = zone_form.number_field :zone_a_discount, step: 0.01, min: 0, max: 100, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm", style: "min-width: 70px;"
+                  td.px-2.py-1
+                    = zone_form.number_field :zone_b_discount, step: 0.01, min: 0, max: 100, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm", style: "min-width: 70px;"
+                  td.px-2.py-1
+                    = zone_form.number_field :zone_c_discount, step: 0.01, min: 0, max: 100, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm", style: "min-width: 70px;"
+                  td.px-2.py-1
+                    = zone_form.number_field :zone_d_discount, step: 0.01, min: 0, max: 100, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm", style: "min-width: 70px;"
+                  td.px-2.py-1
+                    = zone_form.number_field :zone_e_discount, step: 0.01, min: 0, max: 100, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm", style: "min-width: 70px;"
+                  td.px-2.py-1
+                    = zone_form.number_field :zone_f_discount, step: 0.01, min: 0, max: 100, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm", style: "min-width: 70px;"
+                  td.px-2.py-1
+                    = zone_form.number_field :zone_g_discount, step: 0.01, min: 0, max: 100, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm", style: "min-width: 70px;"
+                  td.px-2.py-1
+                    = zone_form.number_field :zone_h_discount, step: 0.01, min: 0, max: 100, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm", style: "min-width: 70px;"
+                  td.px-2.py-1
+                    = zone_form.number_field :zone_i_discount, step: 0.01, min: 0, max: 100, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm", style: "min-width: 70px;"
+                  td.px-2.py-1
+                    = zone_form.number_field :zone_j_discount, step: 0.01, min: 0, max: 100, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm", style: "min-width: 70px;"
+                  td.px-2.py-1
+                    = zone_form.number_field :zone_k_discount, step: 0.01, min: 0, max: 100, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm", style: "min-width: 70px;"
+                  td.px-2.py-1
+                    = zone_form.number_field :zone_l_discount, step: 0.01, min: 0, max: 100, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm", style: "min-width: 70px;"
+                  td.px-2.py-1
+                    = zone_form.number_field :zone_m_discount, step: 0.01, min: 0, max: 100, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm", style: "min-width: 70px;"
+                  td.px-2.py-1
+                    = zone_form.number_field :zone_n_discount, step: 0.01, min: 0, max: 100, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm", style: "min-width: 70px;"
+                  td.px-2.py-1
+                    = zone_form.number_field :zone_o_discount, step: 0.01, min: 0, max: 100, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm", style: "min-width: 70px;"
+                  td.px-2.py-1
+                    = zone_form.number_field :zone_p_discount, step: 0.01, min: 0, max: 100, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm", style: "min-width: 70px;"
+                  td.px-2.py-1
+                    - if zone_form.object.persisted?
+                      div.flex.items-center
+                        = zone_form.check_box :_destroy, class: "delete-weight-range focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded transition duration-150 ease-in-out"
+                        = zone_form.label :_destroy, "Remove", class: "ml-2 text-sm text-red-600 font-medium"
+                    - else
+                      button.inline-flex.items-center.px-2.py-1.border.border-transparent.text-xs.font-medium.rounded.text-red-700.bg-red-100.hover:bg-red-200.focus:outline-none.focus:ring-2.focus:ring-offset-2.focus:ring-red-500.remove-weight-range type="button"
+                        svg.-ml-0.5.mr-1.h-4.w-4[xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"]
+                          path[fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"]
+                        | Remove
 
-          = form.fields_for :fedex_box_zone_discount_internationals do |zone_form|
-        - unless zone_form.object.new_record?
-        .nested-form-wrapper.bg-white.shadow.rounded-lg.overflow-hidden.mb-4
-          div.px-4.py-5.sm:p-6.border-b.border-gray-200
-            .flex.justify-between.items-center.mb-4
-              h3.text-lg.font-medium.text-gray-900 Box Zone Discounts - Weight Range
-              button.text-red-600.hover:text-red-800.focus:outline-none type="button" data-action="nested-form#remove"
-                svg.h-5.w-5[xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"]
-                  path[fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"]
-            
-            .grid.grid-cols-6.gap-6.mb-6
-              div.col-span-6.sm:col-span-3
-                = zone_form.label :low_weight, "Low Weight (lbs)", class: "block text-sm font-medium text-gray-700"
-                div.mt-1.relative
-                  = zone_form.number_field :low_weight, step: 0.01, min: 0, class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition duration-200 ease-in-out hover:border-gray-400"
-              
-              div.col-span-6.sm:col-span-3
-                = zone_form.label :max_weight, "Max Weight (lbs)", class: "block text-sm font-medium text-gray-700"
-                div.mt-1.relative
-                  = zone_form.number_field :max_weight, step: 0.01, min: 0, class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition duration-200 ease-in-out hover:border-gray-400"
-            
-            p.text-sm.text-gray-500.mb-4 Enter the percentage discount for each zone.
-            
-            div.grid.grid-cols-6.gap-6
-              div.col-span-6.sm:col-span-3
-                = zone_form.label :zone_a_discount, "Zone A (%)", class: "block text-sm font-medium text-gray-700"
-                div.mt-1.relative
-                  = zone_form.number_field :zone_a_discount, step: 0.01, min: 0, max: 100, class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition duration-200 ease-in-out hover:border-gray-400"
-              
-              div.col-span-6.sm:col-span-3
-                = zone_form.label :zone_b_discount, "Zone B (%)", class: "block text-sm font-medium text-gray-700"
-                div.mt-1.relative
-                  = zone_form.number_field :zone_b_discount, step: 0.01, min: 0, max: 100, class: "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition duration-200 ease-in-out hover:border-gray-400"
-            
-            = zone_form.hidden_field :_destroy 
+javascript:
+  // Run immediately to ensure initialization happens regardless of load event timing
+  (function() {
+    // Function to initialize form functionality
+    function initBoxZoneForm() {
+      var addWeightRangeBtn = document.getElementById('add-weight-range');
+      if (addWeightRangeBtn) {
+        // Use direct function to avoid closure issues
+        addWeightRangeBtn.onclick = function(e) {
+          e.preventDefault();
+          addWeightRange();
+          return false;
+        };
+      }
+      
+      // Set up event delegation for remove buttons
+      var table = document.getElementById('box-discounts-table');
+      if (table) {
+        table.onclick = function(event) {
+          var target = event.target;
+          if (target.classList.contains('remove-weight-range') || 
+              (target.closest && target.closest('.remove-weight-range'))) {
+            event.preventDefault();
+            var row = target.closest('tr');
+            if (row) {
+              row.remove();
+            }
+            return false;
+          }
+        };
+      }
+    }
+    
+    function addWeightRange() {
+      var table = document.getElementById('box-discounts-table');
+      
+      if (!table) {
+        return;
+      }
+      
+      // Try different methods to find the relevant rows
+      var allRows = table.querySelectorAll('tbody tr.weight-range-row');
+      
+      var tbody = table.querySelector('tbody');
+      if (!tbody) {
+        tbody = document.createElement('tbody');
+        table.appendChild(tbody);
+      }
+      
+      var lastRow = null;
+      
+      // Method 1: Direct tbody child
+      if (allRows.length > 0) {
+        lastRow = allRows[allRows.length - 1];
+      }
+      
+      // If still no row, try to find a template row or create one
+      if (!lastRow && tbody.querySelector('.weight-range-row')) {
+        lastRow = tbody.querySelector('.weight-range-row');
+      }
+      
+      if (!lastRow) {
+        return;
+      }
+      
+      var newRow = lastRow.cloneNode(true);
+      
+      // Generate a unique timestamp for the new element IDs
+      var time = new Date().getTime();
+      
+      // Force clearing all input values
+      setTimeout(function() {
+        // Get all input elements
+        var inputs = newRow.querySelectorAll('input');
+        
+        // Clear each input value
+        inputs.forEach(function(input) {
+          if (input.type === 'checkbox') {
+            input.checked = false;
+          } else {
+            // Force empty value and remove any default values
+            input.value = '';
+            input.defaultValue = '';
+            input.setAttribute('value', '');
+          }
+        });
+      }, 0);
+      
+      // Update input names and IDs with a unique timestamp
+      var regexp = new RegExp('fedex_international_priority_import_discount_projection\\[fedex_box_zone_discount_internationals_attributes\\]\\[\\d+\\]', 'g');
+      newRow.innerHTML = newRow.innerHTML.replace(regexp, 'fedex_international_priority_import_discount_projection[fedex_box_zone_discount_internationals_attributes][' + time + ']');
+      
+      // Append the row
+      tbody.appendChild(newRow);
+    }
+    
+    // Initialize on DOM ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initBoxZoneForm);
+    } else {
+      // DOM already loaded, run immediately
+      initBoxZoneForm();
+    }
+    
+    // Also initialize on Turbolinks events if available
+    if (typeof Turbolinks !== 'undefined') {
+      document.addEventListener('turbolinks:load', initBoxZoneForm);
+    }
+    
+    // Re-initialize if Rails UJS AJAX requests are used
+    if (typeof Rails !== 'undefined') {
+      document.addEventListener('ajax:complete', initBoxZoneForm);
+    }
+  })(); 

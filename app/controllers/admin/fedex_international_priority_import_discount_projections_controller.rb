@@ -30,7 +30,7 @@ class Admin::FedexInternationalPriorityImportDiscountProjectionsController < Adm
     @projection.build_fedex_envelope_zone_discount_international
     @projection.build_fedex_pak_zone_discount_international
     @projection.fedex_box_zone_discount_internationals.build
-    @projection.build_fedex_envelope_minimum_charge_international(envelope_min_charge: 59.50)
+    @projection.build_fedex_envelope_minimum_charge_international
     @projection.build_fedex_pak_minimum_charge_international(pak_min_charge: 99.25)
     @projection.build_fedex_box_minimum_charge_international(box_min_charge: 119.61)
   end
@@ -98,7 +98,7 @@ class Admin::FedexInternationalPriorityImportDiscountProjectionsController < Adm
       :name,
       :shipping_invoice_id,
       fedex_discount_basic_international_attributes: [
-        :id, :dim_divisor, :envelope_earned_discount, :pakbox_earned_discount
+        :id, :dim_divisor, :envelope_earned_discount, :pak_earned_discount, :box_earned_discount
       ],
       fedex_envelope_zone_discount_international_attributes: [
         :id, :zone_a_discount, :zone_b_discount, :zone_c_discount, :zone_d_discount,
@@ -120,7 +120,7 @@ class Admin::FedexInternationalPriorityImportDiscountProjectionsController < Adm
         :zone_m_discount, :zone_n_discount, :zone_o_discount, :zone_p_discount, :_destroy
       ],
       fedex_envelope_minimum_charge_international_attributes: [
-        :id, :envelope_min_charge,
+        :id,
         :zone_a_min_charge, :zone_b_min_charge, :zone_c_min_charge, :zone_d_min_charge,
         :zone_e_min_charge, :zone_f_min_charge, :zone_g_min_charge, :zone_h_min_charge,
         :zone_i_min_charge, :zone_j_min_charge, :zone_k_min_charge, :zone_l_min_charge,
@@ -135,7 +135,11 @@ class Admin::FedexInternationalPriorityImportDiscountProjectionsController < Adm
         :zone_m_dollar_reduction, :zone_n_dollar_reduction, :zone_o_dollar_reduction, :zone_p_dollar_reduction
       ],
       fedex_pak_minimum_charge_international_attributes: [
-        :id, :pak_min_charge,
+        :id,
+        :zone_a_min_charge, :zone_b_min_charge, :zone_c_min_charge, :zone_d_min_charge,
+        :zone_e_min_charge, :zone_f_min_charge, :zone_g_min_charge, :zone_h_min_charge,
+        :zone_i_min_charge, :zone_j_min_charge, :zone_k_min_charge, :zone_l_min_charge,
+        :zone_m_min_charge, :zone_n_min_charge, :zone_o_min_charge, :zone_p_min_charge,
         :zone_a_percentage_reduction, :zone_b_percentage_reduction, :zone_c_percentage_reduction, :zone_d_percentage_reduction,
         :zone_e_percentage_reduction, :zone_f_percentage_reduction, :zone_g_percentage_reduction, :zone_h_percentage_reduction,
         :zone_i_percentage_reduction, :zone_j_percentage_reduction, :zone_k_percentage_reduction, :zone_l_percentage_reduction,
@@ -146,7 +150,11 @@ class Admin::FedexInternationalPriorityImportDiscountProjectionsController < Adm
         :zone_m_dollar_reduction, :zone_n_dollar_reduction, :zone_o_dollar_reduction, :zone_p_dollar_reduction
       ],
       fedex_box_minimum_charge_international_attributes: [
-        :id, :box_min_charge,
+        :id,
+        :zone_a_min_charge, :zone_b_min_charge, :zone_c_min_charge, :zone_d_min_charge,
+        :zone_e_min_charge, :zone_f_min_charge, :zone_g_min_charge, :zone_h_min_charge,
+        :zone_i_min_charge, :zone_j_min_charge, :zone_k_min_charge, :zone_l_min_charge,
+        :zone_m_min_charge, :zone_n_min_charge, :zone_o_min_charge, :zone_p_min_charge,
         :zone_a_percentage_reduction, :zone_b_percentage_reduction, :zone_c_percentage_reduction, :zone_d_percentage_reduction,
         :zone_e_percentage_reduction, :zone_f_percentage_reduction, :zone_g_percentage_reduction, :zone_h_percentage_reduction,
         :zone_i_percentage_reduction, :zone_j_percentage_reduction, :zone_k_percentage_reduction, :zone_l_percentage_reduction,
